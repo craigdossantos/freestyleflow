@@ -1,0 +1,5187 @@
+{
+  "syllable_1_families": [
+    {
+      "family_id": "UW1",
+      "label": "Q Family (-rew)",
+      "count": 73,
+      "words": [
+        "q",
+        "u",
+        "do",
+        "du",
+        "lu",
+        "mu",
+        "nu",
+        "to",
+        "boo",
+        "coo",
+        "cpu",
+        "cue",
+        "dew",
+        "due",
+        "few",
+        "flu",
+        "foo",
+        "gnu",
+        "goo",
+        "hue",
+        "jew",
+        "lew",
+        "loo",
+        "lou",
+        "mew",
+        "moo",
+        "new",
+        "pew",
+        "rue",
+        "sue",
+        "too",
+        "two",
+        "who",
+        "woo",
+        "yew",
+        "you",
+        "zoo",
+        "poo",
+        "blew",
+        "blue",
+        "brew",
+        "chew",
+        "clue",
+        "coup",
+        "crew",
+        "drew",
+        "flew",
+        "glue",
+        "grew",
+        "hugh",
+        "knew",
+        "lieu",
+        "phew",
+        "pooh",
+        "roux",
+        "shoe",
+        "skew",
+        "slew",
+        "stew",
+        "true",
+        "view",
+        "whew",
+        "canoe",
+        "queue",
+        "revue",
+        "screw",
+        "sioux",
+        "threw",
+        "undue",
+        "purdue",
+        "subdue",
+        "untrue",
+        "through"
+      ]
+    },
+    {
+      "family_id": "IY1",
+      "label": "B Family (-ree)",
+      "count": 72,
+      "words": [
+        "b",
+        "c",
+        "d",
+        "e",
+        "g",
+        "p",
+        "t",
+        "v",
+        "z",
+        "av",
+        "be",
+        "de",
+        "di",
+        "ee",
+        "he",
+        "je",
+        "li",
+        "me",
+        "mi",
+        "si",
+        "ti",
+        "tv",
+        "we",
+        "xi",
+        "ye",
+        "bee",
+        "dee",
+        "fee",
+        "gee",
+        "key",
+        "lea",
+        "lee",
+        "nee",
+        "pea",
+        "pee",
+        "phd",
+        "pre",
+        "sea",
+        "see",
+        "she",
+        "sie",
+        "ski",
+        "sri",
+        "tea",
+        "tee",
+        "thi",
+        "vee",
+        "wee",
+        "zee",
+        "bree",
+        "flea",
+        "flee",
+        "free",
+        "glee",
+        "knee",
+        "plea",
+        "quay",
+        "rsvp",
+        "thee",
+        "tree",
+        "jolie",
+        "leigh",
+        "louie",
+        "mcgee",
+        "naacp",
+        "rupee",
+        "spree",
+        "three",
+        "decree",
+        "marquee",
+        "trainee",
+        "trustee"
+      ]
+    },
+    {
+      "family_id": "EY1",
+      "label": "J Family (-ray)",
+      "count": 56,
+      "words": [
+        "j",
+        "k",
+        "ae",
+        "ay",
+        "ba",
+        "ok",
+        "re",
+        "se",
+        "bay",
+        "bey",
+        "day",
+        "dey",
+        "dna",
+        "fay",
+        "gay",
+        "hay",
+        "hey",
+        "jay",
+        "kay",
+        "lay",
+        "lei",
+        "mae",
+        "may",
+        "nay",
+        "pay",
+        "rae",
+        "ray",
+        "rey",
+        "say",
+        "way",
+        "yea",
+        "bray",
+        "clay",
+        "faye",
+        "fray",
+        "frey",
+        "gray",
+        "grey",
+        "play",
+        "pray",
+        "prey",
+        "rene",
+        "shay",
+        "shea",
+        "slay",
+        "stay",
+        "sway",
+        "they",
+        "tray",
+        "whey",
+        "mckay",
+        "renee",
+        "spray",
+        "stray",
+        "weigh",
+        "cliche"
+      ]
+    },
+    {
+      "family_id": "OW1",
+      "label": "O Family (-low)",
+      "count": 56,
+      "words": [
+        "o",
+        "au",
+        "bo",
+        "go",
+        "ho",
+        "jo",
+        "lo",
+        "mo",
+        "no",
+        "oh",
+        "ow",
+        "ro",
+        "so",
+        "wo",
+        "yo",
+        "aux",
+        "bro",
+        "doe",
+        "eau",
+        "flo",
+        "foe",
+        "fro",
+        "hoe",
+        "joe",
+        "low",
+        "moe",
+        "mow",
+        "owe",
+        "poe",
+        "pro",
+        "quo",
+        "roe",
+        "row",
+        "sew",
+        "toe",
+        "tow",
+        "woe",
+        "beau",
+        "blow",
+        "crow",
+        "flow",
+        "glow",
+        "gogh",
+        "grow",
+        "know",
+        "lowe",
+        "rowe",
+        "show",
+        "slow",
+        "snow",
+        "stow",
+        "whoa",
+        "dough",
+        "throw",
+        "monroe",
+        "though"
+      ]
+    },
+    {
+      "family_id": "EY1 N",
+      "label": "ANE Family (-ain)",
+      "count": 46,
+      "words": [
+        "bane",
+        "cain",
+        "cane",
+        "dane",
+        "gain",
+        "iain",
+        "jane",
+        "kane",
+        "lane",
+        "main",
+        "mane",
+        "pain",
+        "pane",
+        "rain",
+        "rein",
+        "sane",
+        "vain",
+        "vane",
+        "vein",
+        "zane",
+        "brain",
+        "caine",
+        "chain",
+        "crane",
+        "drain",
+        "duane",
+        "grain",
+        "jayne",
+        "maine",
+        "paine",
+        "payne",
+        "plain",
+        "plane",
+        "reign",
+        "seine",
+        "shane",
+        "slain",
+        "spain",
+        "stain",
+        "swain",
+        "train",
+        "twain",
+        "wayne",
+        "blaine",
+        "dwayne",
+        "strain"
+      ]
+    },
+    {
+      "family_id": "AY1",
+      "label": "I Family (-igh)",
+      "count": 47,
+      "words": [
+        "i",
+        "y",
+        "ai",
+        "by",
+        "fi",
+        "hi",
+        "hy",
+        "ly",
+        "my",
+        "pi",
+        "ty",
+        "vi",
+        "aye",
+        "buy",
+        "bye",
+        "chi",
+        "cry",
+        "die",
+        "dry",
+        "dye",
+        "eye",
+        "fly",
+        "fry",
+        "guy",
+        "lie",
+        "phi",
+        "pie",
+        "ply",
+        "pry",
+        "psi",
+        "rye",
+        "shy",
+        "sky",
+        "sly",
+        "spy",
+        "thy",
+        "tie",
+        "try",
+        "vie",
+        "why",
+        "high",
+        "nigh",
+        "sigh",
+        "skye",
+        "thai",
+        "thigh",
+        "goodbye"
+      ]
+    },
+    {
+      "family_id": "EH1 R",
+      "label": "AIR Family (-are)",
+      "count": 44,
+      "words": [
+        "air",
+        "ere",
+        "err",
+        "bare",
+        "bear",
+        "care",
+        "cher",
+        "dare",
+        "eyre",
+        "fair",
+        "fare",
+        "hair",
+        "hare",
+        "heir",
+        "herr",
+        "lair",
+        "mare",
+        "pair",
+        "pear",
+        "rare",
+        "tear",
+        "ware",
+        "wear",
+        "blair",
+        "chair",
+        "clair",
+        "clare",
+        "flair",
+        "flare",
+        "glare",
+        "khmer",
+        "scare",
+        "share",
+        "snare",
+        "spare",
+        "stair",
+        "stare",
+        "swear",
+        "their",
+        "there",
+        "where",
+        "claire",
+        "prayer",
+        "square"
+      ]
+    },
+    {
+      "family_id": "AO1 R",
+      "label": "OR Family (-ore)",
+      "count": 36,
+      "words": [
+        "or",
+        "cor",
+        "for",
+        "nor",
+        "ore",
+        "orr",
+        "tor",
+        "war",
+        "boar",
+        "boer",
+        "bore",
+        "core",
+        "door",
+        "fore",
+        "four",
+        "gore",
+        "lore",
+        "more",
+        "pore",
+        "pour",
+        "roar",
+        "soar",
+        "sore",
+        "thor",
+        "tore",
+        "wore",
+        "your",
+        "chore",
+        "corps",
+        "floor",
+        "score",
+        "shore",
+        "spore",
+        "store",
+        "swore",
+        "whore"
+      ]
+    },
+    {
+      "family_id": "EY1 L",
+      "label": "AIL Family (-ail)",
+      "count": 33,
+      "words": [
+        "ale",
+        "bail",
+        "bale",
+        "dale",
+        "fail",
+        "gail",
+        "gale",
+        "hail",
+        "hale",
+        "jail",
+        "kale",
+        "mail",
+        "male",
+        "nail",
+        "pale",
+        "rail",
+        "sail",
+        "sale",
+        "tail",
+        "tale",
+        "vail",
+        "vale",
+        "veil",
+        "yale",
+        "frail",
+        "grail",
+        "quail",
+        "scale",
+        "shale",
+        "snail",
+        "stale",
+        "trail",
+        "whale"
+      ]
+    },
+    {
+      "family_id": "AA1 K",
+      "label": "DOC Family (-ock)",
+      "count": 25,
+      "words": [
+        "doc",
+        "hoc",
+        "roc",
+        "bach",
+        "bloc",
+        "cock",
+        "dock",
+        "jock",
+        "loch",
+        "lock",
+        "mach",
+        "mock",
+        "rock",
+        "sock",
+        "block",
+        "brock",
+        "chalk",
+        "clock",
+        "crock",
+        "flock",
+        "knock",
+        "locke",
+        "shock",
+        "stock",
+        "glock"
+      ]
+    },
+    {
+      "family_id": "EY1 T",
+      "label": "ATE Family (-ate)",
+      "count": 28,
+      "words": [
+        "ate",
+        "bait",
+        "cate",
+        "date",
+        "fate",
+        "gait",
+        "gate",
+        "hate",
+        "kate",
+        "late",
+        "mate",
+        "nate",
+        "rate",
+        "tate",
+        "wait",
+        "crate",
+        "eight",
+        "grate",
+        "great",
+        "plate",
+        "skate",
+        "slate",
+        "state",
+        "trait",
+        "strait",
+        "weight",
+        "freight",
+        "straight"
+      ]
+    },
+    {
+      "family_id": "IH1 L",
+      "label": "FIL Family (-ill)",
+      "count": 29,
+      "words": [
+        "fil",
+        "gil",
+        "ill",
+        "mil",
+        "nil",
+        "til",
+        "bill",
+        "dill",
+        "fill",
+        "gill",
+        "hill",
+        "jill",
+        "kill",
+        "mill",
+        "phil",
+        "pill",
+        "sill",
+        "till",
+        "will",
+        "brill",
+        "chill",
+        "drill",
+        "grill",
+        "quill",
+        "skill",
+        "spill",
+        "still",
+        "mcgill",
+        "thrill"
+      ]
+    },
+    {
+      "family_id": "AE1 N",
+      "label": "AN Family (-nne)",
+      "count": 32,
+      "words": [
+        "an",
+        "ann",
+        "ban",
+        "can",
+        "dan",
+        "fan",
+        "gan",
+        "jan",
+        "man",
+        "nan",
+        "pan",
+        "ran",
+        "san",
+        "tan",
+        "van",
+        "anne",
+        "bran",
+        "chan",
+        "clan",
+        "fran",
+        "klan",
+        "mann",
+        "plan",
+        "scan",
+        "shan",
+        "span",
+        "stan",
+        "than",
+        "diane",
+        "dianne",
+        "joanne",
+        "mccann"
+      ]
+    },
+    {
+      "family_id": "IY1 L",
+      "label": "EEL Family (-eal)",
+      "count": 21,
+      "words": [
+        "eel",
+        "deal",
+        "feel",
+        "heal",
+        "heel",
+        "keel",
+        "meal",
+        "neal",
+        "neil",
+        "peel",
+        "reel",
+        "seal",
+        "teal",
+        "veal",
+        "zeal",
+        "kneel",
+        "neill",
+        "steal",
+        "steel",
+        "wheel",
+        "steele"
+      ]
+    },
+    {
+      "family_id": "IH1 N",
+      "label": "BIN Family (-inn)",
+      "count": 32,
+      "words": [
+        "bin",
+        "din",
+        "fin",
+        "gin",
+        "inn",
+        "kin",
+        "lin",
+        "lyn",
+        "min",
+        "pin",
+        "sin",
+        "tin",
+        "vin",
+        "win",
+        "yin",
+        "been",
+        "chin",
+        "finn",
+        "grin",
+        "linn",
+        "lynn",
+        "shin",
+        "skin",
+        "spin",
+        "thin",
+        "twin",
+        "winn",
+        "wynn",
+        "flynn",
+        "lynne",
+        "quinn",
+        "wynne"
+      ]
+    },
+    {
+      "family_id": "AY1 T",
+      "label": "BITE Family (-ght)",
+      "count": 30,
+      "words": [
+        "bite",
+        "byte",
+        "cite",
+        "kite",
+        "mite",
+        "rite",
+        "site",
+        "fight",
+        "light",
+        "might",
+        "night",
+        "quite",
+        "right",
+        "sight",
+        "spite",
+        "tight",
+        "white",
+        "wight",
+        "write",
+        "blight",
+        "bright",
+        "dwight",
+        "flight",
+        "fright",
+        "height",
+        "knight",
+        "plight",
+        "slight",
+        "sprite",
+        "wright"
+      ]
+    },
+    {
+      "family_id": "OW1 N",
+      "label": "MON Family (-one)",
+      "count": 30,
+      "words": [
+        "mon",
+        "own",
+        "bone",
+        "cohn",
+        "cone",
+        "hone",
+        "joan",
+        "loan",
+        "lone",
+        "moan",
+        "sewn",
+        "tone",
+        "zone",
+        "blown",
+        "clone",
+        "drone",
+        "flown",
+        "groan",
+        "grown",
+        "known",
+        "leone",
+        "phone",
+        "prone",
+        "shone",
+        "shown",
+        "sloan",
+        "stone",
+        "sloane",
+        "throne",
+        "thrown"
+      ]
+    },
+    {
+      "family_id": "AE1 K",
+      "label": "DAK Family (-ack)",
+      "count": 29,
+      "words": [
+        "dak",
+        "lac",
+        "mac",
+        "sac",
+        "yak",
+        "back",
+        "flak",
+        "hack",
+        "jack",
+        "lack",
+        "mack",
+        "pack",
+        "rack",
+        "sack",
+        "tack",
+        "zach",
+        "zack",
+        "black",
+        "crack",
+        "knack",
+        "quack",
+        "shack",
+        "slack",
+        "smack",
+        "snack",
+        "stack",
+        "track",
+        "whack",
+        "plaque"
+      ]
+    },
+    {
+      "family_id": "EH1 L",
+      "label": "L Family (-ell)",
+      "count": 26,
+      "words": [
+        "l",
+        "el",
+        "bel",
+        "del",
+        "gel",
+        "mel",
+        "nel",
+        "tel",
+        "bell",
+        "cell",
+        "dell",
+        "fell",
+        "hell",
+        "nell",
+        "noel",
+        "pell",
+        "sell",
+        "tell",
+        "well",
+        "yell",
+        "dwell",
+        "quell",
+        "shell",
+        "smell",
+        "spell",
+        "swell"
+      ]
+    },
+    {
+      "family_id": "IY1 K",
+      "label": "EKE Family (-eak)",
+      "count": 23,
+      "words": [
+        "beak",
+        "chic",
+        "geek",
+        "leak",
+        "meek",
+        "peak",
+        "peek",
+        "seek",
+        "weak",
+        "week",
+        "zeke",
+        "bleak",
+        "cheek",
+        "creek",
+        "freak",
+        "greek",
+        "sheik",
+        "sleek",
+        "sneak",
+        "speak",
+        "tweak",
+        "clique",
+        "streak"
+      ]
+    },
+    {
+      "family_id": "IH1 R",
+      "label": "MIR Family (-ear)",
+      "count": 23,
+      "words": [
+        "mir",
+        "beer",
+        "dear",
+        "deer",
+        "fear",
+        "gear",
+        "lear",
+        "mere",
+        "near",
+        "peer",
+        "pier",
+        "rear",
+        "veer",
+        "year",
+        "cheer",
+        "clear",
+        "queer",
+        "shear",
+        "sheer",
+        "smear",
+        "spear",
+        "steer",
+        "sphere"
+      ]
+    },
+    {
+      "family_id": "AE1 M",
+      "label": "AM Family (-ram)",
+      "count": 22,
+      "words": [
+        "am",
+        "cam",
+        "dam",
+        "ham",
+        "jam",
+        "lam",
+        "pam",
+        "ram",
+        "sam",
+        "tam",
+        "yam",
+        "clam",
+        "cram",
+        "damn",
+        "gram",
+        "lamb",
+        "scam",
+        "sham",
+        "siam",
+        "slam",
+        "swam",
+        "tram"
+      ]
+    },
+    {
+      "family_id": "AA1 T",
+      "label": "COT Family (-lot)",
+      "count": 25,
+      "words": [
+        "cot",
+        "dot",
+        "got",
+        "hot",
+        "lot",
+        "not",
+        "pot",
+        "rot",
+        "tot",
+        "blot",
+        "clot",
+        "knot",
+        "plot",
+        "scot",
+        "shot",
+        "slot",
+        "spot",
+        "swat",
+        "trot",
+        "watt",
+        "scott",
+        "squat",
+        "yacht",
+        "bought",
+        "caught"
+      ]
+    },
+    {
+      "family_id": "EH1 D",
+      "label": "ED Family (-ead)",
+      "count": 27,
+      "words": [
+        "ed",
+        "bed",
+        "fed",
+        "led",
+        "red",
+        "ted",
+        "wed",
+        "zed",
+        "bled",
+        "bred",
+        "dead",
+        "fled",
+        "fred",
+        "head",
+        "lead",
+        "read",
+        "said",
+        "shed",
+        "sled",
+        "sped",
+        "bread",
+        "dread",
+        "shred",
+        "stead",
+        "tread",
+        "spread",
+        "thread"
+      ]
+    },
+    {
+      "family_id": "EH1 N",
+      "label": "N Family (-hen)",
+      "count": 26,
+      "words": [
+        "n",
+        "en",
+        "ben",
+        "den",
+        "gen",
+        "hen",
+        "jen",
+        "ken",
+        "len",
+        "men",
+        "pen",
+        "sen",
+        "ten",
+        "wen",
+        "yen",
+        "zen",
+        "chen",
+        "glen",
+        "gwen",
+        "penn",
+        "then",
+        "when",
+        "wren",
+        "glenn",
+        "nguyen",
+        "cheyenne"
+      ]
+    },
+    {
+      "family_id": "IH1 T",
+      "label": "IT Family (-itt)",
+      "count": 27,
+      "words": [
+        "it",
+        "bit",
+        "fit",
+        "git",
+        "hit",
+        "kit",
+        "lit",
+        "nit",
+        "pit",
+        "sit",
+        "tit",
+        "wit",
+        "brit",
+        "chit",
+        "grit",
+        "knit",
+        "mitt",
+        "pitt",
+        "quit",
+        "shit",
+        "skit",
+        "slit",
+        "spit",
+        "whit",
+        "writ",
+        "split",
+        "schmidt"
+      ]
+    },
+    {
+      "family_id": "IH1 K",
+      "label": "MIC Family (-ick)",
+      "count": 26,
+      "words": [
+        "mic",
+        "nic",
+        "pic",
+        "sic",
+        "tic",
+        "vic",
+        "dick",
+        "kick",
+        "lick",
+        "nick",
+        "pick",
+        "rick",
+        "sick",
+        "tick",
+        "vick",
+        "wick",
+        "brick",
+        "chick",
+        "click",
+        "flick",
+        "prick",
+        "quick",
+        "slick",
+        "stick",
+        "thick",
+        "trick"
+      ]
+    },
+    {
+      "family_id": "AY1 D",
+      "label": "BIDE Family (-ide)",
+      "count": 24,
+      "words": [
+        "died",
+        "eyed",
+        "fide",
+        "hide",
+        "hyde",
+        "lied",
+        "pied",
+        "ride",
+        "side",
+        "tide",
+        "tied",
+        "wide",
+        "bride",
+        "clyde",
+        "cried",
+        "dried",
+        "fried",
+        "glide",
+        "guide",
+        "pride",
+        "slide",
+        "tried",
+        "stride",
+        "mcbride"
+      ]
+    },
+    {
+      "family_id": "IY1 T",
+      "label": "ST Family (-eat)",
+      "count": 23,
+      "words": [
+        "st",
+        "eat",
+        "beat",
+        "beet",
+        "feat",
+        "feet",
+        "heat",
+        "meat",
+        "meet",
+        "neat",
+        "peat",
+        "pete",
+        "seat",
+        "cheat",
+        "crete",
+        "fleet",
+        "greet",
+        "sheet",
+        "suite",
+        "sweet",
+        "treat",
+        "wheat",
+        "street"
+      ]
+    },
+    {
+      "family_id": "IH1 P",
+      "label": "DIP Family (-rip)",
+      "count": 21,
+      "words": [
+        "dip",
+        "hip",
+        "kip",
+        "lip",
+        "nip",
+        "pip",
+        "rip",
+        "sip",
+        "tip",
+        "zip",
+        "chip",
+        "clip",
+        "drip",
+        "flip",
+        "grip",
+        "ship",
+        "skip",
+        "slip",
+        "trip",
+        "whip",
+        "strip"
+      ]
+    },
+    {
+      "family_id": "AO1 L",
+      "label": "ALL Family (-all)",
+      "count": 20,
+      "words": [
+        "all",
+        "mol",
+        "ball",
+        "call",
+        "fall",
+        "gall",
+        "gaul",
+        "hall",
+        "haul",
+        "mall",
+        "paul",
+        "saul",
+        "tall",
+        "wall",
+        "brawl",
+        "crawl",
+        "shawl",
+        "small",
+        "stall",
+        "mccall"
+      ]
+    },
+    {
+      "family_id": "AE1 T",
+      "label": "AT Family (-att)",
+      "count": 20,
+      "words": [
+        "at",
+        "bat",
+        "cat",
+        "fat",
+        "hat",
+        "mat",
+        "nat",
+        "pat",
+        "rat",
+        "sat",
+        "tat",
+        "vat",
+        "brat",
+        "chat",
+        "flat",
+        "matt",
+        "spat",
+        "that",
+        "platt",
+        "pratt"
+      ]
+    },
+    {
+      "family_id": "IY1 N",
+      "label": "BEAN Family (-een)",
+      "count": 22,
+      "words": [
+        "bean",
+        "bien",
+        "dean",
+        "gene",
+        "jean",
+        "keen",
+        "lean",
+        "lien",
+        "mean",
+        "seen",
+        "teen",
+        "clean",
+        "green",
+        "keane",
+        "queen",
+        "scene",
+        "sheen",
+        "greene",
+        "jeanne",
+        "mclean",
+        "screen",
+        "spleen"
+      ]
+    },
+    {
+      "family_id": "OW1 L",
+      "label": "BOLE Family (-ole)",
+      "count": 20,
+      "words": [
+        "bowl",
+        "coal",
+        "cole",
+        "dole",
+        "goal",
+        "hole",
+        "mole",
+        "pole",
+        "poll",
+        "role",
+        "roll",
+        "sole",
+        "soul",
+        "toll",
+        "seoul",
+        "stole",
+        "troll",
+        "whole",
+        "scroll",
+        "stroll"
+      ]
+    },
+    {
+      "family_id": "AA1 R",
+      "label": "R Family (-arr)",
+      "count": 20,
+      "words": [
+        "r",
+        "are",
+        "bar",
+        "car",
+        "far",
+        "jar",
+        "mar",
+        "par",
+        "tar",
+        "barr",
+        "carr",
+        "char",
+        "czar",
+        "parr",
+        "scar",
+        "spar",
+        "star",
+        "tsar",
+        "ussr",
+        "starr"
+      ]
+    },
+    {
+      "family_id": "EY1 D",
+      "label": "AID Family (-ade)",
+      "count": 19,
+      "words": [
+        "aid",
+        "aide",
+        "dade",
+        "fade",
+        "jade",
+        "laid",
+        "made",
+        "maid",
+        "paid",
+        "raid",
+        "wade",
+        "blade",
+        "braid",
+        "grade",
+        "shade",
+        "slade",
+        "spade",
+        "suede",
+        "trade"
+      ]
+    },
+    {
+      "family_id": "AE1 NG K",
+      "label": "BANC Family (-ank)",
+      "count": 20,
+      "words": [
+        "bank",
+        "dank",
+        "hank",
+        "rank",
+        "sank",
+        "tank",
+        "yank",
+        "blanc",
+        "blank",
+        "crank",
+        "drank",
+        "flank",
+        "franc",
+        "frank",
+        "plank",
+        "prank",
+        "shank",
+        "spank",
+        "thank",
+        "planck"
+      ]
+    },
+    {
+      "family_id": "IY1 D",
+      "label": "EDE Family (-eed)",
+      "count": 18,
+      "words": [
+        "bead",
+        "deed",
+        "feed",
+        "heed",
+        "mead",
+        "need",
+        "reed",
+        "reid",
+        "weed",
+        "seed",
+        "bleed",
+        "breed",
+        "creed",
+        "greed",
+        "plead",
+        "speed",
+        "swede",
+        "tweed"
+      ]
+    },
+    {
+      "family_id": "EY1 Z",
+      "label": "DAIS Family (-aze)",
+      "count": 15,
+      "words": [
+        "days",
+        "gaze",
+        "haze",
+        "maze",
+        "ways",
+        "blaze",
+        "craze",
+        "glaze",
+        "graze",
+        "hayes",
+        "maize",
+        "phase",
+        "raise",
+        "phrase",
+        "praise"
+      ]
+    },
+    {
+      "family_id": "EH1 T",
+      "label": "ET Family (-ret)",
+      "count": 21,
+      "words": [
+        "et",
+        "bet",
+        "get",
+        "jet",
+        "let",
+        "met",
+        "net",
+        "pet",
+        "ret",
+        "set",
+        "vet",
+        "wet",
+        "yet",
+        "chet",
+        "debt",
+        "duet",
+        "fret",
+        "viet",
+        "brett",
+        "sweat",
+        "threat"
+      ]
+    },
+    {
+      "family_id": "IY1 Z",
+      "label": "EASE Family (-eze)",
+      "count": 20,
+      "words": [
+        "ease",
+        "jeez",
+        "lees",
+        "ruiz",
+        "skis",
+        "seas",
+        "bees",
+        "keys",
+        "seize",
+        "tease",
+        "these",
+        "knees",
+        "trees",
+        "breeze",
+        "cheese",
+        "freeze",
+        "louise",
+        "please",
+        "sneeze",
+        "squeeze"
+      ]
+    },
+    {
+      "family_id": "AY1 ER0",
+      "label": "FIRE Family (-ier)",
+      "count": 15,
+      "words": [
+        "fire",
+        "hire",
+        "liar",
+        "sire",
+        "tire",
+        "wire",
+        "choir",
+        "drier",
+        "dryer",
+        "dwyer",
+        "flyer",
+        "friar",
+        "meyer",
+        "pryor",
+        "higher"
+      ]
+    },
+    {
+      "family_id": "AY1 N",
+      "label": "DINE Family (-ine)",
+      "count": 20,
+      "words": [
+        "dine",
+        "fine",
+        "line",
+        "mine",
+        "nine",
+        "pine",
+        "sign",
+        "sine",
+        "vine",
+        "wine",
+        "brine",
+        "klein",
+        "rhine",
+        "shine",
+        "spine",
+        "stein",
+        "swine",
+        "thine",
+        "whine",
+        "shrine"
+      ]
+    },
+    {
+      "family_id": "EY1 K",
+      "label": "AKE Family (-ake)",
+      "count": 21,
+      "words": [
+        "ache",
+        "bake",
+        "cake",
+        "fake",
+        "jake",
+        "lake",
+        "make",
+        "rake",
+        "sake",
+        "take",
+        "wake",
+        "blake",
+        "brake",
+        "break",
+        "drake",
+        "flake",
+        "quake",
+        "shake",
+        "snake",
+        "stake",
+        "steak"
+      ]
+    },
+    {
+      "family_id": "AE1 D",
+      "label": "AD Family (-lad)",
+      "count": 21,
+      "words": [
+        "ad",
+        "add",
+        "bad",
+        "cad",
+        "dad",
+        "fad",
+        "had",
+        "lad",
+        "mad",
+        "pad",
+        "rad",
+        "sad",
+        "tad",
+        "brad",
+        "chad",
+        "clad",
+        "glad",
+        "grad",
+        "vlad",
+        "plaid",
+        "riyadh"
+      ]
+    },
+    {
+      "family_id": "AE1 SH",
+      "label": "ASH Family (-ash)",
+      "count": 20,
+      "words": [
+        "ash",
+        "bash",
+        "cash",
+        "dash",
+        "hash",
+        "lash",
+        "mash",
+        "nash",
+        "rash",
+        "sash",
+        "cache",
+        "clash",
+        "crash",
+        "flash",
+        "slash",
+        "smash",
+        "stash",
+        "trash",
+        "splash",
+        "thrash"
+      ]
+    },
+    {
+      "family_id": "AA1 N",
+      "label": "ON Family (-onn)",
+      "count": 19,
+      "words": [
+        "on",
+        "bon",
+        "con",
+        "don",
+        "hon",
+        "jon",
+        "lon",
+        "non",
+        "ron",
+        "wan",
+        "bonn",
+        "conn",
+        "hahn",
+        "john",
+        "juan",
+        "kahn",
+        "khan",
+        "swan",
+        "spawn"
+      ]
+    },
+    {
+      "family_id": "AW1",
+      "label": "BOW Family (-ugh)",
+      "count": 18,
+      "words": [
+        "bow",
+        "cow",
+        "dow",
+        "how",
+        "lao",
+        "now",
+        "pow",
+        "sow",
+        "vow",
+        "wow",
+        "brow",
+        "chow",
+        "frau",
+        "howe",
+        "meow",
+        "plow",
+        "thou",
+        "plough"
+      ]
+    },
+    {
+      "family_id": "AH1 M",
+      "label": "BUM Family (-umb)",
+      "count": 17,
+      "words": [
+        "bum",
+        "cum",
+        "gum",
+        "hum",
+        "mum",
+        "rum",
+        "sum",
+        "come",
+        "drum",
+        "dumb",
+        "from",
+        "numb",
+        "plum",
+        "scum",
+        "slum",
+        "some",
+        "thumb"
+      ]
+    },
+    {
+      "family_id": "EH1 S",
+      "label": "S Family (-ess)",
+      "count": 17,
+      "words": [
+        "s",
+        "des",
+        "les",
+        "yes",
+        "bess",
+        "hess",
+        "jess",
+        "less",
+        "mess",
+        "ness",
+        "tess",
+        "bless",
+        "chess",
+        "dress",
+        "guess",
+        "press",
+        "stress"
+      ]
+    },
+    {
+      "family_id": "IH1 NG K",
+      "label": "INC Family (-ink)",
+      "count": 16,
+      "words": [
+        "inc",
+        "ink",
+        "fink",
+        "link",
+        "mink",
+        "pink",
+        "rink",
+        "sink",
+        "wink",
+        "zinc",
+        "blink",
+        "brink",
+        "drink",
+        "stink",
+        "think",
+        "shrink"
+      ]
+    },
+    {
+      "family_id": "AE1 P",
+      "label": "CAP Family (-rap)",
+      "count": 20,
+      "words": [
+        "cap",
+        "gap",
+        "hap",
+        "lap",
+        "map",
+        "nap",
+        "pap",
+        "rap",
+        "sap",
+        "tap",
+        "chap",
+        "clap",
+        "crap",
+        "flap",
+        "slap",
+        "snap",
+        "trap",
+        "wrap",
+        "scrap",
+        "strap"
+      ]
+    },
+    {
+      "family_id": "AA1",
+      "label": "AH Family (-hah)",
+      "count": 20,
+      "words": [
+        "ah",
+        "ha",
+        "ja",
+        "ka",
+        "la",
+        "ma",
+        "pa",
+        "ta",
+        "ya",
+        "awe",
+        "bah",
+        "bra",
+        "hah",
+        "moi",
+        "rah",
+        "raw",
+        "spa",
+        "blah",
+        "bois",
+        "shah"
+      ]
+    },
+    {
+      "family_id": "AE1 G",
+      "label": "BAG Family (-rag)",
+      "count": 18,
+      "words": [
+        "bag",
+        "fag",
+        "gag",
+        "lag",
+        "mag",
+        "nag",
+        "rag",
+        "sag",
+        "tag",
+        "wag",
+        "brag",
+        "drag",
+        "flag",
+        "shag",
+        "slag",
+        "snag",
+        "stag",
+        "bragg"
+      ]
+    },
+    {
+      "family_id": "ER1 N",
+      "label": "URN Family (-ern)",
+      "count": 11,
+      "words": [
+        "urn",
+        "bern",
+        "burn",
+        "earn",
+        "fern",
+        "kern",
+        "turn",
+        "byrne",
+        "churn",
+        "learn",
+        "stern"
+      ]
+    },
+    {
+      "family_id": "OW1 K",
+      "label": "OAK Family (-oke)",
+      "count": 18,
+      "words": [
+        "oak",
+        "coke",
+        "folk",
+        "joke",
+        "poke",
+        "polk",
+        "soak",
+        "woke",
+        "yoke",
+        "yolk",
+        "bloke",
+        "broke",
+        "choke",
+        "cloak",
+        "smoke",
+        "spoke",
+        "stoke",
+        "stroke"
+      ]
+    },
+    {
+      "family_id": "UW1 T",
+      "label": "BOOT Family (-oot)",
+      "count": 16,
+      "words": [
+        "boot",
+        "cute",
+        "loot",
+        "moot",
+        "mute",
+        "newt",
+        "root",
+        "suit",
+        "toot",
+        "brute",
+        "butte",
+        "chute",
+        "flute",
+        "fruit",
+        "route",
+        "shoot"
+      ]
+    },
+    {
+      "family_id": "IH1 M",
+      "label": "DIM Family (-rim)",
+      "count": 18,
+      "words": [
+        "dim",
+        "gym",
+        "him",
+        "jim",
+        "kim",
+        "rim",
+        "sim",
+        "tim",
+        "brim",
+        "grim",
+        "hymn",
+        "limb",
+        "skim",
+        "slim",
+        "swim",
+        "trim",
+        "whim",
+        "grimm"
+      ]
+    },
+    {
+      "family_id": "AH1 K",
+      "label": "YUK Family (-uck)",
+      "count": 15,
+      "words": [
+        "buck",
+        "duck",
+        "fuck",
+        "luck",
+        "muck",
+        "puck",
+        "suck",
+        "tuck",
+        "yuck",
+        "chuck",
+        "pluck",
+        "snuck",
+        "stuck",
+        "truck",
+        "struck"
+      ]
+    },
+    {
+      "family_id": "AH1 N",
+      "label": "UN Family (-one)",
+      "count": 20,
+      "words": [
+        "un",
+        "bun",
+        "dun",
+        "fun",
+        "gun",
+        "nun",
+        "one",
+        "pun",
+        "run",
+        "son",
+        "sun",
+        "ton",
+        "won",
+        "done",
+        "dunn",
+        "none",
+        "shun",
+        "spun",
+        "stun",
+        "tonne"
+      ]
+    },
+    {
+      "family_id": "AO1",
+      "label": "AW Family (-raw)",
+      "count": 14,
+      "words": [
+        "aw",
+        "daw",
+        "haw",
+        "jaw",
+        "law",
+        "paw",
+        "saw",
+        "claw",
+        "draw",
+        "flaw",
+        "shaw",
+        "thaw",
+        "straw",
+        "mcgraw"
+      ]
+    },
+    {
+      "family_id": "AA1 P",
+      "label": "OP Family (-lop)",
+      "count": 15,
+      "words": [
+        "op",
+        "bop",
+        "cop",
+        "hop",
+        "mop",
+        "pop",
+        "top",
+        "chop",
+        "crop",
+        "drop",
+        "flop",
+        "prop",
+        "shop",
+        "stop",
+        "swap"
+      ]
+    },
+    {
+      "family_id": "UW1 P",
+      "label": "COOP Family (-oop)",
+      "count": 14,
+      "words": [
+        "coop",
+        "hoop",
+        "loop",
+        "poop",
+        "soup",
+        "coupe",
+        "group",
+        "scoop",
+        "snoop",
+        "stoop",
+        "swoop",
+        "troop",
+        "whoop",
+        "troupe"
+      ]
+    },
+    {
+      "family_id": "AY1 L",
+      "label": "BILE Family (-ile)",
+      "count": 13,
+      "words": [
+        "bile",
+        "file",
+        "kyle",
+        "lyle",
+        "mile",
+        "nile",
+        "pile",
+        "tile",
+        "vile",
+        "aisle",
+        "smile",
+        "style",
+        "while"
+      ]
+    },
+    {
+      "family_id": "AE1 NG",
+      "label": "BANG Family (-ang)",
+      "count": 18,
+      "words": [
+        "bang",
+        "dang",
+        "fang",
+        "gang",
+        "hang",
+        "lang",
+        "pang",
+        "rang",
+        "sang",
+        "tang",
+        "wang",
+        "yang",
+        "chang",
+        "lange",
+        "liang",
+        "slang",
+        "chiang",
+        "sprang"
+      ]
+    },
+    {
+      "family_id": "ER1",
+      "label": "BUR Family (-lur)",
+      "count": 13,
+      "words": [
+        "fir",
+        "fur",
+        "her",
+        "per",
+        "sir",
+        "sur",
+        "blur",
+        "burr",
+        "kerr",
+        "slur",
+        "spur",
+        "stir",
+        "were"
+      ]
+    },
+    {
+      "family_id": "AH1 F",
+      "label": "BUFF Family (-uff)",
+      "count": 13,
+      "words": [
+        "buff",
+        "cuff",
+        "duff",
+        "huff",
+        "puff",
+        "ruff",
+        "bluff",
+        "fluff",
+        "rough",
+        "snuff",
+        "stuff",
+        "tough",
+        "slough"
+      ]
+    },
+    {
+      "family_id": "AW1 T",
+      "label": "OUT Family (-out)",
+      "count": 15,
+      "words": [
+        "out",
+        "bout",
+        "gout",
+        "rout",
+        "tout",
+        "clout",
+        "doubt",
+        "scout",
+        "shout",
+        "snout",
+        "spout",
+        "stout",
+        "trout",
+        "sprout",
+        "drought"
+      ]
+    },
+    {
+      "family_id": "AY1 S",
+      "label": "ICE Family (-ice)",
+      "count": 14,
+      "words": [
+        "ice",
+        "dice",
+        "lice",
+        "mice",
+        "nice",
+        "rice",
+        "vice",
+        "bryce",
+        "price",
+        "slice",
+        "spice",
+        "twice",
+        "weiss",
+        "thrice"
+      ]
+    },
+    {
+      "family_id": "ER1 T",
+      "label": "BERT Family (-urt)",
+      "count": 10,
+      "words": [
+        "bert",
+        "burt",
+        "curt",
+        "dirt",
+        "hurt",
+        "kurt",
+        "flirt",
+        "shirt",
+        "skirt",
+        "squirt"
+      ]
+    },
+    {
+      "family_id": "EH1 S T",
+      "label": "EST Family (-est)",
+      "count": 16,
+      "words": [
+        "est",
+        "best",
+        "jest",
+        "lest",
+        "nest",
+        "pest",
+        "rest",
+        "test",
+        "vest",
+        "west",
+        "zest",
+        "chest",
+        "crest",
+        "guest",
+        "quest",
+        "breast"
+      ]
+    },
+    {
+      "family_id": "IH1 NG",
+      "label": "BING Family (-ing)",
+      "count": 17,
+      "words": [
+        "bing",
+        "ding",
+        "king",
+        "ling",
+        "ring",
+        "sing",
+        "ting",
+        "wing",
+        "bring",
+        "cling",
+        "fling",
+        "sling",
+        "sting",
+        "swing",
+        "thing",
+        "spring",
+        "string"
+      ]
+    },
+    {
+      "family_id": "OW1 T",
+      "label": "OAT Family (-oat)",
+      "count": 11,
+      "words": [
+        "boat",
+        "coat",
+        "goat",
+        "moat",
+        "note",
+        "tote",
+        "vote",
+        "float",
+        "quote",
+        "wrote",
+        "throat"
+      ]
+    },
+    {
+      "family_id": "UW1 Z",
+      "label": "CRUZ Family (-use)",
+      "count": 13,
+      "words": [
+        "cruz",
+        "fuse",
+        "lose",
+        "muse",
+        "news",
+        "ruse",
+        "blues",
+        "booze",
+        "shoes",
+        "whose",
+        "bruise",
+        "choose",
+        "cruise"
+      ]
+    },
+    {
+      "family_id": "UW1 N",
+      "label": "BOON Family (-oon)",
+      "count": 13,
+      "words": [
+        "boon",
+        "coon",
+        "dune",
+        "goon",
+        "june",
+        "moon",
+        "noon",
+        "rune",
+        "soon",
+        "tune",
+        "boone",
+        "spoon",
+        "strewn"
+      ]
+    },
+    {
+      "family_id": "AH1 G",
+      "label": "BUG Family (-hug)",
+      "count": 18,
+      "words": [
+        "bug",
+        "dug",
+        "hug",
+        "jug",
+        "lug",
+        "mug",
+        "pug",
+        "rug",
+        "tug",
+        "ugh",
+        "doug",
+        "drug",
+        "plug",
+        "slug",
+        "smug",
+        "snug",
+        "thug",
+        "shrug"
+      ]
+    },
+    {
+      "family_id": "AE1 B",
+      "label": "AB Family (-lab)",
+      "count": 12,
+      "words": [
+        "ab",
+        "cab",
+        "dab",
+        "jab",
+        "lab",
+        "nab",
+        "tab",
+        "crab",
+        "drab",
+        "grab",
+        "slab",
+        "stab"
+      ]
+    },
+    {
+      "family_id": "AA1 R K",
+      "label": "ARC Family (-ark)",
+      "count": 14,
+      "words": [
+        "arc",
+        "ark",
+        "bark",
+        "dark",
+        "lark",
+        "marc",
+        "mark",
+        "park",
+        "clark",
+        "quark",
+        "shark",
+        "spark",
+        "stark",
+        "clarke"
+      ]
+    },
+    {
+      "family_id": "EH1 N T",
+      "label": "BENT Family (-ent)",
+      "count": 16,
+      "words": [
+        "bent",
+        "cent",
+        "dent",
+        "gent",
+        "kent",
+        "lent",
+        "rent",
+        "sent",
+        "tent",
+        "vent",
+        "went",
+        "brent",
+        "meant",
+        "scent",
+        "spent",
+        "trent"
+      ]
+    },
+    {
+      "family_id": "ER1 K",
+      "label": "ERK Family (-irk)",
+      "count": 12,
+      "words": [
+        "dirk",
+        "jerk",
+        "kirk",
+        "lurk",
+        "perk",
+        "turk",
+        "work",
+        "burke",
+        "clerk",
+        "merck",
+        "quirk",
+        "smirk"
+      ]
+    },
+    {
+      "family_id": "IH1 CH",
+      "label": "ICH Family (-tch)",
+      "count": 17,
+      "words": [
+        "ich",
+        "itch",
+        "rich",
+        "bitch",
+        "ditch",
+        "fitch",
+        "hitch",
+        "mitch",
+        "niche",
+        "pitch",
+        "which",
+        "witch",
+        "glitch",
+        "snitch",
+        "stitch",
+        "switch",
+        "twitch"
+      ]
+    },
+    {
+      "family_id": "AA1 B",
+      "label": "BOB Family (-lob)",
+      "count": 9,
+      "words": [
+        "bob",
+        "cob",
+        "job",
+        "mob",
+        "rob",
+        "sob",
+        "blob",
+        "cobb",
+        "knob"
+      ]
+    },
+    {
+      "family_id": "AO1 R N",
+      "label": "BORN Family (-orn)",
+      "count": 15,
+      "words": [
+        "born",
+        "corn",
+        "horn",
+        "morn",
+        "torn",
+        "warn",
+        "worn",
+        "porn",
+        "borne",
+        "mourn",
+        "scorn",
+        "sworn",
+        "thorn",
+        "bourne",
+        "thorne"
+      ]
+    },
+    {
+      "family_id": "UW1 L",
+      "label": "BUHL Family (-ool)",
+      "count": 11,
+      "words": [
+        "cool",
+        "fool",
+        "mule",
+        "pool",
+        "rule",
+        "tool",
+        "drool",
+        "poole",
+        "raoul",
+        "stool",
+        "school"
+      ]
+    },
+    {
+      "family_id": "OY1",
+      "label": "OY Family (-coy)",
+      "count": 11,
+      "words": [
+        "oy",
+        "boy",
+        "coy",
+        "hoy",
+        "joy",
+        "roy",
+        "soy",
+        "toy",
+        "ploy",
+        "troy",
+        "mccoy"
+      ]
+    },
+    {
+      "family_id": "EY1 V",
+      "label": "CAVE Family (-ave)",
+      "count": 16,
+      "words": [
+        "cave",
+        "dave",
+        "fave",
+        "gave",
+        "nave",
+        "pave",
+        "rave",
+        "save",
+        "wave",
+        "brave",
+        "crave",
+        "grave",
+        "shave",
+        "slave",
+        "stave",
+        "waive"
+      ]
+    },
+    {
+      "family_id": "AH1 M P",
+      "label": "BUMP Family (-ump)",
+      "count": 12,
+      "words": [
+        "bump",
+        "dump",
+        "gump",
+        "hump",
+        "jump",
+        "lump",
+        "pump",
+        "rump",
+        "plump",
+        "slump",
+        "stump",
+        "trump"
+      ]
+    },
+    {
+      "family_id": "AH1 NG",
+      "label": "BUNG Family (-ung)",
+      "count": 14,
+      "words": [
+        "dung",
+        "hung",
+        "lung",
+        "rung",
+        "sung",
+        "tung",
+        "chung",
+        "flung",
+        "stung",
+        "swung",
+        "young",
+        "sprung",
+        "strung",
+        "tongue"
+      ]
+    },
+    {
+      "family_id": "AH1 NG K",
+      "label": "BUNK Family (-unk)",
+      "count": 13,
+      "words": [
+        "bunk",
+        "dunk",
+        "funk",
+        "hunk",
+        "junk",
+        "monk",
+        "punk",
+        "sunk",
+        "chunk",
+        "drunk",
+        "skunk",
+        "trunk",
+        "shrunk"
+      ]
+    },
+    {
+      "family_id": "EY1 S",
+      "label": "ACE Family (-ace)",
+      "count": 15,
+      "words": [
+        "ace",
+        "base",
+        "case",
+        "face",
+        "lace",
+        "mace",
+        "pace",
+        "race",
+        "vase",
+        "brace",
+        "chase",
+        "grace",
+        "place",
+        "space",
+        "trace"
+      ]
+    },
+    {
+      "family_id": "IY1 M",
+      "label": "BEAM Family (-eam)",
+      "count": 13,
+      "words": [
+        "beam",
+        "deem",
+        "diem",
+        "seam",
+        "seem",
+        "team",
+        "cream",
+        "dream",
+        "steam",
+        "theme",
+        "scheme",
+        "scream",
+        "stream"
+      ]
+    },
+    {
+      "family_id": "EH1 K",
+      "label": "LEK Family (-eck)",
+      "count": 14,
+      "words": [
+        "sec",
+        "beck",
+        "deck",
+        "heck",
+        "neck",
+        "peck",
+        "spec",
+        "tech",
+        "trek",
+        "check",
+        "czech",
+        "speck",
+        "wreck",
+        "cheque"
+      ]
+    },
+    {
+      "family_id": "IY1 P",
+      "label": "BEEP Family (-eep)",
+      "count": 15,
+      "words": [
+        "beep",
+        "deep",
+        "heap",
+        "jeep",
+        "keep",
+        "leap",
+        "peep",
+        "reap",
+        "weep",
+        "cheap",
+        "creep",
+        "sheep",
+        "sleep",
+        "steep",
+        "sweep"
+      ]
+    },
+    {
+      "family_id": "IH1 G",
+      "label": "BIG Family (-rig)",
+      "count": 10,
+      "words": [
+        "big",
+        "dig",
+        "fig",
+        "gig",
+        "jig",
+        "pig",
+        "rig",
+        "wig",
+        "brig",
+        "twig"
+      ]
+    },
+    {
+      "family_id": "IH1 S",
+      "label": "BIS Family (-iss)",
+      "count": 14,
+      "words": [
+        "bis",
+        "lis",
+        "sis",
+        "vis",
+        "diss",
+        "hiss",
+        "kiss",
+        "kris",
+        "miss",
+        "piss",
+        "this",
+        "bliss",
+        "chris",
+        "swiss"
+      ]
+    },
+    {
+      "family_id": "UW1 M",
+      "label": "BLUM Family (-oom)",
+      "count": 14,
+      "words": [
+        "boom",
+        "doom",
+        "hume",
+        "loom",
+        "room",
+        "tomb",
+        "whom",
+        "womb",
+        "zoom",
+        "bloom",
+        "broom",
+        "gloom",
+        "groom",
+        "plume"
+      ]
+    },
+    {
+      "family_id": "OW1 Z",
+      "label": "BOSE Family (-ose)",
+      "count": 13,
+      "words": [
+        "bose",
+        "goes",
+        "hose",
+        "nose",
+        "pose",
+        "rose",
+        "toes",
+        "chose",
+        "flows",
+        "froze",
+        "prose",
+        "shows",
+        "those"
+      ]
+    },
+    {
+      "family_id": "UW1 S",
+      "label": "USE Family (-uce)",
+      "count": 9,
+      "words": [
+        "use",
+        "zeus",
+        "bruce",
+        "goose",
+        "juice",
+        "loose",
+        "moose",
+        "truce",
+        "spruce"
+      ]
+    },
+    {
+      "family_id": "AA1 D",
+      "label": "COD Family (-odd)",
+      "count": 14,
+      "words": [
+        "cod",
+        "god",
+        "nod",
+        "odd",
+        "pod",
+        "rod",
+        "sod",
+        "tod",
+        "wad",
+        "dodd",
+        "prod",
+        "quad",
+        "todd",
+        "squad"
+      ]
+    },
+    {
+      "family_id": "EY1 M",
+      "label": "AIM Family (-ame)",
+      "count": 15,
+      "words": [
+        "aim",
+        "came",
+        "dame",
+        "fame",
+        "game",
+        "lame",
+        "name",
+        "same",
+        "tame",
+        "blame",
+        "claim",
+        "flame",
+        "frame",
+        "shame",
+        "graeme"
+      ]
+    },
+    {
+      "family_id": "AH1 T",
+      "label": "BUT Family (-utt)",
+      "count": 12,
+      "words": [
+        "but",
+        "cut",
+        "gut",
+        "hut",
+        "nut",
+        "rut",
+        "butt",
+        "putt",
+        "shut",
+        "slut",
+        "what",
+        "strut"
+      ]
+    },
+    {
+      "family_id": "AO1 S",
+      "label": "COS Family (-oss)",
+      "count": 11,
+      "words": [
+        "cos",
+        "dos",
+        "ros",
+        "joss",
+        "loss",
+        "moss",
+        "toss",
+        "voss",
+        "cross",
+        "gloss",
+        "sauce"
+      ]
+    },
+    {
+      "family_id": "AA1 R T",
+      "label": "ART Family (-art)",
+      "count": 14,
+      "words": [
+        "art",
+        "bart",
+        "cart",
+        "dart",
+        "fart",
+        "hart",
+        "mart",
+        "part",
+        "tart",
+        "carte",
+        "chart",
+        "heart",
+        "smart",
+        "start"
+      ]
+    },
+    {
+      "family_id": "AE1 S",
+      "label": "ASS Family (-ass)",
+      "count": 12,
+      "words": [
+        "ass",
+        "gas",
+        "bass",
+        "cass",
+        "gras",
+        "lass",
+        "mass",
+        "pass",
+        "brass",
+        "class",
+        "glass",
+        "grass"
+      ]
+    },
+    {
+      "family_id": "AA1 M",
+      "label": "DOM Family (-alm)",
+      "count": 11,
+      "words": [
+        "dom",
+        "mom",
+        "rom",
+        "tom",
+        "balm",
+        "bomb",
+        "calm",
+        "guam",
+        "palm",
+        "prom",
+        "thom"
+      ]
+    },
+    {
+      "family_id": "IH1 D",
+      "label": "ID Family (-kid)",
+      "count": 15,
+      "words": [
+        "id",
+        "bid",
+        "did",
+        "hid",
+        "kid",
+        "lid",
+        "mid",
+        "rid",
+        "sid",
+        "syd",
+        "grid",
+        "quid",
+        "skid",
+        "slid",
+        "squid"
+      ]
+    },
+    {
+      "family_id": "UH1 K",
+      "label": "BOOK Family (-ook)",
+      "count": 12,
+      "words": [
+        "book",
+        "cook",
+        "hook",
+        "look",
+        "nook",
+        "rook",
+        "took",
+        "brook",
+        "cooke",
+        "crook",
+        "shook",
+        "brooke"
+      ]
+    },
+    {
+      "family_id": "UW1 D",
+      "label": "DUDE Family (-ude)",
+      "count": 11,
+      "words": [
+        "dude",
+        "feud",
+        "food",
+        "jude",
+        "lewd",
+        "mood",
+        "nude",
+        "rude",
+        "brood",
+        "crude",
+        "shrewd"
+      ]
+    },
+    {
+      "family_id": "AH1 B",
+      "label": "BUB Family (-rub)",
+      "count": 12,
+      "words": [
+        "cub",
+        "dub",
+        "hub",
+        "pub",
+        "rub",
+        "sub",
+        "tub",
+        "club",
+        "grub",
+        "stub",
+        "scrub",
+        "shrub"
+      ]
+    },
+    {
+      "family_id": "OW1 M",
+      "label": "OHM Family (-ome)",
+      "count": 10,
+      "words": [
+        "ohm",
+        "comb",
+        "dome",
+        "foam",
+        "home",
+        "roam",
+        "rome",
+        "tome",
+        "gnome",
+        "chrome"
+      ]
+    },
+    {
+      "family_id": "AO1 R T",
+      "label": "CORT Family (-ort)",
+      "count": 12,
+      "words": [
+        "fort",
+        "mort",
+        "port",
+        "sort",
+        "tort",
+        "court",
+        "porte",
+        "quart",
+        "short",
+        "snort",
+        "sport",
+        "thwart"
+      ]
+    },
+    {
+      "family_id": "AY1 Z",
+      "label": "DIES Family (-ies)",
+      "count": 14,
+      "words": [
+        "dies",
+        "eyes",
+        "lies",
+        "rise",
+        "size",
+        "ties",
+        "wise",
+        "fries",
+        "guise",
+        "prize",
+        "tries",
+        "cries",
+        "skies",
+        "thighs"
+      ]
+    },
+    {
+      "family_id": "AO1 T",
+      "label": "BOT Family (-ght)",
+      "count": 9,
+      "words": [
+        "bot",
+        "ought",
+        "fought",
+        "sought",
+        "taught",
+        "brought",
+        "fraught",
+        "thought",
+        "wrought"
+      ]
+    },
+    {
+      "family_id": "IY1 CH",
+      "label": "EACH Family (-ach)",
+      "count": 12,
+      "words": [
+        "each",
+        "beach",
+        "beech",
+        "leach",
+        "leech",
+        "peach",
+        "reach",
+        "teach",
+        "bleach",
+        "breach",
+        "preach",
+        "speech"
+      ]
+    },
+    {
+      "family_id": "AH1 D",
+      "label": "BUD Family (-udd)",
+      "count": 7,
+      "words": [
+        "bud",
+        "mud",
+        "judd",
+        "rudd",
+        "stud",
+        "blood",
+        "flood"
+      ]
+    },
+    {
+      "family_id": "AW1 S",
+      "label": "DOUSE Family (-use)",
+      "count": 8,
+      "words": [
+        "house",
+        "klaus",
+        "mouse",
+        "rouse",
+        "blouse",
+        "grouse",
+        "spouse",
+        "strauss"
+      ]
+    },
+    {
+      "family_id": "OW1 D",
+      "label": "ODE Family (-ode)",
+      "count": 11,
+      "words": [
+        "ode",
+        "bode",
+        "code",
+        "load",
+        "mode",
+        "node",
+        "road",
+        "rode",
+        "toad",
+        "rhode",
+        "showed"
+      ]
+    },
+    {
+      "family_id": "OW1 L D",
+      "label": "OLD Family (-old)",
+      "count": 10,
+      "words": [
+        "old",
+        "bold",
+        "cold",
+        "fold",
+        "gold",
+        "hold",
+        "mold",
+        "sold",
+        "told",
+        "mould"
+      ]
+    },
+    {
+      "family_id": "AO1 N",
+      "label": "VON Family (-awn)",
+      "count": 12,
+      "words": [
+        "von",
+        "dawn",
+        "fawn",
+        "gone",
+        "lawn",
+        "pawn",
+        "sean",
+        "yawn",
+        "braun",
+        "drawn",
+        "shawn",
+        "vaughn"
+      ]
+    },
+    {
+      "family_id": "IH1 L T",
+      "label": "GILT Family (-ilt)",
+      "count": 6,
+      "words": [
+        "gilt",
+        "tilt",
+        "wilt",
+        "built",
+        "guilt",
+        "quilt"
+      ]
+    },
+    {
+      "family_id": "EH1 M",
+      "label": "M Family (-hem)",
+      "count": 10,
+      "words": [
+        "m",
+        "em",
+        "gem",
+        "hem",
+        "ppm",
+        "rem",
+        "rpm",
+        "stem",
+        "them",
+        "femme"
+      ]
+    },
+    {
+      "family_id": "IH1 N T",
+      "label": "DINT Family (-int)",
+      "count": 8,
+      "words": [
+        "hint",
+        "mint",
+        "tint",
+        "clint",
+        "flint",
+        "print",
+        "stint",
+        "sprint"
+      ]
+    },
+    {
+      "family_id": "AE1 M P",
+      "label": "AMP Family (-amp)",
+      "count": 10,
+      "words": [
+        "amp",
+        "camp",
+        "damp",
+        "lamp",
+        "ramp",
+        "champ",
+        "clamp",
+        "cramp",
+        "stamp",
+        "tramp"
+      ]
+    },
+    {
+      "family_id": "AE1 N T",
+      "label": "ANT Family (-ant)",
+      "count": 12,
+      "words": [
+        "ant",
+        "aunt",
+        "cant",
+        "kant",
+        "pant",
+        "rant",
+        "chant",
+        "grant",
+        "plant",
+        "scant",
+        "slant",
+        "brandt"
+      ]
+    },
+    {
+      "family_id": "AE1 N D",
+      "label": "BAND Family (-and)",
+      "count": 13,
+      "words": [
+        "band",
+        "hand",
+        "land",
+        "rand",
+        "sand",
+        "bland",
+        "brand",
+        "gland",
+        "grand",
+        "stand",
+        "grande",
+        "strand",
+        "planned"
+      ]
+    },
+    {
+      "family_id": "AY1 K",
+      "label": "IKE Family (-ike)",
+      "count": 11,
+      "words": [
+        "ike",
+        "bike",
+        "dyke",
+        "hike",
+        "like",
+        "mike",
+        "pike",
+        "psych",
+        "reich",
+        "spike",
+        "strike"
+      ]
+    },
+    {
+      "family_id": "ER1 D",
+      "label": "BIRD Family (-urd)",
+      "count": 7,
+      "words": [
+        "bird",
+        "byrd",
+        "herd",
+        "nerd",
+        "word",
+        "heard",
+        "third"
+      ]
+    },
+    {
+      "family_id": "AO1 R D",
+      "label": "CORD Family (-ord)",
+      "count": 10,
+      "words": [
+        "cord",
+        "ford",
+        "lord",
+        "ward",
+        "board",
+        "chord",
+        "hoard",
+        "horde",
+        "sword",
+        "stored"
+      ]
+    },
+    {
+      "family_id": "AA1 G",
+      "label": "BOG Family (-log)",
+      "count": 8,
+      "words": [
+        "bog",
+        "fog",
+        "hog",
+        "jog",
+        "frog",
+        "hogg",
+        "smog",
+        "prague"
+      ]
+    },
+    {
+      "family_id": "IY1 S",
+      "label": "LUIS Family (-ece)",
+      "count": 13,
+      "words": [
+        "luis",
+        "cease",
+        "geese",
+        "lease",
+        "niece",
+        "peace",
+        "piece",
+        "reece",
+        "reese",
+        "crease",
+        "fleece",
+        "grease",
+        "greece"
+      ]
+    },
+    {
+      "family_id": "AY1 M",
+      "label": "DIME Family (-ime)",
+      "count": 12,
+      "words": [
+        "dime",
+        "lime",
+        "mime",
+        "time",
+        "chime",
+        "climb",
+        "crime",
+        "grime",
+        "prime",
+        "rhyme",
+        "slime",
+        "thyme"
+      ]
+    },
+    {
+      "family_id": "IH1 S T",
+      "label": "CIST Family (-ist)",
+      "count": 8,
+      "words": [
+        "cyst",
+        "fist",
+        "gist",
+        "list",
+        "mist",
+        "twist",
+        "wrist",
+        "missed"
+      ]
+    },
+    {
+      "family_id": "IY1 V",
+      "label": "EVE Family (-eve)",
+      "count": 7,
+      "words": [
+        "eve",
+        "leave",
+        "naive",
+        "steve",
+        "weave",
+        "grieve",
+        "sleeve"
+      ]
+    },
+    {
+      "family_id": "OW1 P",
+      "label": "COPE Family (-ope)",
+      "count": 9,
+      "words": [
+        "cope",
+        "dope",
+        "hope",
+        "nope",
+        "pope",
+        "rope",
+        "soap",
+        "scope",
+        "slope"
+      ]
+    },
+    {
+      "family_id": "AO1 NG",
+      "label": "DONG Family (-ong)",
+      "count": 11,
+      "words": [
+        "dong",
+        "hong",
+        "kong",
+        "long",
+        "pong",
+        "song",
+        "tong",
+        "wong",
+        "thong",
+        "wrong",
+        "strong"
+      ]
+    },
+    {
+      "family_id": "AE1 K S",
+      "label": "AX Family (-lax)",
+      "count": 11,
+      "words": [
+        "ax",
+        "axe",
+        "fax",
+        "lax",
+        "max",
+        "pax",
+        "sax",
+        "tax",
+        "wax",
+        "flax",
+        "sachs"
+      ]
+    },
+    {
+      "family_id": "AO1 D",
+      "label": "MOD Family (-aud)",
+      "count": 6,
+      "words": [
+        "mod",
+        "maud",
+        "broad",
+        "fraud",
+        "maude",
+        "claude"
+      ]
+    },
+    {
+      "family_id": "IY1 F",
+      "label": "BEEF Family (-ief)",
+      "count": 7,
+      "words": [
+        "beef",
+        "leaf",
+        "reef",
+        "brief",
+        "chief",
+        "grief",
+        "thief"
+      ]
+    },
+    {
+      "family_id": "EH1 N D",
+      "label": "END Family (-end)",
+      "count": 11,
+      "words": [
+        "end",
+        "bend",
+        "fend",
+        "lend",
+        "mend",
+        "send",
+        "tend",
+        "blend",
+        "spend",
+        "trend",
+        "friend"
+      ]
+    },
+    {
+      "family_id": "IH1 B",
+      "label": "BIB Family (-lib)",
+      "count": 4,
+      "words": [
+        "lib",
+        "nib",
+        "rib",
+        "crib"
+      ]
+    },
+    {
+      "family_id": "AH1 SH",
+      "label": "GUSH Family (-ush)",
+      "count": 8,
+      "words": [
+        "hush",
+        "lush",
+        "rush",
+        "blush",
+        "brush",
+        "crush",
+        "flush",
+        "plush"
+      ]
+    },
+    {
+      "family_id": "OW1 V",
+      "label": "NOV Family (-ove)",
+      "count": 6,
+      "words": [
+        "nov",
+        "cove",
+        "hove",
+        "drove",
+        "grove",
+        "stove"
+      ]
+    },
+    {
+      "family_id": "AE1 F T",
+      "label": "AFT Family (-aft)",
+      "count": 10,
+      "words": [
+        "aft",
+        "daft",
+        "raft",
+        "taft",
+        "craft",
+        "draft",
+        "graft",
+        "kraft",
+        "shaft",
+        "draught"
+      ]
+    },
+    {
+      "family_id": "EY1 JH",
+      "label": "AGE Family (-age)",
+      "count": 10,
+      "words": [
+        "age",
+        "cage",
+        "gage",
+        "page",
+        "rage",
+        "sage",
+        "wage",
+        "gauge",
+        "paige",
+        "stage"
+      ]
+    },
+    {
+      "family_id": "EY1 P",
+      "label": "APE Family (-ape)",
+      "count": 7,
+      "words": [
+        "ape",
+        "cape",
+        "rape",
+        "tape",
+        "grape",
+        "shape",
+        "scrape"
+      ]
+    },
+    {
+      "family_id": "AE1 S T",
+      "label": "BAST Family (-ast)",
+      "count": 10,
+      "words": [
+        "cast",
+        "fast",
+        "hast",
+        "last",
+        "mast",
+        "past",
+        "vast",
+        "blast",
+        "caste",
+        "passed"
+      ]
+    },
+    {
+      "family_id": "EH1 L T",
+      "label": "BELT Family (-elt)",
+      "count": 4,
+      "words": [
+        "belt",
+        "felt",
+        "melt",
+        "dealt"
+      ]
+    },
+    {
+      "family_id": "IH1 S K",
+      "label": "DISC Family (-isk)",
+      "count": 6,
+      "words": [
+        "disc",
+        "disk",
+        "fisk",
+        "risk",
+        "brisk",
+        "whisk"
+      ]
+    },
+    {
+      "family_id": "AH1 N T",
+      "label": "BUNT Family (-unt)",
+      "count": 8,
+      "words": [
+        "cunt",
+        "hunt",
+        "punt",
+        "blunt",
+        "brunt",
+        "front",
+        "grunt",
+        "stunt"
+      ]
+    },
+    {
+      "family_id": "OY1 L",
+      "label": "OIL Family (-oil)",
+      "count": 9,
+      "words": [
+        "oil",
+        "boil",
+        "coil",
+        "foil",
+        "soil",
+        "toil",
+        "boyle",
+        "doyle",
+        "spoil"
+      ]
+    },
+    {
+      "family_id": "AA1 S",
+      "label": "OS Family (-oss)",
+      "count": 7,
+      "words": [
+        "os",
+        "kos",
+        "las",
+        "boss",
+        "haas",
+        "ross",
+        "floss"
+      ]
+    },
+    {
+      "family_id": "ER1 L",
+      "label": "BURL Family (-irl)",
+      "count": 5,
+      "words": [
+        "curl",
+        "earl",
+        "girl",
+        "pearl",
+        "swirl"
+      ]
+    },
+    {
+      "family_id": "AH1 S",
+      "label": "US Family (-uss)",
+      "count": 9,
+      "words": [
+        "us",
+        "bus",
+        "gus",
+        "pus",
+        "fuss",
+        "plus",
+        "russ",
+        "thus",
+        "truss"
+      ]
+    },
+    {
+      "family_id": "AE1 F",
+      "label": "CALF Family (-aff)",
+      "count": 5,
+      "words": [
+        "calf",
+        "half",
+        "graph",
+        "laugh",
+        "staff"
+      ]
+    },
+    {
+      "family_id": "AE1 N S",
+      "label": "DANCE Family (-nce)",
+      "count": 8,
+      "words": [
+        "dance",
+        "lance",
+        "vance",
+        "chance",
+        "france",
+        "glance",
+        "stance",
+        "trance"
+      ]
+    },
+    {
+      "family_id": "AE1 L",
+      "label": "AL Family (-bal)",
+      "count": 10,
+      "words": [
+        "al",
+        "bal",
+        "cal",
+        "gal",
+        "hal",
+        "pal",
+        "sal",
+        "val",
+        "shall",
+        "royale"
+      ]
+    },
+    {
+      "family_id": "EH1 N CH",
+      "label": "BENCH Family (-nch)",
+      "count": 5,
+      "words": [
+        "bench",
+        "french",
+        "stench",
+        "trench",
+        "wrench"
+      ]
+    },
+    {
+      "family_id": "ER1 M",
+      "label": "BERM Family (-erm)",
+      "count": 5,
+      "words": [
+        "firm",
+        "germ",
+        "term",
+        "worm",
+        "sperm"
+      ]
+    },
+    {
+      "family_id": "IH1 F",
+      "label": "IF Family (-iff)",
+      "count": 7,
+      "words": [
+        "if",
+        "riff",
+        "tiff",
+        "cliff",
+        "sniff",
+        "stiff",
+        "whiff"
+      ]
+    },
+    {
+      "family_id": "AY1 N D",
+      "label": "BIND Family (-ind)",
+      "count": 9,
+      "words": [
+        "bind",
+        "find",
+        "hind",
+        "kind",
+        "mind",
+        "wind",
+        "blind",
+        "grind",
+        "signed"
+      ]
+    },
+    {
+      "family_id": "UH1 R",
+      "label": "BOOR Family (-ure)",
+      "count": 8,
+      "words": [
+        "cure",
+        "lure",
+        "moor",
+        "muir",
+        "pure",
+        "sure",
+        "tour",
+        "moore"
+      ]
+    },
+    {
+      "family_id": "AA1 K S",
+      "label": "OX Family (-cks)",
+      "count": 9,
+      "words": [
+        "ox",
+        "box",
+        "cox",
+        "fox",
+        "pox",
+        "sox",
+        "knox",
+        "rocks",
+        "socks"
+      ]
+    },
+    {
+      "family_id": "AW1 N",
+      "label": "DOWN Family (-own)",
+      "count": 10,
+      "words": [
+        "down",
+        "gown",
+        "noun",
+        "town",
+        "brown",
+        "clown",
+        "crown",
+        "drown",
+        "frown",
+        "browne"
+      ]
+    },
+    {
+      "family_id": "AH1 S T",
+      "label": "BUST Family (-ust)",
+      "count": 10,
+      "words": [
+        "bust",
+        "dust",
+        "gust",
+        "just",
+        "lust",
+        "must",
+        "rust",
+        "crust",
+        "trust",
+        "thrust"
+      ]
+    },
+    {
+      "family_id": "AA1 L",
+      "label": "DOL Family (-ahl)",
+      "count": 3,
+      "words": [
+        "sol",
+        "dahl",
+        "doll"
+      ]
+    },
+    {
+      "family_id": "IH1 F T",
+      "label": "GIFT Family (-ift)",
+      "count": 8,
+      "words": [
+        "gift",
+        "lift",
+        "rift",
+        "sift",
+        "drift",
+        "shift",
+        "swift",
+        "thrift"
+      ]
+    },
+    {
+      "family_id": "AY1 V",
+      "label": "DR Family (-ive)",
+      "count": 10,
+      "words": [
+        "dr",
+        "dive",
+        "five",
+        "hive",
+        "jive",
+        "live",
+        "clive",
+        "drive",
+        "strive",
+        "thrive"
+      ]
+    },
+    {
+      "family_id": "ER1 S",
+      "label": "CURSE Family (-rse)",
+      "count": 5,
+      "words": [
+        "curse",
+        "nurse",
+        "purse",
+        "verse",
+        "worse"
+      ]
+    },
+    {
+      "family_id": "AY1 R",
+      "label": "IRE Family (-ire)",
+      "count": 7,
+      "words": [
+        "ire",
+        "dire",
+        "shire",
+        "skier",
+        "spire",
+        "squire",
+        "mcguire"
+      ]
+    },
+    {
+      "family_id": "ER1 JH",
+      "label": "URGE Family (-rge)",
+      "count": 7,
+      "words": [
+        "urge",
+        "merge",
+        "purge",
+        "serge",
+        "surge",
+        "verge",
+        "scourge"
+      ]
+    },
+    {
+      "family_id": "AY1 P",
+      "label": "HYPE Family (-ipe)",
+      "count": 8,
+      "words": [
+        "hype",
+        "pipe",
+        "ripe",
+        "type",
+        "wipe",
+        "snipe",
+        "swipe",
+        "stripe"
+      ]
+    },
+    {
+      "family_id": "AA1 R D",
+      "label": "BARD Family (-ard)",
+      "count": 7,
+      "words": [
+        "bard",
+        "card",
+        "hard",
+        "yard",
+        "garde",
+        "guard",
+        "shard"
+      ]
+    },
+    {
+      "family_id": "AE1 CH",
+      "label": "BATCH Family (-tch)",
+      "count": 8,
+      "words": [
+        "batch",
+        "catch",
+        "hatch",
+        "latch",
+        "match",
+        "patch",
+        "snatch",
+        "scratch"
+      ]
+    },
+    {
+      "family_id": "EH1 G",
+      "label": "BEG Family (-egg)",
+      "count": 9,
+      "words": [
+        "beg",
+        "egg",
+        "keg",
+        "leg",
+        "meg",
+        "peg",
+        "reg",
+        "greg",
+        "gregg"
+      ]
+    },
+    {
+      "family_id": "ER1 TH",
+      "label": "BERTH Family (-rth)",
+      "count": 6,
+      "words": [
+        "berth",
+        "birth",
+        "earth",
+        "firth",
+        "perth",
+        "worth"
+      ]
+    },
+    {
+      "family_id": "IH1 Z",
+      "label": "IS Family (-izz)",
+      "count": 6,
+      "words": [
+        "is",
+        "biz",
+        "his",
+        "liz",
+        "wiz",
+        "quiz"
+      ]
+    },
+    {
+      "family_id": "IH1 M P",
+      "label": "IMP Family (-imp)",
+      "count": 4,
+      "words": [
+        "imp",
+        "limp",
+        "pimp",
+        "shrimp"
+      ]
+    },
+    {
+      "family_id": "IH1 T S",
+      "label": "ITS Family (-its)",
+      "count": 7,
+      "words": [
+        "its",
+        "ritz",
+        "tits",
+        "hits",
+        "blitz",
+        "fritz",
+        "quits"
+      ]
+    },
+    {
+      "family_id": "AA1 N D",
+      "label": "BOND Family (-ond)",
+      "count": 7,
+      "words": [
+        "bond",
+        "fond",
+        "pond",
+        "wand",
+        "blond",
+        "monde",
+        "blonde"
+      ]
+    },
+    {
+      "family_id": "AW1 N D",
+      "label": "BOUND Family (-und)",
+      "count": 9,
+      "words": [
+        "bound",
+        "found",
+        "hound",
+        "mound",
+        "pound",
+        "round",
+        "sound",
+        "wound",
+        "ground"
+      ]
+    },
+    {
+      "family_id": "AH1 JH",
+      "label": "BUDGE Family (-dge)",
+      "count": 6,
+      "words": [
+        "budge",
+        "fudge",
+        "judge",
+        "nudge",
+        "grudge",
+        "sludge"
+      ]
+    },
+    {
+      "family_id": "ER1 S T",
+      "label": "BURST Family (-rst)",
+      "count": 6,
+      "words": [
+        "burst",
+        "first",
+        "hurst",
+        "worst",
+        "hearst",
+        "thirst"
+      ]
+    },
+    {
+      "family_id": "AW1 L",
+      "label": "OWL Family (-owl)",
+      "count": 5,
+      "words": [
+        "owl",
+        "foul",
+        "fowl",
+        "howl",
+        "growl"
+      ]
+    },
+    {
+      "family_id": "AH1 L",
+      "label": "CULL Family (-ull)",
+      "count": 6,
+      "words": [
+        "dull",
+        "gull",
+        "hull",
+        "lull",
+        "null",
+        "skull"
+      ]
+    },
+    {
+      "family_id": "EH1 N S",
+      "label": "DENSE Family (-nce)",
+      "count": 9,
+      "words": [
+        "dense",
+        "fence",
+        "hence",
+        "pence",
+        "sense",
+        "tense",
+        "spence",
+        "thence",
+        "whence"
+      ]
+    },
+    {
+      "family_id": "IH1 K S",
+      "label": "DIX Family (-cks)",
+      "count": 8,
+      "words": [
+        "dix",
+        "fix",
+        "mix",
+        "nix",
+        "six",
+        "kicks",
+        "tricks",
+        "chicks"
+      ]
+    },
+    {
+      "family_id": "EH1 JH",
+      "label": "EDGE Family (-dge)",
+      "count": 7,
+      "words": [
+        "edge",
+        "hedge",
+        "ledge",
+        "wedge",
+        "dredge",
+        "pledge",
+        "sledge"
+      ]
+    },
+    {
+      "family_id": "EH1 K S",
+      "label": "X Family (-lex)",
+      "count": 8,
+      "words": [
+        "x",
+        "ex",
+        "hex",
+        "lex",
+        "rex",
+        "sex",
+        "flex",
+        "specs"
+      ]
+    },
+    {
+      "family_id": "EH1 P",
+      "label": "HEP Family (-hep)",
+      "count": 4,
+      "words": [
+        "pep",
+        "yep",
+        "prep",
+        "step"
+      ]
+    },
+    {
+      "family_id": "AO1 K",
+      "label": "BALK Family (-alk)",
+      "count": 4,
+      "words": [
+        "hawk",
+        "talk",
+        "walk",
+        "stalk"
+      ]
+    },
+    {
+      "family_id": "EY1 S T",
+      "label": "BASED Family (-ste)",
+      "count": 6,
+      "words": [
+        "based",
+        "haste",
+        "paste",
+        "taste",
+        "waist",
+        "waste"
+      ]
+    },
+    {
+      "family_id": "AW1 ER0",
+      "label": "OUR Family (-our)",
+      "count": 5,
+      "words": [
+        "our",
+        "hour",
+        "sour",
+        "bauer",
+        "flour"
+      ]
+    },
+    {
+      "family_id": "IH1 N JH",
+      "label": "INGE Family (-nge)",
+      "count": 4,
+      "words": [
+        "binge",
+        "hinge",
+        "cringe",
+        "fringe"
+      ]
+    },
+    {
+      "family_id": "OW1 S T",
+      "label": "HOST Family (-ost)",
+      "count": 8,
+      "words": [
+        "host",
+        "most",
+        "post",
+        "boast",
+        "coast",
+        "ghost",
+        "roast",
+        "toast"
+      ]
+    },
+    {
+      "family_id": "AA1 SH",
+      "label": "BOSH Family (-osh)",
+      "count": 5,
+      "words": [
+        "gosh",
+        "josh",
+        "posh",
+        "wash",
+        "squash"
+      ]
+    },
+    {
+      "family_id": "AH1 N CH",
+      "label": "BUNCH Family (-nch)",
+      "count": 7,
+      "words": [
+        "bunch",
+        "hunch",
+        "lunch",
+        "munch",
+        "punch",
+        "brunch",
+        "crunch"
+      ]
+    },
+    {
+      "family_id": "AY1 AH0 N",
+      "label": "ION Family (-ion)",
+      "count": 7,
+      "words": [
+        "ion",
+        "dion",
+        "lyon",
+        "zion",
+        "bryan",
+        "mayan",
+        "scion"
+      ]
+    },
+    {
+      "family_id": "EH1 F",
+      "label": "F Family (-eff)",
+      "count": 6,
+      "words": [
+        "f",
+        "ref",
+        "chef",
+        "deaf",
+        "jeff",
+        "geoff"
+      ]
+    },
+    {
+      "family_id": "IH1 N CH",
+      "label": "INCH Family (-nch)",
+      "count": 6,
+      "words": [
+        "inch",
+        "finch",
+        "lynch",
+        "pinch",
+        "winch",
+        "clinch"
+      ]
+    },
+    {
+      "family_id": "AW1 D",
+      "label": "LOUD Family (-oud)",
+      "count": 6,
+      "words": [
+        "loud",
+        "cloud",
+        "crowd",
+        "proud",
+        "mcleod",
+        "shroud"
+      ]
+    },
+    {
+      "family_id": "AO1 R S",
+      "label": "CORSE Family (-rse)",
+      "count": 6,
+      "words": [
+        "force",
+        "horse",
+        "morse",
+        "coarse",
+        "course",
+        "source"
+      ]
+    },
+    {
+      "family_id": "UH1 D",
+      "label": "GOOD Family (-ood)",
+      "count": 7,
+      "words": [
+        "good",
+        "hood",
+        "wood",
+        "could",
+        "stood",
+        "would",
+        "should"
+      ]
+    },
+    {
+      "family_id": "UW1 K",
+      "label": "DUKE Family (-uke)",
+      "count": 5,
+      "words": [
+        "duke",
+        "luke",
+        "nuke",
+        "puke",
+        "fluke"
+      ]
+    },
+    {
+      "family_id": "AO1 L T",
+      "label": "GALT Family (-alt)",
+      "count": 6,
+      "words": [
+        "halt",
+        "malt",
+        "salt",
+        "walt",
+        "fault",
+        "vault"
+      ]
+    },
+    {
+      "family_id": "IY2",
+      "label": "KYLIE Family (-lie)",
+      "count": 3,
+      "words": [
+        "kylie",
+        "maggie",
+        "paulie"
+      ]
+    },
+    {
+      "family_id": "AE1 TH",
+      "label": "BATH Family (-ath)",
+      "count": 6,
+      "words": [
+        "bath",
+        "hath",
+        "math",
+        "path",
+        "wrath",
+        "mcgrath"
+      ]
+    },
+    {
+      "family_id": "IY1 T S",
+      "label": "EATS Family (-ats)",
+      "count": 5,
+      "words": [
+        "eats",
+        "beats",
+        "feats",
+        "sheets",
+        "streets"
+      ]
+    },
+    {
+      "family_id": "IY1 R",
+      "label": "EAR Family (-ear)",
+      "count": 6,
+      "words": [
+        "ear",
+        "hear",
+        "here",
+        "seer",
+        "tier",
+        "weir"
+      ]
+    },
+    {
+      "family_id": "UW1 IY0",
+      "label": "BUOY Family (-oey)",
+      "count": 2,
+      "words": [
+        "buoy",
+        "huey"
+      ]
+    },
+    {
+      "family_id": "OW1 TH",
+      "label": "BOTH Family (-oth)",
+      "count": 5,
+      "words": [
+        "both",
+        "oath",
+        "sloth",
+        "goethe",
+        "growth"
+      ]
+    },
+    {
+      "family_id": "OY1 D",
+      "label": "BOYD Family (-oyd)",
+      "count": 6,
+      "words": [
+        "boyd",
+        "void",
+        "droid",
+        "floyd",
+        "freud",
+        "lloyd"
+      ]
+    },
+    {
+      "family_id": "IH1 L D",
+      "label": "GILD Family (-ild)",
+      "count": 4,
+      "words": [
+        "build",
+        "guild",
+        "killed",
+        "skilled"
+      ]
+    },
+    {
+      "family_id": "AA1 Z",
+      "label": "OZ Family (-coz)",
+      "count": 6,
+      "words": [
+        "oz",
+        "coz",
+        "pas",
+        "was",
+        "chas",
+        "cause"
+      ]
+    },
+    {
+      "family_id": "AH1 CH",
+      "label": "MUCH Family (-tch)",
+      "count": 6,
+      "words": [
+        "much",
+        "such",
+        "dutch",
+        "hutch",
+        "touch",
+        "clutch"
+      ]
+    },
+    {
+      "family_id": "AO1 N T",
+      "label": "CONTE Family (-unt)",
+      "count": 2,
+      "words": [
+        "conte",
+        "haunt"
+      ]
+    },
+    {
+      "family_id": "AO1 R M",
+      "label": "CORM Family (-orm)",
+      "count": 6,
+      "words": [
+        "dorm",
+        "form",
+        "norm",
+        "warm",
+        "storm",
+        "swarm"
+      ]
+    },
+    {
+      "family_id": "AW1 CH",
+      "label": "OUCH Family (-uch)",
+      "count": 5,
+      "words": [
+        "ouch",
+        "couch",
+        "pouch",
+        "vouch",
+        "crouch"
+      ]
+    },
+    {
+      "family_id": "EH1 P T",
+      "label": "KEPT Family (-ept)",
+      "count": 7,
+      "words": [
+        "kept",
+        "sept",
+        "wept",
+        "crept",
+        "leapt",
+        "slept",
+        "swept"
+      ]
+    },
+    {
+      "family_id": "AH1 K S",
+      "label": "DUX Family (-lux)",
+      "count": 5,
+      "words": [
+        "lux",
+        "crux",
+        "flux",
+        "fucks",
+        "sucks"
+      ]
+    },
+    {
+      "family_id": "ER1 V",
+      "label": "MERV Family (-rve)",
+      "count": 3,
+      "words": [
+        "curve",
+        "nerve",
+        "serve"
+      ]
+    },
+    {
+      "family_id": "AO1 F",
+      "label": "OFF Family (-off)",
+      "count": 2,
+      "words": [
+        "off",
+        "trough"
+      ]
+    },
+    {
+      "family_id": "AY1 F",
+      "label": "FIFE Family (-ife)",
+      "count": 6,
+      "words": [
+        "fife",
+        "life",
+        "rife",
+        "wife",
+        "knife",
+        "strife"
+      ]
+    },
+    {
+      "family_id": "IH1 TH",
+      "label": "MYTH Family (-ith)",
+      "count": 2,
+      "words": [
+        "myth",
+        "smith"
+      ]
+    },
+    {
+      "family_id": "IY1 AH0",
+      "label": "MIA Family (-hea)",
+      "count": 5,
+      "words": [
+        "mia",
+        "pia",
+        "ria",
+        "leah",
+        "rhea"
+      ]
+    },
+    {
+      "family_id": "IH1 N S",
+      "label": "MINCE Family (-nce)",
+      "count": 5,
+      "words": [
+        "mince",
+        "rinse",
+        "since",
+        "vince",
+        "prince"
+      ]
+    },
+    {
+      "family_id": "EY2",
+      "label": "AVE Family (-dre)",
+      "count": 6,
+      "words": [
+        "ave",
+        "andre",
+        "dolce",
+        "melee",
+        "padre",
+        "fiance"
+      ]
+    },
+    {
+      "family_id": "AE1 S K",
+      "label": "ASK Family (-ask)",
+      "count": 4,
+      "words": [
+        "ask",
+        "mask",
+        "task",
+        "flask"
+      ]
+    },
+    {
+      "family_id": "AE1 N Z",
+      "label": "BANS Family (-ans)",
+      "count": 6,
+      "words": [
+        "bans",
+        "sans",
+        "vans",
+        "franz",
+        "trans",
+        "plans"
+      ]
+    },
+    {
+      "family_id": "EH1 R IY0",
+      "label": "BARRE Family (-rie)",
+      "count": 3,
+      "words": [
+        "barre",
+        "carrie",
+        "prairie"
+      ]
+    },
+    {
+      "family_id": "IY1 S T",
+      "label": "EAST Family (-ast)",
+      "count": 6,
+      "words": [
+        "east",
+        "beast",
+        "feast",
+        "least",
+        "yeast",
+        "priest"
+      ]
+    },
+    {
+      "family_id": "ER1 CH",
+      "label": "BIRCH Family (-rch)",
+      "count": 4,
+      "words": [
+        "birch",
+        "perch",
+        "church",
+        "search"
+      ]
+    },
+    {
+      "family_id": "OW1 L T",
+      "label": "BOLT Family (-olt)",
+      "count": 5,
+      "words": [
+        "bolt",
+        "colt",
+        "holt",
+        "jolt",
+        "volt"
+      ]
+    },
+    {
+      "family_id": "UW1 TH",
+      "label": "RUTH Family (-uth)",
+      "count": 5,
+      "words": [
+        "ruth",
+        "booth",
+        "tooth",
+        "truth",
+        "youth"
+      ]
+    },
+    {
+      "family_id": "AA1 CH",
+      "label": "BOTCH Family (-tch)",
+      "count": 4,
+      "words": [
+        "notch",
+        "watch",
+        "crotch",
+        "scotch"
+      ]
+    },
+    {
+      "family_id": "OY1 N",
+      "label": "COIN Family (-oin)",
+      "count": 3,
+      "words": [
+        "coin",
+        "join",
+        "groin"
+      ]
+    },
+    {
+      "family_id": "AY1 B",
+      "label": "GIBE Family (-ibe)",
+      "count": 4,
+      "words": [
+        "vibe",
+        "bribe",
+        "tribe",
+        "scribe"
+      ]
+    },
+    {
+      "family_id": "AO1 TH",
+      "label": "DOTH Family (-oth)",
+      "count": 5,
+      "words": [
+        "doth",
+        "moth",
+        "roth",
+        "broth",
+        "cloth"
+      ]
+    },
+    {
+      "family_id": "AH1 S K",
+      "label": "BUSK Family (-usk)",
+      "count": 2,
+      "words": [
+        "dusk",
+        "musk"
+      ]
+    },
+    {
+      "family_id": "AE1 P S",
+      "label": "TAPS Family (-aps)",
+      "count": 4,
+      "words": [
+        "taps",
+        "chaps",
+        "flaps",
+        "lapse"
+      ]
+    },
+    {
+      "family_id": "AA1 M P",
+      "label": "COMP Family (-omp)",
+      "count": 3,
+      "words": [
+        "comp",
+        "stomp",
+        "swamp"
+      ]
+    },
+    {
+      "family_id": "AO1 R K",
+      "label": "CORK Family (-ork)",
+      "count": 5,
+      "words": [
+        "cork",
+        "fork",
+        "pork",
+        "york",
+        "torque"
+      ]
+    },
+    {
+      "family_id": "EY1 G",
+      "label": "HAIG Family (-gue)",
+      "count": 4,
+      "words": [
+        "craig",
+        "hague",
+        "vague",
+        "plague"
+      ]
+    },
+    {
+      "family_id": "AY1 IH0 NG",
+      "label": "TYING Family (-ing)",
+      "count": 3,
+      "words": [
+        "tying",
+        "crying",
+        "drying"
+      ]
+    },
+    {
+      "family_id": "IH1 SH",
+      "label": "DISH Family (-ish)",
+      "count": 4,
+      "words": [
+        "dish",
+        "fish",
+        "wish",
+        "trish"
+      ]
+    },
+    {
+      "family_id": "EH1 CH",
+      "label": "ETCH Family (-tch)",
+      "count": 3,
+      "words": [
+        "fetch",
+        "sketch",
+        "stretch"
+      ]
+    },
+    {
+      "family_id": "EY1 N T",
+      "label": "FAINT Family (-int)",
+      "count": 4,
+      "words": [
+        "faint",
+        "paint",
+        "saint",
+        "quaint"
+      ]
+    },
+    {
+      "family_id": "IY1 L D",
+      "label": "FIELD Family (-eld)",
+      "count": 5,
+      "words": [
+        "field",
+        "wield",
+        "yield",
+        "sealed",
+        "shield"
+      ]
+    },
+    {
+      "family_id": "IH1 P S",
+      "label": "LIPS Family (-ips)",
+      "count": 3,
+      "words": [
+        "lips",
+        "flips",
+        "chips"
+      ]
+    },
+    {
+      "family_id": "OW1 B",
+      "label": "LOBE Family (-obe)",
+      "count": 5,
+      "words": [
+        "lobe",
+        "loeb",
+        "robe",
+        "globe",
+        "probe"
+      ]
+    },
+    {
+      "family_id": "IY1 TH",
+      "label": "HEATH Family (-ath)",
+      "count": 6,
+      "words": [
+        "heath",
+        "keith",
+        "leith",
+        "teeth",
+        "sheath",
+        "wreath"
+      ]
+    },
+    {
+      "family_id": "AE1 K T",
+      "label": "ACT Family (-act)",
+      "count": 5,
+      "words": [
+        "act",
+        "fact",
+        "pact",
+        "tact",
+        "tract"
+      ]
+    },
+    {
+      "family_id": "AA1 R CH",
+      "label": "ARCH Family (-rch)",
+      "count": 3,
+      "words": [
+        "arch",
+        "march",
+        "starch"
+      ]
+    },
+    {
+      "family_id": "AA1 R M",
+      "label": "ARM Family (-arm)",
+      "count": 4,
+      "words": [
+        "arm",
+        "farm",
+        "harm",
+        "charm"
+      ]
+    },
+    {
+      "family_id": "AA1 R S",
+      "label": "ARSE Family (-rse)",
+      "count": 3,
+      "words": [
+        "arse",
+        "farce",
+        "sparse"
+      ]
+    },
+    {
+      "family_id": "AE1 S P",
+      "label": "ASP Family (-asp)",
+      "count": 4,
+      "words": [
+        "asp",
+        "gasp",
+        "clasp",
+        "grasp"
+      ]
+    },
+    {
+      "family_id": "AA1 R N",
+      "label": "BARN Family (-arn)",
+      "count": 3,
+      "words": [
+        "barn",
+        "darn",
+        "yarn"
+      ]
+    },
+    {
+      "family_id": "EH1 N Z",
+      "label": "BENZ Family (-ens)",
+      "count": 3,
+      "words": [
+        "benz",
+        "lens",
+        "cleanse"
+      ]
+    },
+    {
+      "family_id": "EH1 S IY0",
+      "label": "JESSE Family (-sie)",
+      "count": 3,
+      "words": [
+        "jesse",
+        "bessie",
+        "jessie"
+      ]
+    },
+    {
+      "family_id": "IH1 L IY0",
+      "label": "BILLIE Family (-lie)",
+      "count": 3,
+      "words": [
+        "billie",
+        "millie",
+        "willie"
+      ]
+    },
+    {
+      "family_id": "ER1 B",
+      "label": "CURB Family (-erb)",
+      "count": 3,
+      "words": [
+        "curb",
+        "herb",
+        "verb"
+      ]
+    },
+    {
+      "family_id": "AW1 N S",
+      "label": "OUNCE Family (-nce)",
+      "count": 2,
+      "words": [
+        "ounce",
+        "bounce"
+      ]
+    },
+    {
+      "family_id": "OY1 S",
+      "label": "BOYCE Family (-yce)",
+      "count": 5,
+      "words": [
+        "boyce",
+        "joyce",
+        "royce",
+        "voice",
+        "choice"
+      ]
+    },
+    {
+      "family_id": "UH1 SH",
+      "label": "BUSH Family (-ush)",
+      "count": 4,
+      "words": [
+        "bush",
+        "push",
+        "kush",
+        "busch"
+      ]
+    },
+    {
+      "family_id": "AA1 R P",
+      "label": "CARP Family (-arp)",
+      "count": 4,
+      "words": [
+        "carp",
+        "harp",
+        "sharp",
+        "sharpe"
+      ]
+    },
+    {
+      "family_id": "EY1 N JH",
+      "label": "MANGE Family (-nge)",
+      "count": 4,
+      "words": [
+        "range",
+        "change",
+        "grange",
+        "strange"
+      ]
+    },
+    {
+      "family_id": "EH1 F T",
+      "label": "DEFT Family (-eft)",
+      "count": 2,
+      "words": [
+        "left",
+        "theft"
+      ]
+    },
+    {
+      "family_id": "IY1 OW0",
+      "label": "LEO Family (-leo)",
+      "count": 4,
+      "words": [
+        "leo",
+        "rio",
+        "cleo",
+        "theo"
+      ]
+    },
+    {
+      "family_id": "OW1 S",
+      "label": "LOS Family (-ose)",
+      "count": 4,
+      "words": [
+        "los",
+        "dose",
+        "close",
+        "gross"
+      ]
+    },
+    {
+      "family_id": "EH1 SH",
+      "label": "MESH Family (-esh)",
+      "count": 3,
+      "words": [
+        "mesh",
+        "flesh",
+        "fresh"
+      ]
+    },
+    {
+      "family_id": "EH1 B",
+      "label": "EB Family (-ebb)",
+      "count": 5,
+      "words": [
+        "eb",
+        "deb",
+        "ebb",
+        "web",
+        "webb"
+      ]
+    },
+    {
+      "family_id": "AH1 V",
+      "label": "OF Family (-ove)",
+      "count": 5,
+      "words": [
+        "of",
+        "dove",
+        "love",
+        "glove",
+        "shove"
+      ]
+    },
+    {
+      "family_id": "UW1 F",
+      "label": "GOOF Family (-oof)",
+      "count": 4,
+      "words": [
+        "hoof",
+        "roof",
+        "proof",
+        "spoof"
+      ]
+    },
+    {
+      "family_id": "AA1 R Z",
+      "label": "LARS Family (-ars)",
+      "count": 5,
+      "words": [
+        "lars",
+        "mars",
+        "cars",
+        "bars",
+        "stars"
+      ]
+    },
+    {
+      "family_id": "EY1 ER0",
+      "label": "MAIER Family (-yer)",
+      "count": 2,
+      "words": [
+        "mayer",
+        "payer"
+      ]
+    },
+    {
+      "family_id": "OY1 Z",
+      "label": "BOYS Family (-oys)",
+      "count": 4,
+      "words": [
+        "boys",
+        "toys",
+        "noise",
+        "poise"
+      ]
+    }
+  ]
+}
