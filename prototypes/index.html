@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freestyle Flow - Design Prototypes</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@400;700;900&family=Space+Mono:wght@400;700&family=Permanent+Marker&family=Courier+Prime:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Main Game Container -->
+    <!-- The 'theme-class' will be injected here by switcher.js -->
+    <div id="game-container" class="game-container theme-neon">
+
+        <!-- Video Background Layer -->
+        <div class="video-layer"></div>
+
+        <!-- Overlay/Content Layer -->
+        <div class="content-layer">
+            <header class="game-header">
+                <div class="logo-area">
+                    <h1 class="logo-text">FREESTYLE<span class="highlight">FLOW</span></h1>
+                </div>
+                <div class="header-controls">
+                    <button class="icon-btn settings-btn">⚙️</button>
+                    <div class="bpm-display">90 BPM</div>
+                </div>
+            </header>
+
+            <main class="game-board">
+                <!-- Metronome / Visualizer Area -->
+                <div class="metronome-area">
+                    <div class="metronome-ball active"></div>
+                    <div class="metronome-track"></div>
+                </div>
+
+                <!-- Rhyme Grid -->
+                <div class="rhyme-grid">
+                    <!-- Row 1 -->
+                    <div class="grid-row">
+                        <div class="word-card color-1">FLOW</div>
+                        <div class="word-card color-2">GLOW</div>
+                        <div class="word-card color-3">SHOW</div>
+                        <div class="word-card color-4">KNOW</div>
+                    </div>
+                    <!-- Row 2 -->
+                    <div class="grid-row">
+                        <div class="word-card color-1">RHYME</div>
+                        <div class="word-card color-2">TIME</div>
+                        <div class="word-card color-3">CLIMB</div>
+                        <div class="word-card color-4">DIME</div>
+                    </div>
+                    <!-- Row 3 -->
+                    <div class="grid-row dimmed">
+                        <div class="word-card color-1">BEAT</div>
+                        <div class="word-card color-2">HEAT</div>
+                        <div class="word-card color-3">STREET</div>
+                        <div class="word-card color-4">FEET</div>
+                    </div>
+                    <!-- Row 4 -->
+                    <div class="grid-row dimmed">
+                        <div class="word-card color-1">STYLE</div>
+                        <div class="word-card color-2">MILE</div>
+                        <div class="word-card color-3">SMILE</div>
+                        <div class="word-card color-4">WHILE</div>
+                    </div>
+                </div>
+
+                <!-- Mastery / Progress -->
+                <div class="mastery-area">
+                    <div class="mastery-label">Mastery: 100%</div>
+                    <div class="mastery-track">
+                        <div class="mastery-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="game-controls">
+                <button class="control-btn primary-btn">PLAY</button>
+                <button class="control-btn secondary-btn">DICTIONARY</button>
+                <button class="control-btn secondary-btn">MENU</button>
+            </footer>
+        </div>
+    </div>
+
+    <script src="switcher.js"></script>
+</body>
+
+</html>

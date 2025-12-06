@@ -48,6 +48,15 @@ export const YouTubeLayer: React.FC<YouTubeLayerProps> = ({ videoId = '5qap5aO4i
                             controls: true, // Enable controls so user can play/pause
                             modestbranding: true,
                             loop: true,
+                            playsinline: true, // Force inline playback
+                            rel: false, // Don't show related videos (if supported)
+                        }}
+                        webViewProps={{
+                            allowsInlineMediaPlayback: true,
+                            mediaPlaybackRequiresUserAction: false,
+                            originWhitelist: ['*'],
+                            // This helps keep navigation inside the webview
+                            startInLoadingState: true,
                         }}
                     />
                 )}

@@ -1,0 +1,573 @@
+/* Base Styles */
+* {
+    box-sizing: border-box;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: sans-serif;
+    overflow: hidden;
+}
+
+/* --- Design Switcher Toolbar Styles (Unchanged) --- */
+.ds-toolbar {
+    position: fixed;
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    width: 300px;
+    z-index: 9999;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    border: 1px solid #333;
+}
+
+.ds-header {
+    padding: 10px 15px;
+    background: #2563eb;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: move;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.ds-header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.ds-content {
+    padding: 15px;
+}
+
+.ds-content.hidden {
+    display: none;
+}
+
+.ds-row {
+    margin-bottom: 12px;
+}
+
+.ds-row label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: #aaa;
+}
+
+.ds-row select,
+.ds-row textarea {
+    width: 100%;
+    background: #333;
+    border: 1px solid #444;
+    color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.ds-row textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+.ds-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.ds-actions button {
+    flex: 1;
+    padding: 8px;
+    background: #333;
+    border: 1px solid #444;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.ds-actions button:hover {
+    background: #444;
+}
+
+/* --- Game Container Base Layout --- */
+.game-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* Default Variables (can be overridden by themes) */
+    --bg-color: #000;
+    --text-color: #fff;
+    --accent-color: #00ff00;
+    --card-bg: #111;
+    --card-border: #333;
+    --font-main: 'Inter', sans-serif;
+    --font-header: 'Inter', sans-serif;
+}
+
+.video-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    z-index: 0;
+}
+
+.content-layer {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px;
+    color: var(--text-color);
+    font-family: var(--font-main);
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo-text {
+    font-family: var(--font-header);
+    font-size: 24px;
+    margin: 0;
+}
+
+.game-board {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.metronome-area {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.metronome-ball {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+.rhyme-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.grid-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.word-card {
+    flex: 1;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 8px;
+    text-transform: uppercase;
+}
+
+.grid-row.dimmed {
+    opacity: 0.5;
+}
+
+.mastery-area {
+    margin-top: 20px;
+}
+
+.mastery-track {
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.mastery-fill {
+    height: 100%;
+    background: var(--accent-color);
+}
+
+.game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.control-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--card-border);
+}
+
+.primary-btn {
+    background: var(--accent-color);
+    color: #000;
+    border-color: var(--accent-color);
+}
+
+/* --- THEMES --- */
+
+/* 1. Neon Flow (Cyberpunk) */
+.theme-neon {
+    --bg-color: #050505;
+    --text-color: #00ff00;
+    --accent-color: #00ff00;
+    --card-bg: #0a0a0a;
+    --card-border: #00ff00;
+    --font-main: 'Courier Prime', monospace;
+    --font-header: 'Courier Prime', monospace;
+}
+
+.theme-neon .word-card {
+    box-shadow: 0 0 5px var(--accent-color);
+    border-radius: 0;
+}
+
+.theme-neon .metronome-ball {
+    box-shadow: 0 0 20px var(--accent-color);
+}
+
+/* 2. Studio Zen (Minimalist) */
+.theme-zen {
+    --bg-color: #f5f5f7;
+    --text-color: #1d1d1f;
+    --accent-color: #007aff;
+    --card-bg: #fff;
+    --card-border: transparent;
+    --font-main: 'Inter', sans-serif;
+    --font-header: 'Inter', sans-serif;
+}
+
+.theme-zen .word-card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.theme-zen .primary-btn {
+    color: #fff;
+}
+
+/* 3. Golden Era (90s Hip Hop) */
+.theme-golden {
+    --bg-color: #e0c097;
+    --text-color: #1a1a1a;
+    --accent-color: #f1c40f;
+    --card-bg: #1a1a1a;
+    --card-border: #1a1a1a;
+    --font-main: 'Outfit', sans-serif;
+    --font-header: 'Permanent Marker', cursive;
+}
+
+.theme-golden .video-layer {
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZTBjMDk3Ii8+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNkM2IwODciLz4KPC9zdmc+');
+}
+
+.theme-golden .word-card {
+    color: #f1c40f;
+    transform: rotate(-1deg);
+}
+
+.theme-golden .grid-row:nth-child(even) .word-card {
+    transform: rotate(1deg);
+    color: #e74c3c;
+}
+
+/* 4. Vaporwave */
+.theme-vapor {
+    --bg-color: #2b003b;
+    --text-color: #00ffff;
+    --accent-color: #ff00ff;
+    --card-bg: rgba(255, 0, 255, 0.1);
+    --card-border: #00ffff;
+    --font-main: 'Space Mono', monospace;
+}
+
+.theme-vapor .video-layer {
+    background: linear-gradient(to bottom, #2b003b, #ff0080);
+}
+
+.theme-vapor .word-card {
+    border-style: dashed;
+}
+
+/* 5. Terminal */
+.theme-terminal {
+    --bg-color: #000;
+    --text-color: #33ff00;
+    --accent-color: #33ff00;
+    --card-bg: #000;
+    --card-border: #33ff00;
+    --font-main: 'Courier Prime', monospace;
+}
+
+.theme-terminal .content-layer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* 6. Paper */
+.theme-paper {
+    --bg-color: #fffdf0;
+    --text-color: #2c3e50;
+    --accent-color: #e74c3c;
+    --card-bg: transparent;
+    --card-border: #2c3e50;
+    --font-main: 'Permanent Marker', cursive;
+}
+
+.theme-paper .word-card {
+    border-width: 2px;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+}
+
+/* 7. Glassmorphism */
+.theme-glass {
+    --bg-color: #4158D0;
+    --text-color: #fff;
+    --accent-color: rgba(255, 255, 255, 0.3);
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --card-border: rgba(255, 255, 255, 0.2);
+    --font-main: 'Inter', sans-serif;
+}
+
+.theme-glass .video-layer {
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+}
+
+.theme-glass .word-card {
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+}
+
+/* 8. Neumorphism */
+.theme-neu {
+    --bg-color: #e0e5ec;
+    --text-color: #4d5b6b;
+    --accent-color: #4d5b6b;
+    --card-bg: #e0e5ec;
+    --card-border: transparent;
+    --font-main: 'Inter', sans-serif;
+}
+
+.theme-neu .word-card {
+    box-shadow: 9px 9px 16px rgb(163, 177, 198, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+}
+
+.theme-neu .primary-btn {
+    box-shadow: inset 6px 6px 10px 0 rgba(163, 177, 198, 0.7), inset -6px -6px 10px 0 rgba(255, 255, 255, 0.8);
+    background: #e0e5ec;
+    color: #4d5b6b;
+}
+
+/* 9. Brutalism */
+.theme-brutal {
+    --bg-color: #fff;
+    --text-color: #000;
+    --accent-color: #ff0000;
+    --card-bg: #ffff00;
+    --card-border: #000;
+    --font-main: 'Courier Prime', monospace;
+}
+
+.theme-brutal .word-card {
+    border-width: 4px;
+    border-radius: 0;
+    box-shadow: 5px 5px 0 #000;
+    font-weight: 900;
+}
+
+.theme-brutal .primary-btn {
+    background: #000;
+    color: #fff;
+    border-radius: 0;
+}
+
+/* 10. Nature */
+.theme-nature {
+    --bg-color: #f0f7f4;
+    --text-color: #2d3436;
+    --accent-color: #55efc4;
+    --card-bg: #fff;
+    --card-border: #dfe6e9;
+    --font-main: 'Outfit', sans-serif;
+}
+
+.theme-nature .word-card {
+    border-radius: 20px 0 20px 0;
+    border: 2px solid #55efc4;
+}
+
+/* 11. Space */
+.theme-space {
+    --bg-color: #0b0d17;
+    --text-color: #d0d6f9;
+    --accent-color: #ffffff;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --font-main: 'Space Mono', monospace;
+}
+
+.theme-space .metronome-ball {
+    background: #fff;
+    box-shadow: 0 0 30px #fff;
+}
+
+/* 12. Arcade */
+.theme-arcade {
+    --bg-color: #2c3e50;
+    --text-color: #ecf0f1;
+    --accent-color: #e74c3c;
+    --card-bg: #34495e;
+    --card-border: #2980b9;
+    --font-main: 'Press Start 2P', cursive;
+    /* Fallback */
+}
+
+.theme-arcade .word-card {
+    border-width: 4px;
+    box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* 13. Luxury */
+.theme-luxury {
+    --bg-color: #000;
+    --text-color: #d4af37;
+    --accent-color: #d4af37;
+    --card-bg: #111;
+    --card-border: #d4af37;
+    --font-main: 'Times New Roman', serif;
+}
+
+.theme-luxury .word-card {
+    border: 1px solid #d4af37;
+    letter-spacing: 2px;
+}
+
+/* 14. Blueprint */
+.theme-blueprint {
+    --bg-color: #0d47a1;
+    --text-color: #fff;
+    --accent-color: #fff;
+    --card-bg: transparent;
+    --card-border: #fff;
+    --font-main: 'Courier Prime', monospace;
+}
+
+.theme-blueprint .video-layer {
+    background-image: linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-color: #0d47a1;
+    opacity: 0.3;
+}
+
+/* 15. Chalkboard */
+.theme-chalk {
+    --bg-color: #2d3436;
+    --text-color: #dfe6e9;
+    --accent-color: #fff;
+    --card-bg: transparent;
+    --card-border: #dfe6e9;
+    --font-main: 'Permanent Marker', cursive;
+}
+
+.theme-chalk .word-card {
+    border-style: dashed;
+}
+
+/* 16. Comic Book */
+.theme-comic {
+    --bg-color: #fff;
+    --text-color: #000;
+    --accent-color: #f1c40f;
+    --card-bg: #fff;
+    --card-border: #000;
+    --font-main: 'Outfit', sans-serif;
+}
+
+.theme-comic .word-card {
+    border: 3px solid #000;
+    box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.2);
+    background-image: radial-gradient(#000 15%, transparent 16%);
+    background-size: 4px 4px;
+}
+
+/* 17. Watercolor */
+.theme-water {
+    --bg-color: #fff;
+    --text-color: #2c3e50;
+    --accent-color: #3498db;
+    --card-bg: rgba(52, 152, 219, 0.1);
+    --card-border: transparent;
+    --font-main: 'Inter', sans-serif;
+}
+
+.theme-water .word-card {
+    border-radius: 50% 20% / 10% 40%;
+}
+
+/* 18. High Contrast */
+.theme-contrast {
+    --bg-color: #000;
+    --text-color: #fff;
+    --accent-color: #ffff00;
+    --card-bg: #000;
+    --card-border: #fff;
+    --font-main: sans-serif;
+}
+
+.theme-contrast .word-card {
+    border: 2px solid #fff;
+    font-weight: bold;
+    font-size: 20px;
+}

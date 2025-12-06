@@ -24,12 +24,16 @@ def get_common_suffix(words):
         return ""
     return Counter(suffixes).most_common(1)[0][0]
 
-def analyze_1_syllable_families(conn):
-    """Group and rank 1-syllable rhyme families."""
+def analyze_families(conn, syllables, min_syllables=None):
+    """Group and rank rhyme families for a specific syllable count (or range)."""
     cursor = conn.cursor()
     
-    # Get all 1-syllable words with a rhyme family
-    cursor.execute("SELECT * FROM words WHERE syllables = 1 AND rhyme_family IS NOT NULL")
+    if min_syllables:
+        # For 4+ syllables
+        cursor.execute("SELECT * FROM words WHERE syllables >= ? AND rhyme_family IS NOT NULL", (min_syllables,))
+    else:
+        cursor.execute("SELECT * FROM words WHERE syllables = ? AND rhyme_family IS NOT NULL", (syllables,))
+        
     words = [dict(row) for row in cursor.fetchall()]
     
     # Group by family
@@ -43,25 +47,48 @@ def analyze_1_syllable_families(conn):
     # Rank by size
     ranked_families = []
     for fam_key, fam_words in families.items():
-        if len(fam_words) < 5: continue # Skip tiny families
+        if len(fam_words) < 2: continue # Skip singletons
         
         # Find representative word (shortest, most common looking)
-        # Heuristic: shortest word is usually the root (e.g., 'cat' vs 'scat')
         fam_words.sort(key=lambda x: len(x['word']))
         rep_word = fam_words[0]['word']
         
         # Find common suffix for label
         suffix = get_common_suffix(fam_words)
-        label = f"{rep_word.upper()} Family (-{suffix})"
+        label = f"{rep_word.upper()} Family"
+        if suffix:
+            label += f" (-{suffix})"
+            
+        # Get slant rhymes
+        # We want words that rhyme with members of this family but aren't in it.
+        # We'll look for words that appear as rhymes for multiple family members.
+        family_ids = [w['id'] for w in fam_words]
+        family_words_set = set(w['word'] for w in fam_words)
         
-        # Get slant rhymes (placeholder for now, querying DB is expensive for all)
-        # We can do a quick query for the top families later if needed
+        placeholders = ','.join('?' for _ in family_ids)
+        query = f'''
+            SELECT w.word, COUNT(*) as match_count, MAX(sr.score) as max_score
+            FROM scraped_rhymes sr
+            JOIN words w ON sr.rhyme_word_id = w.id
+            WHERE sr.word_id IN ({placeholders})
+            AND w.word NOT IN ({','.join(['?']*len(family_words_set))})
+            GROUP BY w.word
+            HAVING match_count >= 1
+            ORDER BY match_count DESC, max_score DESC
+            LIMIT 20
+        '''
+        
+        args = family_ids + list(family_words_set)
+        cursor.execute(query, args)
+        slant_rows = cursor.fetchall()
+        slant_words = [row['word'] for row in slant_rows]
         
         ranked_families.append({
             "family_id": fam_key,
             "label": label,
             "count": len(fam_words),
-            "words": [w['word'] for w in fam_words]
+            "words": [w['word'] for w in fam_words],
+            "slant_words": slant_words
         })
         
     # Sort by count descending
@@ -75,25 +102,20 @@ def main():
 
     conn = get_db_connection()
     
-    print("Analyzing 1-syllable families...")
-    families_1 = analyze_1_syllable_families(conn)
-    print(f"Found {len(families_1)} common 1-syllable families.")
+    output_data = {}
     
-    # For 2 and 3 syllables, we might just want lists for now, 
-    # or we can group them too. User asked for "separate lists".
-    # Let's just get the raw words for now to keep the file size manageable,
-    # or maybe group them if they have families.
-    # The user said "lists of words that are one syllable rhymes... two syllable rhymes..."
-    # implying grouped rhymes. Let's try to group them too.
-    
-    # Reusing logic for 2 and 3?
-    # Actually, let's just output the structure requested.
-    
-    output_data = {
-        "syllable_1_families": families_1,
-        # For 2 and 3, we might not have enough data yet to form good families if scrape isn't done,
-        # but let's try.
-    }
+    # Analyze 1, 2, 3 syllables
+    for i in range(1, 4):
+        print(f"Analyzing {i}-syllable families...")
+        families = analyze_families(conn, i)
+        print(f"Found {len(families)} common {i}-syllable families.")
+        output_data[f"syllable_{i}_families"] = families
+
+    # Analyze 4+ syllables
+    print("Analyzing 4+ syllable families...")
+    families_4plus = analyze_families(conn, None, min_syllables=4)
+    print(f"Found {len(families_4plus)} common 4+ syllable families.")
+    output_data["syllable_4_plus_families"] = families_4plus
     
     # Ensure directory exists
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)

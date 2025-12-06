@@ -1,7 +1,10 @@
+import Slider from '@react-native-community/slider';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useMemo, useState } from 'react';
 import { ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { COLORS, FONTS, SHAPES } from '../constants/theme';
 import { RhymeData } from '../data/rhymes';
+import { useGameStore } from '../store';
 import { ProgressService, UserRhymeProgress } from '../utils/progress';
 import rhymeDataRaw from './data/rhyme_levels.json';
 
@@ -11,6 +14,11 @@ export default function ProgressScreen() {
     const router = useRouter();
     const [progress, setProgress] = useState<UserRhymeProgress>({});
     const [loading, setLoading] = useState(true);
+    const masteryPercentage = useGameStore((state) => state.masteryPercentage);
+    const setMasteryPercentage = useGameStore((state) => state.setMasteryPercentage);
+    const targetFamilyIds = useGameStore((state) => state.targetFamilyIds);
+    const toggleTargetFamily = useGameStore((state) => state.toggleTargetFamily);
+    const clearTargetFamilies = useGameStore((state) => state.clearTargetFamilies);
 
     useEffect(() => {
         loadProgress();
@@ -34,19 +42,21 @@ export default function ProgressScreen() {
     const handlePlayNew = () => {
         // Find families not in progress
         const unplayed = families.filter(f => !progress[f.family_id]);
+        clearTargetFamilies();
+
         if (unplayed.length === 0) {
             // All played! Pick random
             const random = families[Math.floor(Math.random() * families.length)];
-            router.push({ pathname: '/', params: { familyId: random.family_id } });
+            toggleTargetFamily(random.family_id);
         } else {
             const random = unplayed[Math.floor(Math.random() * unplayed.length)];
-            router.push({ pathname: '/', params: { familyId: random.family_id } });
+            toggleTargetFamily(random.family_id);
         }
+        router.push('/');
     };
 
     const handlePlayWeakest = () => {
         // Sort families by play count (ascending)
-        // Families not in progress count as 0
         const sorted = [...families].sort((a, b) => {
             const countA = progress[a.family_id]?.timesPlayed || 0;
             const countB = progress[b.family_id]?.timesPlayed || 0;
@@ -56,77 +66,124 @@ export default function ProgressScreen() {
         // Pick one of the top 5 weakest
         const pool = sorted.slice(0, 5);
         const random = pool[Math.floor(Math.random() * pool.length)];
-        router.push({ pathname: '/', params: { familyId: random.family_id } });
+
+        clearTargetFamilies();
+        toggleTargetFamily(random.family_id);
+        router.push('/');
     };
 
     const handleSelectFamily = (familyId: string) => {
-        router.push({ pathname: '/', params: { familyId } });
+        toggleTargetFamily(familyId);
+    };
+
+    const handleStartPractice = () => {
+        router.push('/');
     };
 
     return (
         <View style={styles.container}>
             <StatusBar barStyle="light-content" />
 
-            {/* Header */}
-            <View style={styles.header}>
-                <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-                    <Text style={styles.backText}>← BACK</Text>
-                </TouchableOpacity>
-                <Text style={styles.title}>RHYME MASTERY</Text>
-                <View style={{ width: 60 }} />
-            </View>
-
-            {/* Stats Overview */}
-            <View style={styles.statsContainer}>
-                <View style={styles.statBox}>
-                    <Text style={styles.statValue}>{stats.seenCount} / {stats.totalCount}</Text>
-                    <Text style={styles.statLabel}>Families Seen</Text>
+            <ScrollView
+                style={{ flex: 1 }}
+                contentContainerStyle={{ paddingBottom: 100 }}
+                stickyHeaderIndices={[3]}
+            >
+                {/* Header */}
+                <View style={styles.header}>
+                    <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+                        <Text style={styles.backText}>← BACK</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.title}>RHYME MASTERY</Text>
+                    <View style={{ width: 60 }} />
                 </View>
-                <View style={styles.statBox}>
-                    <Text style={styles.statValue}>{stats.totalPractices}</Text>
-                    <Text style={styles.statLabel}>Total Practices</Text>
+
+                {/* Stats Overview */}
+                <View style={styles.statsContainer}>
+                    <View style={styles.statBox}>
+                        <Text style={styles.statValue}>{stats.seenCount} / {stats.totalCount}</Text>
+                        <Text style={styles.statLabel}>Families Seen</Text>
+                    </View>
+                    <View style={styles.statBox}>
+                        <Text style={styles.statValue}>{stats.totalPractices}</Text>
+                        <Text style={styles.statLabel}>Total Practices</Text>
+                    </View>
                 </View>
-            </View>
 
-            {/* Quick Actions */}
-            <View style={styles.actionsContainer}>
-                <TouchableOpacity style={[styles.actionButton, styles.newButton]} onPress={handlePlayNew}>
-                    <Text style={styles.actionButtonText}>PLAY NEW FAMILY</Text>
-                    <Text style={styles.actionButtonSubtext}>Find something you haven't seen</Text>
-                </TouchableOpacity>
+                {/* Quick Actions */}
+                <View style={styles.actionsContainer}>
+                    <TouchableOpacity style={[styles.actionButton, styles.newButton]} onPress={handlePlayNew}>
+                        <Text style={styles.actionButtonText}>PLAY NEW FAMILY</Text>
+                        <Text style={styles.actionButtonSubtext}>Find something you haven't seen</Text>
+                    </TouchableOpacity>
 
-                <TouchableOpacity style={[styles.actionButton, styles.weakestButton]} onPress={handlePlayWeakest}>
-                    <Text style={styles.actionButtonText}>PRACTICE WEAKEST</Text>
-                    <Text style={styles.actionButtonSubtext}>Improve your least played rhymes</Text>
-                </TouchableOpacity>
-            </View>
+                    <TouchableOpacity style={[styles.actionButton, styles.weakestButton]} onPress={handlePlayWeakest}>
+                        <Text style={styles.actionButtonText}>PRACTICE WEAKEST</Text>
+                        <Text style={styles.actionButtonSubtext}>Improve your least played rhymes</Text>
+                    </TouchableOpacity>
+                </View>
 
-            {/* Family List */}
-            <Text style={styles.sectionTitle}>ALL FAMILIES (1-SYLLABLE)</Text>
-            <ScrollView style={styles.listContainer}>
-                {families.map((family) => {
-                    const p = progress[family.family_id];
-                    const isSeen = !!p;
-                    const count = p?.timesPlayed || 0;
+                {/* Mastery Slider (Sticky) */}
+                <View style={[styles.sliderSection, { backgroundColor: COLORS.background, paddingVertical: 10 }]}>
+                    <Text style={styles.sectionTitle}>MASTERY LEVEL: {masteryPercentage}%</Text>
+                    <Text style={styles.sliderDescription}>
+                        {masteryPercentage === 100 ? 'Always use selected rhyme family' :
+                            masteryPercentage === 0 ? 'Always random rhymes' :
+                                `${masteryPercentage}% chance to use selected family`}
+                    </Text>
+                    <Slider
+                        style={styles.slider}
+                        minimumValue={0}
+                        maximumValue={100}
+                        step={10}
+                        value={masteryPercentage}
+                        onValueChange={setMasteryPercentage}
+                        minimumTrackTintColor={COLORS.accent}
+                        maximumTrackTintColor={COLORS.cardBorder}
+                        thumbTintColor={COLORS.accent}
+                    />
+                </View>
 
-                    return (
-                        <TouchableOpacity
-                            key={family.family_id}
-                            style={[styles.listItem, isSeen && styles.listItemSeen]}
-                            onPress={() => handleSelectFamily(family.family_id)}
-                        >
-                            <View>
-                                <Text style={styles.familyLabel}>{family.label}</Text>
-                                <Text style={styles.familyExamples}>{family.words.slice(0, 4).join(', ')}...</Text>
-                            </View>
-                            <View style={styles.progressBadge}>
-                                <Text style={styles.progressText}>{count} plays</Text>
-                            </View>
-                        </TouchableOpacity>
-                    );
-                })}
-                <View style={{ height: 40 }} />
+                {/* Family List */}
+                <Text style={styles.sectionTitle}>ALL FAMILIES (1-SYLLABLE)</Text>
+                <View style={styles.listContainer}>
+                    {families.map((family) => {
+                        const p = progress[family.family_id];
+                        const isSeen = !!p;
+                        const count = p?.timesPlayed || 0;
+                        const isSelected = targetFamilyIds.includes(family.family_id);
+
+                        return (
+                            <TouchableOpacity
+                                key={family.family_id}
+                                style={[
+                                    styles.listItem,
+                                    isSeen && styles.listItemSeen,
+                                    isSelected && styles.listItemSelected
+                                ]}
+                                onPress={() => handleSelectFamily(family.family_id)}
+                            >
+                                <View>
+                                    <Text style={[styles.familyLabel, isSelected && styles.familyLabelSelected]}>{family.label}</Text>
+                                    <Text style={styles.familyExamples}>{family.words.slice(0, 4).join(', ')}...</Text>
+                                </View>
+                                <View style={styles.progressBadge}>
+                                    <Text style={styles.progressText}>{count} plays</Text>
+                                </View>
+                            </TouchableOpacity>
+                        );
+                    })}
+                </View>
             </ScrollView>
+
+            {/* Start Button (Fixed at bottom) */}
+            {targetFamilyIds.length > 0 && (
+                <View style={styles.startContainer}>
+                    <TouchableOpacity style={styles.startButton} onPress={handleStartPractice}>
+                        <Text style={styles.startButtonText}>START PRACTICE ({targetFamilyIds.length})</Text>
+                    </TouchableOpacity>
+                </View>
+            )}
         </View>
     );
 }
@@ -134,7 +191,7 @@ export default function ProgressScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#000',
+        backgroundColor: COLORS.background,
         paddingTop: 50,
     },
     header: {
@@ -148,15 +205,13 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     backText: {
-        color: '#666',
-        fontFamily: 'Courier',
-        fontWeight: 'bold',
+        color: COLORS.text,
+        fontFamily: FONTS.main,
     },
     title: {
-        color: '#fff',
+        color: COLORS.text,
         fontSize: 20,
-        fontFamily: 'Courier',
-        fontWeight: 'bold',
+        fontFamily: FONTS.main,
     },
     statsContainer: {
         flexDirection: 'row',
@@ -166,24 +221,23 @@ const styles = StyleSheet.create({
     },
     statBox: {
         alignItems: 'center',
-        backgroundColor: '#111',
+        backgroundColor: COLORS.cardBg,
         padding: 15,
-        borderRadius: 8,
         minWidth: 140,
-        borderWidth: 1,
-        borderColor: '#333',
+        borderWidth: 2,
+        borderColor: COLORS.cardBorder,
+        ...SHAPES.rect,
     },
     statValue: {
-        color: '#00FF00',
+        color: COLORS.accent,
         fontSize: 24,
-        fontWeight: 'bold',
-        fontFamily: 'Courier',
+        fontFamily: FONTS.main,
     },
     statLabel: {
-        color: '#888',
+        color: COLORS.dimmed,
         fontSize: 12,
         marginTop: 5,
-        fontFamily: 'Courier',
+        fontFamily: FONTS.main,
     },
     actionsContainer: {
         paddingHorizontal: 20,
@@ -192,35 +246,33 @@ const styles = StyleSheet.create({
     },
     actionButton: {
         padding: 20,
-        borderRadius: 12,
         alignItems: 'center',
-        borderWidth: 1,
+        borderWidth: 2,
+        backgroundColor: COLORS.cardBg,
+        ...SHAPES.rect,
     },
     newButton: {
-        backgroundColor: '#1a1a1a',
-        borderColor: '#00FF00',
+        borderColor: COLORS.text,
     },
     weakestButton: {
-        backgroundColor: '#1a1a1a',
-        borderColor: '#FF00FF',
+        borderColor: COLORS.accent,
     },
     actionButtonText: {
-        color: '#fff',
+        color: COLORS.text,
         fontSize: 18,
-        fontWeight: 'bold',
-        fontFamily: 'Courier',
+        fontFamily: FONTS.main,
         marginBottom: 5,
     },
     actionButtonSubtext: {
-        color: '#888',
+        color: COLORS.dimmed,
         fontSize: 12,
-        fontFamily: 'Courier',
+        fontFamily: FONTS.main,
     },
     sectionTitle: {
-        color: '#666',
+        color: COLORS.dimmed,
         marginLeft: 20,
         marginBottom: 10,
-        fontFamily: 'Courier',
+        fontFamily: FONTS.main,
         fontSize: 12,
     },
     listContainer: {
@@ -232,37 +284,83 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: 15,
-        backgroundColor: '#111',
-        borderRadius: 8,
+        backgroundColor: COLORS.cardBg,
         marginBottom: 10,
-        borderWidth: 1,
-        borderColor: '#222',
+        borderWidth: 2,
+        borderColor: COLORS.cardBorder,
+        ...SHAPES.rect,
     },
     listItemSeen: {
-        borderColor: '#004400',
-        backgroundColor: '#051105',
+        borderColor: COLORS.accent,
+        borderStyle: 'dashed',
     },
     familyLabel: {
-        color: '#fff',
+        color: COLORS.text,
         fontSize: 16,
-        fontWeight: 'bold',
-        fontFamily: 'Courier',
+        fontFamily: FONTS.main,
         marginBottom: 4,
     },
     familyExamples: {
-        color: '#666',
+        color: COLORS.dimmed,
         fontSize: 12,
-        fontFamily: 'Courier',
+        fontFamily: FONTS.main,
     },
     progressBadge: {
-        backgroundColor: '#222',
+        backgroundColor: COLORS.cardBg,
         paddingHorizontal: 10,
         paddingVertical: 5,
         borderRadius: 12,
+        borderWidth: 1,
+        borderColor: COLORS.cardBorder,
     },
     progressText: {
-        color: '#888',
+        color: COLORS.dimmed,
         fontSize: 10,
-        fontFamily: 'Courier',
+        fontFamily: FONTS.main,
+    },
+    sliderSection: {
+        paddingHorizontal: 20,
+        marginBottom: 30,
+    },
+    sliderDescription: {
+        color: COLORS.dimmed,
+        fontSize: 12,
+        fontFamily: FONTS.main,
+        marginBottom: 10,
+        marginLeft: 20,
+    },
+    slider: {
+        width: '100%',
+        height: 40,
+    },
+    listItemSelected: {
+        borderColor: COLORS.accent,
+        backgroundColor: COLORS.accent,
+        borderWidth: 2,
+    },
+    familyLabelSelected: {
+        color: '#FFF',
+    },
+    startContainer: {
+        position: 'absolute',
+        bottom: 30,
+        left: 20,
+        right: 20,
+        zIndex: 100,
+    },
+    startButton: {
+        backgroundColor: COLORS.accent,
+        padding: 20,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        ...SHAPES.rect,
+    },
+    startButtonText: {
+        color: '#FFF',
+        fontSize: 20,
+        fontFamily: FONTS.main,
     },
 });

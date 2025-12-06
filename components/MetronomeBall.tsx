@@ -8,8 +8,9 @@ import Animated, {
     useAnimatedStyle,
     useSharedValue,
     withSequence,
-    withTiming,
+    withTiming
 } from 'react-native-reanimated';
+import { COLORS } from '../constants/theme';
 import { useGameStore } from '../store';
 
 const BALL_SIZE = 20;
@@ -24,39 +25,32 @@ export const MetronomeBall: React.FC = () => {
     const breakBrick = useGameStore((state) => state.breakBrick);
     const setCurrentBeat = useGameStore((state) => state.setCurrentBeat);
     const resetRow = useGameStore((state) => state.resetRow);
+    const isPlaying = useGameStore((state) => state.isPlaying);
 
-    // Calculate layout based on current width
-    const availableWidth = width - (GRID_PADDING * 2);
-    const brickWidth = (availableWidth - (GAP * 3)) / 4;
-
-    const getTargetX = (colIndex: number) => {
-        'worklet';
-        const brickLeft = colIndex * (brickWidth + GAP);
-        const brickCenter = brickLeft + (brickWidth / 2);
-        return brickCenter - (BALL_SIZE / 2);
-    };
+    const currentBeat = useGameStore((state) => state.currentBeat);
+    const shiftBoard = useGameStore((state) => state.shiftBoard);
 
     const translateX = useSharedValue(0);
     const translateY = useSharedValue(0);
 
-    // Calculate duration per beat in ms
-    const beatDuration = 60000 / (bpm || 90); // Prevent division by zero
+    const availableWidth = width - (GRID_PADDING * 2);
+    const beatDuration = 60000 / bpm;
 
-    // Callback to handle beat hits
+    const getTargetX = (col: number) => {
+        'worklet';
+        const colWidth = availableWidth / 4;
+        // Center of the column
+        return (col * colWidth) + (colWidth / 2) - (BALL_SIZE / 2);
+    };
+
     const onBeatHit = (beatIndex: number) => {
         setCurrentBeat(beatIndex);
-
         // Break brick on the current beat (Row 0)
-        // No delay needed now that we shift early
         breakBrick(beatIndex);
     };
 
-    const currentBeat = useGameStore((state) => state.currentBeat);
-
-    const shiftBoard = useGameStore((state) => state.shiftBoard);
-
     useEffect(() => {
-        console.log(`[MetronomeBall] Effect triggered. Sync: ${syncTrigger}, BPM: ${bpm}, Beat: ${currentBeat}`);
+        console.log(`[MetronomeBall] Effect triggered. Sync: ${syncTrigger}, BPM: ${bpm}, Beat: ${currentBeat}, Playing: ${isPlaying}`);
 
         // Initialize position based on currentBeat (0-3)
         const startBeat = currentBeat % 4;
@@ -66,6 +60,11 @@ export const MetronomeBall: React.FC = () => {
 
         translateX.value = getTargetX(startCol);
         translateY.value = 0; // Always top row
+
+        if (!isPlaying) {
+            // If not playing, just hold the position
+            return;
+        }
 
         function runLoop(beatIndex: number) {
             'worklet';
@@ -118,7 +117,7 @@ export const MetronomeBall: React.FC = () => {
             cancelAnimation(translateX);
             cancelAnimation(translateY);
         };
-    }, [bpm, syncTrigger, width]); // Restart if width, bpm, or syncTrigger changes
+    }, [bpm, syncTrigger, width, isPlaying]); // Restart if width, bpm, syncTrigger, or isPlaying changes
 
     const animatedStyle = useAnimatedStyle(() => {
         return {
@@ -147,7 +146,7 @@ const styles = StyleSheet.create({
         width: BALL_SIZE,
         height: BALL_SIZE,
         borderRadius: BALL_SIZE / 2,
-        backgroundColor: '#FFF',
+        backgroundColor: COLORS.accent,
         // Center vertically relative to brick height (50)
         // Brick Top = (80 - 50) / 2 = 15.
         // We want Ball Bottom to touch Brick Top.

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import rhymeDataRaw from './app/data/rhyme_levels.json';
+import rhymeDataRaw from './app/data/rhyme_levels_filtered.json';
 import { RhymeData } from './data/rhymes';
 
 const rhymeData = rhymeDataRaw as RhymeData;
@@ -14,6 +14,7 @@ export interface RhymeRow {
 interface GameState {
     bpm: number;
     isPlaying: boolean;
+    setIsPlaying: (playing: boolean) => void;
     tapHistory: number[];
     setBpm: (bpm: number) => void;
     togglePlay: () => void;
@@ -38,13 +39,28 @@ interface GameState {
     syncToBeat: (beatIndex: number) => void;
     rhymeColumnIndex: number;
     setRhymeColumnIndex: (index: number) => void;
-    targetFamilyId: string | null;
-    setTargetFamily: (familyId: string | null) => void;
+    targetFamilyIds: string[];
+    toggleTargetFamily: (familyId: string) => void;
+    clearTargetFamilies: () => void;
+    masteryPercentage: number;
+    setMasteryPercentage: (percentage: number) => void;
+    includeImperfect: boolean;
+    setIncludeImperfect: (include: boolean) => void;
+    rhymeScheme: string;
+    setRhymeScheme: (scheme: string) => void;
+    patternIndex: number;
+    activeGroups: { A: string[], B: string[] };
+
+    musicMode: 'youtube' | 'local';
+    setMusicMode: (mode: 'youtube' | 'local') => void;
+    currentSong: any; // Using any for now to avoid circular dependency with Song interface
+    setCurrentSong: (song: any) => void;
 }
 
 export const useGameStore = create<GameState>((set) => ({
     bpm: 90, // Default BPM
     isPlaying: false,
+    setIsPlaying: (playing: boolean) => set({ isPlaying: playing }),
     tapHistory: [],
     setBpm: (bpm) => set({ bpm }),
     togglePlay: () => set((state) => ({ isPlaying: !state.isPlaying })),
@@ -82,6 +98,126 @@ export const useGameStore = create<GameState>((set) => ({
         });
         useGameStore.getState().loadNewRhymes(rowIndex);
     },
+    // Rhyme Logic
+    rhymeRows: [], // Initialized in loadNewRhymes
+    lastRhymeGroup: [],
+    wordsInCurrentGroup: 0,
+    sessionUsedWords: [],
+    targetFamilyIds: [],
+    toggleTargetFamily: (familyId) => set((state) => {
+        const exists = state.targetFamilyIds.includes(familyId);
+        const newIds = exists
+            ? state.targetFamilyIds.filter(id => id !== familyId)
+            : [...state.targetFamilyIds, familyId];
+        return { targetFamilyIds: newIds, sessionUsedWords: [] };
+    }),
+    clearTargetFamilies: () => set({ targetFamilyIds: [], sessionUsedWords: [] }),
+    masteryPercentage: 100, // Default to 100% mastery
+    setMasteryPercentage: (percentage) => set({ masteryPercentage: percentage }),
+    includeImperfect: false,
+    setIncludeImperfect: (include) => set({ includeImperfect: include }),
+
+    // Rhyme Scheme State
+    rhymeScheme: 'AABB',
+    setRhymeScheme: (scheme: string) => {
+        set({ rhymeScheme: scheme, isPlaying: false, currentBeat: 0 });
+        useGameStore.getState().loadNewRhymes();
+    },
+    patternIndex: 0,
+    activeGroups: { A: [], B: [] },
+
+    loadNewRhymes: (rowIndex?: number) => {
+        const state = useGameStore.getState();
+
+        // Helper to get a new group
+        const getNewGroup = () => {
+            const useTarget = state.targetFamilyIds.length > 0 && (Math.random() * 100 < state.masteryPercentage);
+            let family;
+            if (useTarget) {
+                const randomTargetId = state.targetFamilyIds[Math.floor(Math.random() * state.targetFamilyIds.length)];
+                family = ALL_FAMILIES.find(f => f.family_id === randomTargetId);
+                if (!family) family = ALL_FAMILIES[0];
+            } else {
+                family = ALL_FAMILIES[Math.floor(Math.random() * ALL_FAMILIES.length)];
+            }
+            let words = [...family.words];
+            if (state.includeImperfect && family.slant_words) {
+                words = [...words, ...family.slant_words];
+            }
+            return words;
+        };
+
+        // Helper to get unique word
+        const getUniqueWord = (group: string[], used: string[]) => {
+            let available = group.filter(w => !used.includes(w));
+            if (available.length === 0) available = group;
+            return available[Math.floor(Math.random() * available.length)];
+        };
+
+        // If updating single row (debugging/reset), just pick random
+        if (typeof rowIndex === 'number') {
+            const group = getNewGroup();
+            const word = getUniqueWord(group, state.sessionUsedWords);
+            set((prev) => {
+                const newRows = [...prev.rhymeRows];
+                if (newRows[rowIndex]) newRows[rowIndex] = { ...newRows[rowIndex], word };
+                return { rhymeRows: newRows };
+            });
+            return;
+        }
+
+        // Initial Load (4 rows)
+        console.log('[Store] Loading new rhymes (Initial)...');
+        const groupA = getNewGroup();
+        const groupB = getNewGroup();
+        const newActiveGroups = { A: groupA, B: groupB };
+        let newSessionUsedWords: string[] = [];
+        const rows: RhymeRow[] = [];
+
+        // Define patterns
+        const patterns: Record<string, string[]> = {
+            'AABB': ['A', 'A', 'B', 'B'],
+            'AAAA': ['A', 'A', 'A', 'A'],
+            'ABAB': ['A', 'B', 'A', 'B'],
+            'AXBX': ['A', 'X', 'B', 'X'],
+            'XAXB': ['X', 'A', 'X', 'B'],
+        };
+        const currentPattern = patterns[state.rhymeScheme] || patterns['AABB'];
+        const colors = ['#FFD700', '#FFD700', '#87CEEB', '#87CEEB']; // Default colors
+
+        for (let i = 0; i < 4; i++) {
+            const type = currentPattern[i];
+            let word = '';
+            let color = colors[i];
+
+            if (type === 'A') {
+                word = getUniqueWord(groupA, newSessionUsedWords);
+                color = '#FFD700'; // Gold
+            } else if (type === 'B') {
+                word = getUniqueWord(groupB, newSessionUsedWords);
+                color = '#87CEEB'; // SkyBlue
+            } else {
+                word = ''; // X
+                color = '#CCCCCC'; // Gray
+            }
+
+            if (word) newSessionUsedWords.push(word);
+
+            rows.push({
+                id: `init-${i}-${Date.now()}`,
+                word,
+                color
+            });
+        }
+
+        set({
+            rhymeRows: rows,
+            activeGroups: newActiveGroups,
+            patternIndex: 3, // We just loaded 0-3
+            sessionUsedWords: newSessionUsedWords
+        });
+    },
+
     shiftBoard: () => {
         set((state) => {
             // 1. Shift Broken Bricks
@@ -89,173 +225,98 @@ export const useGameStore = create<GameState>((set) => ({
             Object.keys(state.brokenBricks).forEach((key) => {
                 const index = parseInt(key);
                 const newIndex = index - 4;
-                if (newIndex >= 0) {
-                    newBrokenBricks[newIndex] = true;
-                }
+                if (newIndex >= 0) newBrokenBricks[newIndex] = true;
             });
 
             // 2. Shift Rhyme Rows
-            const newRhymeRows = [...state.rhymeRows.slice(1)]; // Drop first
+            const newRhymeRows = [...state.rhymeRows.slice(1)];
 
-            // AABB Logic
-            let newWord, newColor;
-            let newSessionUsedWords = [...state.sessionUsedWords];
+            // 3. Generate New Row
+            const nextIndex = (state.patternIndex + 1) % 4;
+            const patterns: Record<string, string[]> = {
+                'AABB': ['A', 'A', 'B', 'B'],
+                'AAAA': ['A', 'A', 'A', 'A'],
+                'ABAB': ['A', 'B', 'A', 'B'],
+                'AXBX': ['A', 'X', 'B', 'X'],
+                'XAXB': ['X', 'A', 'X', 'B'],
+            };
+            const currentPattern = patterns[state.rhymeScheme] || patterns['AABB'];
+            const type = currentPattern[nextIndex];
 
-            const getGroup = () => {
-                if (state.targetFamilyId) {
-                    const family = ALL_FAMILIES.find(f => f.family_id === state.targetFamilyId);
-                    return family ? family.words : ALL_FAMILIES[0].words;
+            // Helper to get new group (duplicated logic, could be extracted but inside set is tricky)
+            const getNewGroup = () => {
+                const useTarget = state.targetFamilyIds.length > 0 && (Math.random() * 100 < state.masteryPercentage);
+                let family;
+                if (useTarget) {
+                    const randomTargetId = state.targetFamilyIds[Math.floor(Math.random() * state.targetFamilyIds.length)];
+                    family = ALL_FAMILIES.find(f => f.family_id === randomTargetId);
+                    if (!family) family = ALL_FAMILIES[0];
+                } else {
+                    family = ALL_FAMILIES[Math.floor(Math.random() * ALL_FAMILIES.length)];
                 }
-                const randomFamily = ALL_FAMILIES[Math.floor(Math.random() * ALL_FAMILIES.length)];
-                return randomFamily.words;
+                let words = [...family.words];
+                if (state.includeImperfect && family.slant_words) {
+                    words = [...words, ...family.slant_words];
+                }
+                return words;
             };
 
-            const getUniqueWord = (group: string[], excludeWord?: string) => {
-                // Filter out words used in session
+            let newActiveGroups = { ...state.activeGroups };
+
+            // Refresh groups logic
+            if (state.rhymeScheme === 'AABB') {
+                if (nextIndex === 0) newActiveGroups.A = getNewGroup();
+                if (nextIndex === 2) newActiveGroups.B = getNewGroup();
+            } else if (state.rhymeScheme === 'AAAA') {
+                if (nextIndex === 0) newActiveGroups.A = getNewGroup();
+            } else if (state.rhymeScheme === 'ABAB' || state.rhymeScheme === 'AXBX' || state.rhymeScheme === 'XAXB') {
+                // For these, we probably want to refresh both at the start of the cycle?
+                // Or maybe refresh A at 0, B at 1?
+                // Let's refresh both at 0 to keep them distinct pairs.
+                if (nextIndex === 0) {
+                    newActiveGroups.A = getNewGroup();
+                    newActiveGroups.B = getNewGroup();
+                }
+            }
+
+            let newWord = '';
+            let newColor = '#CCCCCC';
+            let newSessionUsedWords = [...state.sessionUsedWords];
+
+            const getUniqueWord = (group: string[]) => {
                 let available = group.filter(w => !newSessionUsedWords.includes(w));
-
-                // If we excluded a specific word (e.g. the first word of the pair), filter it too
-                if (excludeWord) {
-                    available = available.filter(w => w !== excludeWord);
-                }
-
-                // If we ran out of words, reset session for this group (or just pick from group excluding current)
                 if (available.length === 0) {
-                    // Reset session used words? Or just pick any from group?
-                    // Let's pick from group but exclude the specific 'excludeWord' if possible
-                    available = group.filter(w => w !== excludeWord);
-                    // If still empty (group has 1 word?), just return it
-                    if (available.length === 0) return group[0];
+                    // Reset session for this group if exhausted?
+                    available = group;
                 }
-
                 return available[Math.floor(Math.random() * available.length)];
             };
 
-            if (state.wordsInCurrentGroup < 2) {
-                const group = state.lastRhymeGroup.length > 0 ? state.lastRhymeGroup : getGroup();
-
-                // We need a pair for the last added row.
-                // The last added row is at the end of newRhymeRows (which we just sliced, so it was the 2nd to last before slice?)
-                // Wait. newRhymeRows = slice(1). The last element is the one we want to pair with.
-                const pairWord = newRhymeRows[newRhymeRows.length - 1].word;
-
-                newWord = getUniqueWord(group, pairWord);
-                newColor = newRhymeRows[newRhymeRows.length - 1].color;
-
-                set({ wordsInCurrentGroup: state.wordsInCurrentGroup + 1 });
-            } else {
-                const newGroup = getGroup();
-                newWord = getUniqueWord(newGroup);
-
-                const PALETTE = ['#FFD700', '#87CEEB', '#90EE90', '#FFB6C1', '#FFA07A'];
-                const lastColor = newRhymeRows[newRhymeRows.length - 1].color;
-                let nextColor = PALETTE[Math.floor(Math.random() * PALETTE.length)];
-                while (nextColor === lastColor) {
-                    nextColor = PALETTE[Math.floor(Math.random() * PALETTE.length)];
-                }
-                newColor = nextColor;
-
-                set({
-                    lastRhymeGroup: newGroup,
-                    wordsInCurrentGroup: 1
-                });
+            if (type === 'A') {
+                newWord = getUniqueWord(newActiveGroups.A);
+                newColor = '#FFD700';
+            } else if (type === 'B') {
+                newWord = getUniqueWord(newActiveGroups.B);
+                newColor = '#87CEEB';
             }
 
-            newSessionUsedWords.push(newWord);
+            if (newWord) newSessionUsedWords.push(newWord);
+            if (newSessionUsedWords.length > 50) newSessionUsedWords.shift(); // Keep memory low
 
             newRhymeRows.push({
-                id: Date.now().toString() + Math.random(), // Unique ID
+                id: Date.now().toString() + Math.random(),
                 word: newWord,
                 color: newColor
             });
 
-            console.log('[Store] Board Shifted');
             return {
                 brokenBricks: newBrokenBricks,
                 rhymeRows: newRhymeRows,
+                patternIndex: nextIndex,
+                activeGroups: newActiveGroups,
                 sessionUsedWords: newSessionUsedWords
             };
         });
-    },
-
-    // Rhyme Logic
-    rhymeRows: [], // Initialized in loadNewRhymes
-    lastRhymeGroup: [],
-    wordsInCurrentGroup: 0,
-    sessionUsedWords: [],
-    targetFamilyId: null,
-    setTargetFamily: (familyId) => set({ targetFamilyId: familyId, sessionUsedWords: [] }), // Reset used words on family change
-
-    loadNewRhymes: (rowIndex?: number) => {
-        const getGroup = () => {
-            const state = useGameStore.getState();
-            if (state.targetFamilyId) {
-                const family = ALL_FAMILIES.find(f => f.family_id === state.targetFamilyId);
-                return family ? family.words : ALL_FAMILIES[0].words;
-            }
-            const randomFamily = ALL_FAMILIES[Math.floor(Math.random() * ALL_FAMILIES.length)];
-            return randomFamily.words;
-        };
-
-        const randomGroup = getGroup();
-        const state = useGameStore.getState();
-        let newSessionUsedWords = [...state.sessionUsedWords];
-
-        const getUniqueWord = (group: string[]) => {
-            let available = group.filter(w => !newSessionUsedWords.includes(w));
-            if (available.length === 0) {
-                available = group;
-            }
-            return available[Math.floor(Math.random() * available.length)];
-        };
-
-        // If rowIndex is provided, update only that row
-        if (typeof rowIndex === 'number') {
-            const randomWord = getUniqueWord(randomGroup);
-            newSessionUsedWords.push(randomWord);
-
-            set((state) => {
-                const newRows = [...state.rhymeRows];
-                if (newRows[rowIndex]) {
-                    newRows[rowIndex] = {
-                        ...newRows[rowIndex],
-                        word: randomWord
-                    };
-                }
-                console.log(`[Store] Updated Row ${rowIndex} with word: ${randomWord}`);
-                return { rhymeRows: newRows, sessionUsedWords: newSessionUsedWords };
-            });
-            return;
-        }
-
-        // Otherwise load all (initial load)
-        console.log('[Store] Loading new rhymes (ALL)...');
-        // Reset session used words for fresh load
-        newSessionUsedWords = [];
-
-        const shuffled = [...randomGroup].sort(() => 0.5 - Math.random());
-        const rows: RhymeRow[] = [];
-        const colors = ['#FFD700', '#FFD700', '#87CEEB', '#87CEEB']; // Initial AABB
-
-        // Ensure we don't pick duplicates for the initial 4 if possible
-        // Since we shuffled the group, just picking first 4 is usually fine for uniqueness
-        // But we should check if group has enough words
-
-        for (let i = 0; i < 4; i++) {
-            // If group is small (e.g. 2 words), we might have to repeat.
-            // But shuffled[i % length] handles that.
-            // We just want to track them.
-            const word = shuffled[i % shuffled.length];
-            newSessionUsedWords.push(word);
-
-            rows.push({
-                id: `init-${i}`,
-                word: word,
-                color: colors[i]
-            });
-        }
-        console.log('[Store] New rows:', rows);
-        set({ rhymeRows: rows, lastRhymeGroup: randomGroup, wordsInCurrentGroup: 0, sessionUsedWords: newSessionUsedWords });
     },
 
     syncToBeat: (beatIndex: number) => set((state) => {
@@ -269,4 +330,10 @@ export const useGameStore = create<GameState>((set) => ({
     }),
     rhymeColumnIndex: 3,
     setRhymeColumnIndex: (index: number) => set({ rhymeColumnIndex: index }),
+
+    // Music Mode State
+    musicMode: 'youtube', // 'youtube' | 'local'
+    setMusicMode: (mode: 'youtube' | 'local') => set({ musicMode: mode }),
+    currentSong: null,
+    setCurrentSong: (song: any) => set({ currentSong: song }),
 }));
