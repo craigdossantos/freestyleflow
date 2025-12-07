@@ -1,4 +1,3 @@
-import { Asset } from 'expo-asset';
 import { Audio } from 'expo-av';
 import React, { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -44,27 +43,23 @@ export const LocalMusicLayer: React.FC = () => {
 
     const playSong = async (song: Song) => {
         try {
-            console.log(`[LocalMusicLayer] Selected song: ${song.title}`);
-            console.log(`[LocalMusicLayer] Metadata - BPM: ${song.bpm}, Start: ${song.startTime}, End: ${song.endTime}`);
-            console.log(`[LocalMusicLayer] Source type:`, typeof song.source, song.source);
+            console.log(`[LocalMusicLayer] Playing: ${song.title} (${song.bpm} BPM)`);
 
-            // Check if source exists
             if (!song.source) {
-                console.error('Song source is missing for:', song.title);
-                Alert.alert('Error', 'Song source missing. Please check file mapping.');
+                Alert.alert('Error', 'Song source missing.');
                 return;
             }
 
             setIsLoading(true);
 
-            // 1. Stop current sound if any
+            // Stop current sound if any
             setIsPlaying(false);
             if (soundRef.current) {
                 try {
                     await soundRef.current.stopAsync();
                     await soundRef.current.unloadAsync();
                 } catch (e) {
-                    console.log('[LocalMusicLayer] Error stopping previous sound:', e);
+                    // Ignore cleanup errors
                 }
                 soundRef.current = null;
             }
@@ -72,45 +67,19 @@ export const LocalMusicLayer: React.FC = () => {
                 clearTimeout(timeoutRef.current);
             }
 
-            // 2. Set current song
             setCurrentSong(song);
 
-            // 3. Configure Audio for playback
+            // Configure audio mode
             await Audio.setAudioModeAsync({
                 playsInSilentModeIOS: true,
                 staysActiveInBackground: false,
                 shouldDuckAndroid: true,
             });
 
-            // 4. Use expo-asset to properly load the asset
-            // This is the key fix - we need to download/resolve the asset first
-            console.log('[LocalMusicLayer] Loading asset with expo-asset...');
-            const asset = Asset.fromModule(song.source);
-            console.log('[LocalMusicLayer] Asset created:', asset.name, asset.type);
-
-            // Download the asset if not already available locally
-            if (!asset.localUri) {
-                console.log('[LocalMusicLayer] Downloading asset...');
-                await asset.downloadAsync();
-            }
-
-            console.log('[LocalMusicLayer] Asset localUri:', asset.localUri);
-            console.log('[LocalMusicLayer] Asset uri:', asset.uri);
-
-            if (!asset.localUri && !asset.uri) {
-                throw new Error('Failed to resolve asset URI');
-            }
-
-            // 5. Create sound from the resolved URI
-            const uri = asset.localUri || asset.uri;
-            console.log('[LocalMusicLayer] Creating sound from URI:', uri);
-
+            // Load and play the sound directly from require() source
             const { sound, status } = await Audio.Sound.createAsync(
-                { uri },
-                {
-                    shouldPlay: true,
-                    volume: 1.0,
-                },
+                song.source,
+                { shouldPlay: true, volume: 1.0 },
                 (playbackStatus) => {
                     if (playbackStatus.isLoaded && playbackStatus.didJustFinish) {
                         console.log('[LocalMusicLayer] Song finished.');
@@ -119,34 +88,28 @@ export const LocalMusicLayer: React.FC = () => {
                 }
             );
 
-            console.log('[LocalMusicLayer] Sound created successfully, status:', status);
+            console.log('[LocalMusicLayer] Sound loaded, duration:', status.isLoaded ? status.durationMillis : 'unknown');
             soundRef.current = sound;
             setIsLoading(false);
 
-            // 6. Setup Game State
+            // Setup game state
             setBpm(song.bpm);
-
-            // Wait for Start Time (the "drop")
-            const delayMs = song.startTime * 1000;
-            console.log(`[LocalMusicLayer] Waiting ${delayMs}ms for drop...`);
-
-            // Reset Beat
             setCurrentBeat(0);
             triggerSync();
 
+            // Wait for the beat drop, then start the game loop
+            const delayMs = song.startTime * 1000;
+            console.log(`[LocalMusicLayer] Waiting ${delayMs}ms for drop...`);
+
             timeoutRef.current = setTimeout(() => {
-                console.log('[LocalMusicLayer] DROP! Starting game loop.');
+                console.log('[LocalMusicLayer] DROP! Starting game.');
                 setIsPlaying(true);
             }, delayMs);
 
         } catch (error: any) {
             setIsLoading(false);
-            console.error('[LocalMusicLayer] Error playing song:', error);
-            console.error('[LocalMusicLayer] Error details:', error.message);
-            Alert.alert(
-                'Playback Error',
-                `Could not play "${song.title}". ${error.message || 'Unknown error'}`
-            );
+            console.error('[LocalMusicLayer] Playback error:', error.message);
+            Alert.alert('Playback Error', `Could not play "${song.title}". ${error.message || 'Unknown error'}`);
         }
     };
 
@@ -159,17 +122,17 @@ export const LocalMusicLayer: React.FC = () => {
             <ScrollView style={styles.list}>
                 {SONGS.map((song) => (
                     <TouchableOpacity
-                        key={song.filename}
+                        key={song.id}
                         style={[
                             styles.songItem,
-                            currentSong?.filename === song.filename && styles.activeSong
+                            currentSong?.id === song.id && styles.activeSong
                         ]}
                         onPress={() => playSong(song)}
                         disabled={isLoading}
                     >
                         <Text style={[
                             styles.songTitle,
-                            currentSong?.filename === song.filename && styles.activeSongText,
+                            currentSong?.id === song.id && styles.activeSongText,
                             isLoading && styles.disabledText
                         ]}>{song.title}</Text>
                         <Text style={[styles.songMeta, isLoading && styles.disabledText]}>

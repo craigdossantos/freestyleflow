@@ -173,25 +173,23 @@ export default function GameScreen() {
 
             {/* Bottom Half */}
             <View style={styles.bottomHalf}>
-                {/* Bottom Content: GameArea (if Camera Mode) or Video/Music (Normal) */}
+                {/* Bottom Content */}
                 <View style={styles.videoWrapper}>
-                    {cameraMode ? (
-                        <>
-                            {/* Compact game area for camera mode */}
-                            <GameArea isFocused={isFocused} compact={true} />
-                            {/* Hidden music layer to keep audio playing */}
-                            {musicMode === 'local' && (
-                                <View style={styles.hiddenMusicLayer}>
-                                    <LocalMusicLayer />
-                                </View>
-                            )}
-                        </>
-                    ) : (
-                        musicMode === 'youtube' ? (
-                            <YouTubeLayer videoId={videoId} />
-                        ) : (
+                    {/* Game area for camera mode */}
+                    {cameraMode && (
+                        <GameArea isFocused={isFocused} compact={true} />
+                    )}
+
+                    {/* YouTube layer - only when not in camera mode and using YouTube */}
+                    {!cameraMode && musicMode === 'youtube' && (
+                        <YouTubeLayer videoId={videoId} />
+                    )}
+
+                    {/* Local music layer - always mounted when using local music to preserve audio state */}
+                    {musicMode === 'local' && (
+                        <View style={cameraMode ? styles.hiddenMusicLayer : styles.visibleMusicLayer}>
                             <LocalMusicLayer />
-                        )
+                        </View>
                     )}
                 </View>
 
@@ -319,6 +317,11 @@ const styles = StyleSheet.create({
         width: 0,
         height: 0,
         overflow: 'hidden',
+    },
+    visibleMusicLayer: {
+        flex: 1,
+        width: '100%',
+        height: '100%',
     },
     controls: {
         position: 'absolute',
