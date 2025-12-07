@@ -55,6 +55,10 @@ interface GameState {
     setMusicMode: (mode: 'youtube' | 'local') => void;
     currentSong: any; // Using any for now to avoid circular dependency with Song interface
     setCurrentSong: (song: any) => void;
+
+    // Camera filter
+    cameraFilter: 'none' | 'noir' | 'chrome' | 'thermal' | 'comic';
+    setCameraFilter: (filter: 'none' | 'noir' | 'chrome' | 'thermal' | 'comic') => void;
 }
 
 export const useGameStore = create<GameState>((set) => ({
@@ -336,4 +340,8 @@ export const useGameStore = create<GameState>((set) => ({
     setMusicMode: (mode: 'youtube' | 'local') => set({ musicMode: mode }),
     currentSong: null,
     setCurrentSong: (song: any) => set({ currentSong: song }),
+
+    // Camera Filter State
+    cameraFilter: 'none',
+    setCameraFilter: (filter) => set({ cameraFilter: filter }),
 }));

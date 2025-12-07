@@ -32,7 +32,17 @@ export default function MenuScreen() {
     const setMusicMode = useGameStore((state) => state.setMusicMode);
     const currentSong = useGameStore((state) => state.currentSong);
     const setCurrentSong = useGameStore((state) => state.setCurrentSong);
+    const cameraFilter = useGameStore((state) => state.cameraFilter);
+    const setCameraFilter = useGameStore((state) => state.setCameraFilter);
     const [inputUrl, setInputUrl] = useState('');
+
+    const CAMERA_FILTERS = [
+        { id: 'none', label: 'NORMAL' },
+        { id: 'noir', label: 'NOIR' },
+        { id: 'chrome', label: 'CHROME' },
+        { id: 'thermal', label: 'THERMAL' },
+        { id: 'comic', label: 'COMIC' },
+    ] as const;
 
     const handleLoadVideo = () => {
         const extractedId = extractVideoId(inputUrl);
@@ -48,8 +58,21 @@ export default function MenuScreen() {
     return (
         <View style={styles.container}>
             <StatusBar barStyle="light-content" />
-            <Text style={styles.title}>MENU</Text>
 
+            {/* Header with back button */}
+            <View style={styles.header}>
+                <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+                    <Text style={styles.backButtonText}>← BACK</Text>
+                </TouchableOpacity>
+                <Text style={styles.title}>MENU</Text>
+                <View style={{ width: 70 }} />
+            </View>
+
+            <ScrollView
+                style={styles.scrollView}
+                contentContainerStyle={styles.scrollContent}
+                showsVerticalScrollIndicator={true}
+            >
             <View style={styles.section}>
                 <Text style={styles.label}>MUSIC SOURCE</Text>
                 <View style={{ flexDirection: 'row', gap: 10, marginBottom: 20 }}>
@@ -142,11 +165,35 @@ export default function MenuScreen() {
                 <TouchableOpacity style={styles.button} onPress={() => router.push('/dictionary')}>
                     <Text style={styles.buttonText}>RHYMING DICTIONARY</Text>
                 </TouchableOpacity>
+
+                {/* Rhyme Mastery Button */}
+                <TouchableOpacity style={[styles.button, { marginTop: 10 }]} onPress={() => router.push('/progress')}>
+                    <Text style={styles.buttonText}>RHYME MASTERY</Text>
+                </TouchableOpacity>
             </View>
 
-            <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-                <Text style={styles.backButtonText}>BACK TO GAME</Text>
-            </TouchableOpacity>
+            {/* Camera Filters Section */}
+            <View style={styles.section}>
+                <Text style={styles.label}>CAMERA FILTERS</Text>
+                <View style={styles.schemeContainer}>
+                    {CAMERA_FILTERS.map((filter) => (
+                        <TouchableOpacity
+                            key={filter.id}
+                            style={[
+                                styles.schemeButton,
+                                cameraFilter === filter.id && styles.schemeButtonActive
+                            ]}
+                            onPress={() => setCameraFilter(filter.id)}
+                        >
+                            <Text style={[
+                                styles.schemeButtonText,
+                                cameraFilter === filter.id && styles.schemeButtonTextActive
+                            ]}>{filter.label}</Text>
+                        </TouchableOpacity>
+                    ))}
+                </View>
+            </View>
+            </ScrollView>
         </View>
     );
 }
@@ -155,18 +202,38 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: COLORS.background,
-        padding: 20,
-        justifyContent: 'center',
+        paddingTop: 60,
+    },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 20,
+        marginBottom: 20,
+    },
+    backButton: {
+        padding: 10,
+    },
+    backButtonText: {
+        color: COLORS.text,
+        fontFamily: FONTS.main,
+        fontSize: 16,
     },
     title: {
         color: COLORS.text,
-        fontSize: 40,
+        fontSize: 28,
         textAlign: 'center',
-        marginBottom: 40,
         fontFamily: FONTS.main,
     },
+    scrollView: {
+        flex: 1,
+    },
+    scrollContent: {
+        paddingHorizontal: 20,
+        paddingBottom: 40,
+    },
     section: {
-        marginBottom: 40,
+        marginBottom: 30,
     },
     label: {
         color: COLORS.text,
@@ -194,18 +261,6 @@ const styles = StyleSheet.create({
         ...SHAPES.rect,
     },
     buttonText: {
-        color: COLORS.text,
-        fontSize: 16,
-        fontFamily: FONTS.main,
-    },
-    backButton: {
-        padding: 15,
-        alignItems: 'center',
-        borderWidth: 2,
-        borderColor: COLORS.text,
-        ...SHAPES.rect,
-    },
-    backButtonText: {
         color: COLORS.text,
         fontSize: 16,
         fontFamily: FONTS.main,
