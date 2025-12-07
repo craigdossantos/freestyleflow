@@ -1,3 +1,4 @@
+import Slider from '@react-native-community/slider';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
@@ -34,6 +35,8 @@ export default function MenuScreen() {
     const setCurrentSong = useGameStore((state) => state.setCurrentSong);
     const cameraFilter = useGameStore((state) => state.cameraFilter);
     const setCameraFilter = useGameStore((state) => state.setCameraFilter);
+    const musicVolume = useGameStore((state) => state.musicVolume);
+    const setMusicVolume = useGameStore((state) => state.setMusicVolume);
     const [inputUrl, setInputUrl] = useState('');
 
     const CAMERA_FILTERS = [
@@ -194,6 +197,27 @@ export default function MenuScreen() {
                     ))}
                 </View>
             </View>
+
+            {/* Volume Controls Section */}
+            <View style={styles.section}>
+                <Text style={styles.label}>RECORDING VOLUME</Text>
+                <View style={styles.volumeContainer}>
+                    <Text style={styles.volumeLabel}>MUSIC: {Math.round(musicVolume * 100)}%</Text>
+                    <Slider
+                        style={styles.slider}
+                        minimumValue={0}
+                        maximumValue={1}
+                        value={musicVolume}
+                        onValueChange={setMusicVolume}
+                        minimumTrackTintColor={COLORS.accent}
+                        maximumTrackTintColor={COLORS.cardBorder}
+                        thumbTintColor={COLORS.accent}
+                    />
+                    <Text style={styles.volumeHint}>
+                        Lower music volume to make your voice stand out more in recordings
+                    </Text>
+                </View>
+            </View>
             </ScrollView>
         </View>
     );
@@ -320,5 +344,25 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.main,
         fontSize: 12,
         marginTop: 2,
+    },
+    volumeContainer: {
+        marginBottom: 10,
+    },
+    volumeLabel: {
+        color: COLORS.text,
+        fontFamily: FONTS.main,
+        fontSize: 14,
+        marginBottom: 8,
+    },
+    slider: {
+        width: '100%',
+        height: 40,
+    },
+    volumeHint: {
+        color: COLORS.dimmed,
+        fontFamily: FONTS.main,
+        fontSize: 12,
+        marginTop: 8,
+        fontStyle: 'italic',
     },
 });

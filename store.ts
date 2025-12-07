@@ -59,6 +59,10 @@ interface GameState {
     // Camera filter
     cameraFilter: 'none' | 'noir' | 'chrome' | 'thermal' | 'comic' | 'pastel';
     setCameraFilter: (filter: 'none' | 'noir' | 'chrome' | 'thermal' | 'comic' | 'pastel') => void;
+
+    // Volume controls
+    musicVolume: number; // 0.0 to 1.0
+    setMusicVolume: (volume: number) => void;
 }
 
 export const useGameStore = create<GameState>((set) => ({
@@ -344,4 +348,8 @@ export const useGameStore = create<GameState>((set) => ({
     // Camera Filter State
     cameraFilter: 'none',
     setCameraFilter: (filter) => set({ cameraFilter: filter }),
+
+    // Volume Controls
+    musicVolume: 0.5, // Default to 50% to leave room for mic
+    setMusicVolume: (volume) => set({ musicVolume: Math.max(0, Math.min(1, volume)) }),
 }));

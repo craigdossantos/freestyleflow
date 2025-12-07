@@ -11,6 +11,7 @@ export const LocalMusicLayer: React.FC = () => {
     const triggerSync = useGameStore((state) => state.triggerSync);
     const setCurrentBeat = useGameStore((state) => state.setCurrentBeat);
     const currentSong = useGameStore((state) => state.currentSong);
+    const musicVolume = useGameStore((state) => state.musicVolume);
 
     const soundRef = useRef<Audio.Sound | null>(null);
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -46,6 +47,13 @@ export const LocalMusicLayer: React.FC = () => {
 
         handlePlayStateChange();
     }, [isPlaying, currentSong]);
+
+    // Update volume in real-time when musicVolume changes
+    useEffect(() => {
+        if (soundRef.current && isSoundPlaying) {
+            soundRef.current.setVolumeAsync(musicVolume).catch(console.error);
+        }
+    }, [musicVolume, isSoundPlaying]);
 
     const startSong = async () => {
         if (!currentSong) {
@@ -91,10 +99,10 @@ export const LocalMusicLayer: React.FC = () => {
             setCurrentBeat(0);
             triggerSync();
 
-            // Load and play the sound
+            // Load and play the sound with current music volume
             const { sound, status } = await Audio.Sound.createAsync(
                 currentSong.source,
-                { shouldPlay: true, volume: 1.0 },
+                { shouldPlay: true, volume: musicVolume },
                 (playbackStatus) => {
                     if (playbackStatus.isLoaded && playbackStatus.didJustFinish) {
                         console.log('[LocalMusicLayer] Song finished.');
