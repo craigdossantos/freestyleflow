@@ -14,11 +14,19 @@ import { COLORS } from '../constants/theme';
 import { useGameStore } from '../store';
 
 const BALL_SIZE = 20;
+const COMPACT_BALL_SIZE = 16;
 const ROW_HEIGHT = 80;
+const COMPACT_ROW_HEIGHT = 55;
 const GRID_PADDING = 20;
 const GAP = 10;
 
-export const MetronomeBall: React.FC = () => {
+interface MetronomeBallProps {
+    compact?: boolean;
+}
+
+export const MetronomeBall: React.FC<MetronomeBallProps> = ({ compact = false }) => {
+    const ballSize = compact ? COMPACT_BALL_SIZE : BALL_SIZE;
+    const rowHeight = compact ? COMPACT_ROW_HEIGHT : ROW_HEIGHT;
     const { width } = useWindowDimensions();
     const bpm = useGameStore((state) => state.bpm);
     const syncTrigger = useGameStore((state) => state.syncTrigger);
@@ -40,7 +48,7 @@ export const MetronomeBall: React.FC = () => {
         'worklet';
         const colWidth = availableWidth / 4;
         // Center of the column
-        return (col * colWidth) + (colWidth / 2) - (BALL_SIZE / 2);
+        return (col * colWidth) + (colWidth / 2) - (ballSize / 2);
     };
 
     const onBeatHit = (beatIndex: number) => {
@@ -128,9 +136,21 @@ export const MetronomeBall: React.FC = () => {
         };
     });
 
+    // Dynamic styles based on compact mode
+    const ballStyle = {
+        width: ballSize,
+        height: ballSize,
+        borderRadius: ballSize / 2,
+        backgroundColor: COLORS.accent,
+        // Position ball so it visually touches the brick
+        // For normal: row height 80, paddingVertical 5, brick starts around y=5
+        // For compact: row height 55, paddingVertical 5, brick starts around y=5
+        marginTop: 5 - (ballSize / 2), // Center ball on brick top edge
+    };
+
     return (
-        <View style={[styles.container, { width: availableWidth }]} pointerEvents="none">
-            <Animated.View style={[styles.ball, animatedStyle]} />
+        <View style={[styles.container, { width: availableWidth, height: rowHeight * 4 }]} pointerEvents="none">
+            <Animated.View style={[ballStyle, animatedStyle]} />
         </View>
     );
 };
@@ -140,18 +160,5 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 0,
         left: GRID_PADDING,
-        height: ROW_HEIGHT * 4,
-    },
-    ball: {
-        width: BALL_SIZE,
-        height: BALL_SIZE,
-        borderRadius: BALL_SIZE / 2,
-        backgroundColor: COLORS.accent,
-        // Center vertically relative to brick height (50)
-        // Brick Top = (80 - 50) / 2 = 15.
-        // We want Ball Bottom to touch Brick Top.
-        // Ball Bottom = Ball Top + 20.
-        // So Ball Top + 20 = 15 => Ball Top = -5.
-        marginTop: -5,
     },
 });

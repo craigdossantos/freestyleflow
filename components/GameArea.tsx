@@ -5,13 +5,14 @@ import { RhymeGrid } from './RhymeGrid';
 
 interface GameAreaProps {
     isFocused: boolean;
+    compact?: boolean;
 }
 
-export function GameArea({ isFocused }: GameAreaProps) {
+export function GameArea({ isFocused, compact = false }: GameAreaProps) {
     return (
         <View style={styles.gameWrapper}>
-            <RhymeGrid />
-            {isFocused && <MetronomeBall />}
+            <RhymeGrid compact={compact} />
+            {isFocused && <MetronomeBall compact={compact} />}
         </View>
     );
 }

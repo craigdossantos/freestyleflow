@@ -1,3 +1,4 @@
+import { useMicrophonePermissions } from 'expo-camera';
 import { useIsFocused } from '@react-navigation/native';
 import * as MediaLibrary from 'expo-media-library';
 import { useRouter } from 'expo-router';
@@ -23,56 +24,69 @@ export default function GameScreen() {
     const isPlaying = useGameStore((state) => state.isPlaying);
     const togglePlay = useGameStore((state) => state.togglePlay);
 
-    // Record Mode State
-    const [recordMode, setRecordMode] = useState(false);
+    // Camera Mode State (shows camera preview and allows recording)
+    const [cameraMode, setCameraMode] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
     const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
+    const [micPermission, requestMicPermission] = useMicrophonePermissions();
 
     useEffect(() => {
         // On mount (or focus), ensure we have rhymes loaded
         loadNewRhymes();
     }, []);
 
-    const handleTogglePlay = async () => {
-        if (!recordMode) {
-            togglePlay();
-            return;
-        }
+    // Simple play/pause for the game (no recording)
+    const handleTogglePlay = () => {
+        togglePlay();
+    };
 
-        // Record Mode Logic
-        if (!isPlaying) {
-            // Start Playing and Recording
-            try {
-                // Using startInAppRecording (iOS only for now - matches user environment)
-                await startInAppRecording({
-                    options: {
-                        enableMic: true,
-                        enableCamera: false, // We use our own CameraLayer
-                    },
-                    onRecordingFinished: (file) => {
-                        console.log('Recording finished callback:', file.path);
-                    }
-                });
-                setIsRecording(true);
-                togglePlay(); // Start game
-            } catch (error) {
-                console.error("Failed to start recording:", error);
-                Alert.alert("Recording Error", "Could not start screen recording. Are you on a Development Build?");
-                // Fallback to just playing if recording fails
+    // Start recording (only available in camera mode)
+    const handleStartRecording = async () => {
+        try {
+            // Request microphone permission first
+            if (!micPermission?.granted) {
+                const { granted } = await requestMicPermission();
+                if (!granted) {
+                    Alert.alert("Permission Required", "Microphone permission is needed to record audio.");
+                    return;
+                }
+            }
+
+            // Using startInAppRecording (iOS only for now)
+            await startInAppRecording({
+                options: {
+                    enableMic: true,
+                    enableCamera: false, // We use our own CameraLayer
+                },
+                onRecordingFinished: (file) => {
+                    console.log('Recording finished callback:', file.path);
+                }
+            });
+            setIsRecording(true);
+            // Also start the game when recording starts
+            if (!isPlaying) {
                 togglePlay();
             }
-        } else {
-            // Stop Playing and Recording
-            togglePlay(); // Stop game
-            setIsRecording(false);
-            try {
-                const file = await stopInAppRecording();
-                if (file) {
-                    saveRecording(file.path);
-                }
-            } catch (error) {
-                console.error("Failed to stop recording:", error);
+        } catch (error) {
+            console.error("Failed to start recording:", error);
+            Alert.alert("Recording Error", "Could not start screen recording. Are you on a Development Build?");
+        }
+    };
+
+    // Stop recording
+    const handleStopRecording = async () => {
+        setIsRecording(false);
+        // Stop the game too
+        if (isPlaying) {
+            togglePlay();
+        }
+        try {
+            const file = await stopInAppRecording();
+            if (file) {
+                saveRecording(file.path);
             }
+        } catch (error) {
+            console.error("Failed to stop recording:", error);
         }
     };
 
@@ -106,34 +120,50 @@ export default function GameScreen() {
                             <Text style={styles.menuText}>☰ MENU</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            onPress={() => setRecordMode(!recordMode)}
-                            style={[styles.modeButton, recordMode && styles.recordModeActive]}
+                            onPress={() => setCameraMode(!cameraMode)}
+                            style={[styles.modeButton, cameraMode && styles.cameraModeActive]}
                         >
-                            <Text style={[styles.modeText, recordMode && { color: 'white' }]}>
-                                {recordMode ? '● REC MODE' : '○ MODE'}
+                            <Text style={[styles.modeText, cameraMode && { color: 'white' }]}>
+                                {cameraMode ? '📷 CAMERA' : '○ CAMERA'}
                             </Text>
                         </TouchableOpacity>
                     </View>
 
-                    {/* Play/Stop Button */}
-                    <TouchableOpacity
-                        onPress={handleTogglePlay}
-                        style={[
-                            styles.playButton,
-                            isPlaying ? styles.stopButton : (recordMode ? styles.recordStartButton : styles.startButton)
-                        ]}
-                    >
-                        <Text style={styles.playButtonText}>
-                            {isPlaying ? 'STOP' : (recordMode ? 'REC' : 'PLAY')}
-                        </Text>
-                    </TouchableOpacity>
+                    {/* Control Buttons */}
+                    <View style={styles.headerRight}>
+                        {/* Play/Stop Button */}
+                        <TouchableOpacity
+                            onPress={handleTogglePlay}
+                            style={[
+                                styles.playButton,
+                                isPlaying && !isRecording ? styles.stopButton : styles.startButton
+                            ]}
+                        >
+                            <Text style={styles.playButtonText}>
+                                {isPlaying && !isRecording ? 'STOP' : 'PLAY'}
+                            </Text>
+                        </TouchableOpacity>
 
-                    <View style={{ width: 60 }} />
+                        {/* Record Button (only visible in camera mode) */}
+                        {cameraMode && (
+                            <TouchableOpacity
+                                onPress={isRecording ? handleStopRecording : handleStartRecording}
+                                style={[
+                                    styles.recordButton,
+                                    isRecording && styles.recordingActive
+                                ]}
+                            >
+                                <Text style={styles.recordButtonText}>
+                                    {isRecording ? '■ STOP' : '● REC'}
+                                </Text>
+                            </TouchableOpacity>
+                        )}
+                    </View>
                 </View>
 
-                {/* Top Content: Camera (if Record Mode) or GameArea (Normal) */}
+                {/* Top Content: Camera (if Camera Mode) or GameArea (Normal) */}
                 <View style={styles.contentArea}>
-                    {recordMode ? (
+                    {cameraMode ? (
                         <CameraLayer />
                     ) : (
                         <GameArea isFocused={isFocused} />
@@ -143,10 +173,19 @@ export default function GameScreen() {
 
             {/* Bottom Half */}
             <View style={styles.bottomHalf}>
-                {/* Bottom Content: GameArea (if Record Mode) or Video (Normal) */}
+                {/* Bottom Content: GameArea (if Camera Mode) or Video/Music (Normal) */}
                 <View style={styles.videoWrapper}>
-                    {recordMode ? (
-                        <GameArea isFocused={isFocused} />
+                    {cameraMode ? (
+                        <>
+                            {/* Compact game area for camera mode */}
+                            <GameArea isFocused={isFocused} compact={true} />
+                            {/* Hidden music layer to keep audio playing */}
+                            {musicMode === 'local' && (
+                                <View style={styles.hiddenMusicLayer}>
+                                    <LocalMusicLayer />
+                                </View>
+                            )}
+                        </>
                     ) : (
                         musicMode === 'youtube' ? (
                             <YouTubeLayer videoId={videoId} />
@@ -204,33 +243,53 @@ const styles = StyleSheet.create({
         borderColor: COLORS.accent,
         ...SHAPES.rect,
     },
-    recordModeActive: {
-        backgroundColor: '#FF4444',
-        borderColor: '#FF4444',
+    cameraModeActive: {
+        backgroundColor: '#4488FF',
+        borderColor: '#4488FF',
     },
     modeText: {
         color: COLORS.accent,
         fontFamily: FONTS.main,
+    },
+    headerRight: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10,
     },
     playButton: {
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderWidth: 2,
         ...SHAPES.rect,
-        minWidth: 80,
+        minWidth: 70,
         alignItems: 'center',
     },
     startButton: {
         borderColor: '#00FF00',
         backgroundColor: 'rgba(0, 255, 0, 0.1)',
     },
-    recordStartButton: {
-        borderColor: '#FF0000',
-        backgroundColor: 'rgba(255, 0, 0, 0.1)',
-    },
     stopButton: {
+        borderColor: '#FFAA00',
+        backgroundColor: 'rgba(255, 170, 0, 0.1)',
+    },
+    recordButton: {
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderWidth: 2,
         borderColor: '#FF0000',
         backgroundColor: 'rgba(255, 0, 0, 0.1)',
+        ...SHAPES.rect,
+        minWidth: 70,
+        alignItems: 'center',
+    },
+    recordingActive: {
+        backgroundColor: '#FF0000',
+        borderColor: '#FF0000',
+    },
+    recordButtonText: {
+        color: COLORS.text,
+        fontFamily: FONTS.main,
+        fontSize: 16,
     },
     playButtonText: {
         color: COLORS.text,
@@ -254,6 +313,12 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         backgroundColor: COLORS.cardBg,
+    },
+    hiddenMusicLayer: {
+        position: 'absolute',
+        width: 0,
+        height: 0,
+        overflow: 'hidden',
     },
     controls: {
         position: 'absolute',

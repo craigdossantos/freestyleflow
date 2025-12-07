@@ -9,7 +9,17 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const GAP = 10;
 const PADDING = 20;
 
-export const RhymeGrid: React.FC = () => {
+// Sizes for normal vs compact mode
+const NORMAL_ROW_HEIGHT = 80;
+const NORMAL_BRICK_HEIGHT = 50;
+const COMPACT_ROW_HEIGHT = 55;
+const COMPACT_BRICK_HEIGHT = 40;
+
+interface RhymeGridProps {
+    compact?: boolean;
+}
+
+export const RhymeGrid: React.FC<RhymeGridProps> = ({ compact = false }) => {
     const brokenBricks = useGameStore((state) => state.brokenBricks);
     const rhymeRows = useGameStore((state) => state.rhymeRows);
     const loadNewRhymes = useGameStore((state) => state.loadNewRhymes);
@@ -48,6 +58,9 @@ export const RhymeGrid: React.FC = () => {
             runOnJS(updateColumnFromGesture)(e.absoluteX);
         });
 
+    const rowHeight = compact ? COMPACT_ROW_HEIGHT : NORMAL_ROW_HEIGHT;
+    const brickHeight = compact ? COMPACT_BRICK_HEIGHT : NORMAL_BRICK_HEIGHT;
+
     const renderRow = (row: { id: string, word: string, color: string }, rowIndex: number) => {
         const baseIndex = rowIndex * 4;
 
@@ -59,7 +72,7 @@ export const RhymeGrid: React.FC = () => {
 
         return (
             <Animated.View
-                style={styles.row}
+                style={[styles.row, { height: rowHeight }]}
                 key={row.id}
                 layout={LinearTransition.duration(100)}
                 entering={SlideInUp.duration(100)}
@@ -80,13 +93,13 @@ export const RhymeGrid: React.FC = () => {
                             <View
                                 style={[
                                     styles.brick,
-                                    { backgroundColor, width },
+                                    { backgroundColor, width, height: brickHeight },
                                     isBroken && styles.hiddenBrick
                                 ]}
                             >
                                 {isWordBrick && row.word ? (
                                     <Text
-                                        style={styles.brickText}
+                                        style={[styles.brickText, compact && styles.compactBrickText]}
                                         numberOfLines={1}
                                         adjustsFontSizeToFit
                                     >
@@ -121,11 +134,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        height: 80,
-        paddingVertical: 10,
+        // height is set dynamically
+        paddingVertical: 5,
     },
     brick: {
-        height: 50,
+        // height is set dynamically
         borderWidth: 2,
         borderColor: COLORS.cardBorder,
         justifyContent: 'center',
@@ -141,5 +154,8 @@ const styles = StyleSheet.create({
         fontSize: 20, // Start larger, let it scale down
         fontFamily: FONTS.main,
         textTransform: 'uppercase',
+    },
+    compactBrickText: {
+        fontSize: 16,
     },
 });

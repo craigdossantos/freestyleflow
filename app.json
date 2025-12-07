@@ -8,6 +8,10 @@
     "scheme": "freestyleflow",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "assetBundlePatterns": [
+      "**/*",
+      "music/*"
+    ],
     "splash": {
       "image": "./assets/images/splash-icon.png",
       "resizeMode": "contain",

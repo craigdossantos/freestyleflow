@@ -1,6 +1,7 @@
+import { Asset } from 'expo-asset';
 import { Audio } from 'expo-av';
-import React, { useEffect, useRef } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { ActivityIndicator, Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SONGS, Song } from '../constants/songList';
 import { COLORS, FONTS } from '../constants/theme';
 import { useGameStore } from '../store';
@@ -17,6 +18,7 @@ export const LocalMusicLayer: React.FC = () => {
 
     const soundRef = useRef<Audio.Sound | null>(null);
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     // Unload sound on unmount
     useEffect(() => {
@@ -44,43 +46,87 @@ export const LocalMusicLayer: React.FC = () => {
         try {
             console.log(`[LocalMusicLayer] Selected song: ${song.title}`);
             console.log(`[LocalMusicLayer] Metadata - BPM: ${song.bpm}, Start: ${song.startTime}, End: ${song.endTime}`);
+            console.log(`[LocalMusicLayer] Source type:`, typeof song.source, song.source);
 
-            // 1. Configure Audio for Silent Mode (iOS)
-            await Audio.setAudioModeAsync({
-                playsInSilentModeIOS: true,
-                shouldDuckAndroid: true,
-            });
+            // Check if source exists
+            if (!song.source) {
+                console.error('Song source is missing for:', song.title);
+                Alert.alert('Error', 'Song source missing. Please check file mapping.');
+                return;
+            }
 
-            // 2. Stop current
-            setIsPlaying(false); // Force stop game loop immediately
+            setIsLoading(true);
+
+            // 1. Stop current sound if any
+            setIsPlaying(false);
             if (soundRef.current) {
-                await soundRef.current.unloadAsync();
+                try {
+                    await soundRef.current.stopAsync();
+                    await soundRef.current.unloadAsync();
+                } catch (e) {
+                    console.log('[LocalMusicLayer] Error stopping previous sound:', e);
+                }
                 soundRef.current = null;
             }
             if (timeoutRef.current) {
                 clearTimeout(timeoutRef.current);
             }
 
-            // 3. Load new
+            // 2. Set current song
             setCurrentSong(song);
 
-            // Check if source exists (paranoia check based on user error)
-            if (!song.source) {
-                console.error('Song source is missing for:', song.title);
-                alert('Error: Song source missing. Please check file mapping.');
-                return;
+            // 3. Configure Audio for playback
+            await Audio.setAudioModeAsync({
+                playsInSilentModeIOS: true,
+                staysActiveInBackground: false,
+                shouldDuckAndroid: true,
+            });
+
+            // 4. Use expo-asset to properly load the asset
+            // This is the key fix - we need to download/resolve the asset first
+            console.log('[LocalMusicLayer] Loading asset with expo-asset...');
+            const asset = Asset.fromModule(song.source);
+            console.log('[LocalMusicLayer] Asset created:', asset.name, asset.type);
+
+            // Download the asset if not already available locally
+            if (!asset.localUri) {
+                console.log('[LocalMusicLayer] Downloading asset...');
+                await asset.downloadAsync();
             }
 
-            const { sound } = await Audio.Sound.createAsync(
-                song.source,
-                { shouldPlay: true }
-            );
-            soundRef.current = sound;
+            console.log('[LocalMusicLayer] Asset localUri:', asset.localUri);
+            console.log('[LocalMusicLayer] Asset uri:', asset.uri);
 
-            // 4. Setup Game State
+            if (!asset.localUri && !asset.uri) {
+                throw new Error('Failed to resolve asset URI');
+            }
+
+            // 5. Create sound from the resolved URI
+            const uri = asset.localUri || asset.uri;
+            console.log('[LocalMusicLayer] Creating sound from URI:', uri);
+
+            const { sound, status } = await Audio.Sound.createAsync(
+                { uri },
+                {
+                    shouldPlay: true,
+                    volume: 1.0,
+                },
+                (playbackStatus) => {
+                    if (playbackStatus.isLoaded && playbackStatus.didJustFinish) {
+                        console.log('[LocalMusicLayer] Song finished.');
+                        setIsPlaying(false);
+                    }
+                }
+            );
+
+            console.log('[LocalMusicLayer] Sound created successfully, status:', status);
+            soundRef.current = sound;
+            setIsLoading(false);
+
+            // 6. Setup Game State
             setBpm(song.bpm);
 
-            // Wait for Start Time
+            // Wait for Start Time (the "drop")
             const delayMs = song.startTime * 1000;
             console.log(`[LocalMusicLayer] Waiting ${delayMs}ms for drop...`);
 
@@ -90,26 +136,26 @@ export const LocalMusicLayer: React.FC = () => {
 
             timeoutRef.current = setTimeout(() => {
                 console.log('[LocalMusicLayer] DROP! Starting game loop.');
-                setIsPlaying(true); // Force start game loop
+                setIsPlaying(true);
             }, delayMs);
 
-            // Setup finish listener
-            sound.setOnPlaybackStatusUpdate((status) => {
-                if (status.isLoaded && status.didJustFinish) {
-                    console.log('[LocalMusicLayer] Song finished.');
-                    setIsPlaying(false);
-                }
-            });
-
-        } catch (error) {
-            console.error('Error playing song:', error);
-            alert('Error playing song. See console.');
+        } catch (error: any) {
+            setIsLoading(false);
+            console.error('[LocalMusicLayer] Error playing song:', error);
+            console.error('[LocalMusicLayer] Error details:', error.message);
+            Alert.alert(
+                'Playback Error',
+                `Could not play "${song.title}". ${error.message || 'Unknown error'}`
+            );
         }
     };
 
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>SELECT TRACK</Text>
+            <View style={styles.headerRow}>
+                <Text style={styles.header}>SELECT TRACK</Text>
+                {isLoading && <ActivityIndicator size="small" color={COLORS.accent} />}
+            </View>
             <ScrollView style={styles.list}>
                 {SONGS.map((song) => (
                     <TouchableOpacity
@@ -119,12 +165,14 @@ export const LocalMusicLayer: React.FC = () => {
                             currentSong?.filename === song.filename && styles.activeSong
                         ]}
                         onPress={() => playSong(song)}
+                        disabled={isLoading}
                     >
                         <Text style={[
                             styles.songTitle,
-                            currentSong?.filename === song.filename && styles.activeSongText
+                            currentSong?.filename === song.filename && styles.activeSongText,
+                            isLoading && styles.disabledText
                         ]}>{song.title}</Text>
-                        <Text style={styles.songMeta}>
+                        <Text style={[styles.songMeta, isLoading && styles.disabledText]}>
                             {song.bpm} BPM • Start: {song.startTime.toFixed(1)}s
                         </Text>
                     </TouchableOpacity>
@@ -140,11 +188,16 @@ const styles = StyleSheet.create({
         backgroundColor: '#000',
         padding: 20,
     },
+    headerRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10,
+        marginBottom: 10,
+    },
     header: {
         color: '#666',
         fontFamily: FONTS.main,
         fontSize: 14,
-        marginBottom: 10,
     },
     list: {
         flex: 1,
@@ -174,5 +227,8 @@ const styles = StyleSheet.create({
         color: '#888',
         fontFamily: FONTS.main,
         fontSize: 12,
+    },
+    disabledText: {
+        opacity: 0.5,
     },
 });

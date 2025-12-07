@@ -1,14 +1,26 @@
 import { CameraView, useCameraPermissions } from 'expo-camera';
-import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import { COLORS } from '../constants/theme';
+import React, { useEffect } from 'react';
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { COLORS, FONTS } from '../constants/theme';
 
 export function CameraLayer() {
     const [permission, requestPermission] = useCameraPermissions();
 
+    // Auto-request permission on mount if not determined
+    useEffect(() => {
+        if (permission && !permission.granted && permission.canAskAgain) {
+            requestPermission();
+        }
+    }, [permission]);
+
     if (!permission) {
         // Camera permissions are still loading.
-        return <View style={styles.container} />;
+        return (
+            <View style={styles.container}>
+                <ActivityIndicator size="large" color={COLORS.accent} />
+                <Text style={styles.message}>Loading camera...</Text>
+            </View>
+        );
     }
 
     if (!permission.granted) {
@@ -16,8 +28,10 @@ export function CameraLayer() {
         return (
             <View style={styles.container}>
                 <View style={styles.permissionContainer}>
-                    <Text style={styles.message}>We need your permission to show the camera</Text>
-                    <Button onPress={requestPermission} title="grant permission" />
+                    <Text style={styles.message}>Camera permission needed for recording</Text>
+                    <TouchableOpacity onPress={requestPermission} style={styles.permissionButton}>
+                        <Text style={styles.permissionButtonText}>Grant Camera Access</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );
@@ -33,7 +47,10 @@ export function CameraLayer() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        width: '100%',
         backgroundColor: 'black',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     permissionContainer: {
         flex: 1,
@@ -44,10 +61,25 @@ const styles = StyleSheet.create({
     },
     message: {
         textAlign: 'center',
-        paddingBottom: 10,
+        paddingBottom: 15,
         color: COLORS.text,
+        fontFamily: FONTS.main,
+        fontSize: 16,
+    },
+    permissionButton: {
+        backgroundColor: COLORS.accent,
+        paddingVertical: 12,
+        paddingHorizontal: 24,
+        borderRadius: 8,
+    },
+    permissionButtonText: {
+        color: COLORS.background,
+        fontFamily: FONTS.main,
+        fontSize: 16,
+        fontWeight: 'bold',
     },
     camera: {
         flex: 1,
+        width: '100%',
     },
 });
