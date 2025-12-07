@@ -42,6 +42,7 @@ export default function MenuScreen() {
         { id: 'chrome', label: 'CHROME' },
         { id: 'thermal', label: 'THERMAL' },
         { id: 'comic', label: 'COMIC' },
+        { id: 'pastel', label: 'PASTEL' },
     ] as const;
 
     const handleLoadVideo = () => {

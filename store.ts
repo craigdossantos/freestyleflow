@@ -57,8 +57,8 @@ interface GameState {
     setCurrentSong: (song: any) => void;
 
     // Camera filter
-    cameraFilter: 'none' | 'noir' | 'chrome' | 'thermal' | 'comic';
-    setCameraFilter: (filter: 'none' | 'noir' | 'chrome' | 'thermal' | 'comic') => void;
+    cameraFilter: 'none' | 'noir' | 'chrome' | 'thermal' | 'comic' | 'pastel';
+    setCameraFilter: (filter: 'none' | 'noir' | 'chrome' | 'thermal' | 'comic' | 'pastel') => void;
 }
 
 export const useGameStore = create<GameState>((set) => ({

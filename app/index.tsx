@@ -6,8 +6,8 @@ import React, { useEffect, useState } from 'react';
 import { Alert, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { startInAppRecording, stopInAppRecording } from 'react-native-nitro-screen-recorder';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { CameraLayer } from '../components/CameraLayer';
 import { GameArea } from '../components/GameArea';
+import { GLCameraLayer } from '../components/GLCameraLayer';
 import { LocalMusicLayer } from '../components/LocalMusicLayer';
 import { TapButton } from '../components/TapButton';
 import { YouTubeLayer } from '../components/YouTubeLayer';
@@ -115,8 +115,8 @@ export default function GameScreen() {
             <View style={styles.container}>
                 <StatusBar barStyle="light-content" />
 
-                {/* Full screen camera */}
-                <CameraLayer />
+                {/* Full screen camera with GL shaders */}
+                <GLCameraLayer />
 
                 {/* Header overlay */}
                 <View style={[styles.headerOverlay, { paddingTop: insets.top + 10, paddingHorizontal: Math.max(insets.left, 16) + 4 }]}>
