@@ -1,7 +1,6 @@
 import { Audio } from 'expo-av';
 import React, { useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { SONGS, Song } from '../constants/songList';
+import { ActivityIndicator, Alert, StyleSheet, Text, View } from 'react-native';
 import { COLORS, FONTS } from '../constants/theme';
 import { useGameStore } from '../store';
 
@@ -11,13 +10,13 @@ export const LocalMusicLayer: React.FC = () => {
     const isPlaying = useGameStore((state) => state.isPlaying);
     const triggerSync = useGameStore((state) => state.triggerSync);
     const setCurrentBeat = useGameStore((state) => state.setCurrentBeat);
-
     const currentSong = useGameStore((state) => state.currentSong);
-    const setCurrentSong = useGameStore((state) => state.setCurrentSong);
 
     const soundRef = useRef<Audio.Sound | null>(null);
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [isSoundPlaying, setIsSoundPlaying] = useState(false);
+    const wasPlayingRef = useRef(false);
 
     // Unload sound on unmount
     useEffect(() => {
@@ -32,28 +31,41 @@ export const LocalMusicLayer: React.FC = () => {
         };
     }, []);
 
-    // Effect to handle song stopping/cleanup when stopping the game manually
+    // React to isPlaying changes from the top play button
     useEffect(() => {
-        if (!isPlaying && soundRef.current) {
-            // If user stops game manually, pause the music
-            soundRef.current.stopAsync();
-            if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        const handlePlayStateChange = async () => {
+            if (isPlaying && !wasPlayingRef.current && currentSong) {
+                // User pressed play - start the song
+                await startSong();
+            } else if (!isPlaying && wasPlayingRef.current) {
+                // User pressed stop - stop the song
+                await stopSong();
+            }
+            wasPlayingRef.current = isPlaying;
+        };
+
+        handlePlayStateChange();
+    }, [isPlaying, currentSong]);
+
+    const startSong = async () => {
+        if (!currentSong) {
+            Alert.alert('No Track Selected', 'Please select a track from the Menu first.');
+            setIsPlaying(false);
+            return;
         }
-    }, [isPlaying]);
 
-    const playSong = async (song: Song) => {
         try {
-            console.log(`[LocalMusicLayer] Playing: ${song.title} (${song.bpm} BPM)`);
+            console.log(`[LocalMusicLayer] Starting: ${currentSong.title} (${currentSong.bpm} BPM)`);
 
-            if (!song.source) {
+            if (!currentSong.source) {
                 Alert.alert('Error', 'Song source missing.');
+                setIsPlaying(false);
                 return;
             }
 
             setIsLoading(true);
 
             // Stop current sound if any
-            setIsPlaying(false);
             if (soundRef.current) {
                 try {
                     await soundRef.current.stopAsync();
@@ -67,8 +79,6 @@ export const LocalMusicLayer: React.FC = () => {
                 clearTimeout(timeoutRef.current);
             }
 
-            setCurrentSong(song);
-
             // Configure audio mode
             await Audio.setAudioModeAsync({
                 playsInSilentModeIOS: true,
@@ -76,14 +86,20 @@ export const LocalMusicLayer: React.FC = () => {
                 shouldDuckAndroid: true,
             });
 
-            // Load and play the sound directly from require() source
+            // Setup game state first
+            setBpm(currentSong.bpm);
+            setCurrentBeat(0);
+            triggerSync();
+
+            // Load and play the sound
             const { sound, status } = await Audio.Sound.createAsync(
-                song.source,
+                currentSong.source,
                 { shouldPlay: true, volume: 1.0 },
                 (playbackStatus) => {
                     if (playbackStatus.isLoaded && playbackStatus.didJustFinish) {
                         console.log('[LocalMusicLayer] Song finished.');
                         setIsPlaying(false);
+                        setIsSoundPlaying(false);
                     }
                 }
             );
@@ -91,56 +107,56 @@ export const LocalMusicLayer: React.FC = () => {
             console.log('[LocalMusicLayer] Sound loaded, duration:', status.isLoaded ? status.durationMillis : 'unknown');
             soundRef.current = sound;
             setIsLoading(false);
+            setIsSoundPlaying(true);
 
-            // Setup game state
-            setBpm(song.bpm);
-            setCurrentBeat(0);
-            triggerSync();
-
-            // Wait for the beat drop, then start the game loop
-            const delayMs = song.startTime * 1000;
-            console.log(`[LocalMusicLayer] Waiting ${delayMs}ms for drop...`);
-
-            timeoutRef.current = setTimeout(() => {
-                console.log('[LocalMusicLayer] DROP! Starting game.');
-                setIsPlaying(true);
-            }, delayMs);
+            // The game ball is already playing (isPlaying is true)
+            // Wait for the beat drop to sync properly
+            const delayMs = currentSong.startTime * 1000;
+            console.log(`[LocalMusicLayer] Beat drop in ${delayMs}ms...`);
 
         } catch (error: any) {
             setIsLoading(false);
+            setIsPlaying(false);
             console.error('[LocalMusicLayer] Playback error:', error.message);
-            Alert.alert('Playback Error', `Could not play "${song.title}". ${error.message || 'Unknown error'}`);
+            Alert.alert('Playback Error', `Could not play "${currentSong.title}". ${error.message || 'Unknown error'}`);
         }
     };
 
+    const stopSong = async () => {
+        console.log('[LocalMusicLayer] Stopping song');
+        if (soundRef.current) {
+            try {
+                await soundRef.current.stopAsync();
+            } catch (e) {
+                // Ignore errors
+            }
+        }
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+        setIsSoundPlaying(false);
+    };
+
+    // Show selected song info (no separate play button - controlled by top button)
     return (
         <View style={styles.container}>
-            <View style={styles.headerRow}>
-                <Text style={styles.header}>SELECT TRACK</Text>
-                {isLoading && <ActivityIndicator size="small" color={COLORS.accent} />}
-            </View>
-            <ScrollView style={styles.list}>
-                {SONGS.map((song) => (
-                    <TouchableOpacity
-                        key={song.id}
-                        style={[
-                            styles.songItem,
-                            currentSong?.id === song.id && styles.activeSong
-                        ]}
-                        onPress={() => playSong(song)}
-                        disabled={isLoading}
-                    >
-                        <Text style={[
-                            styles.songTitle,
-                            currentSong?.id === song.id && styles.activeSongText,
-                            isLoading && styles.disabledText
-                        ]}>{song.title}</Text>
-                        <Text style={[styles.songMeta, isLoading && styles.disabledText]}>
-                            {song.bpm} BPM • Start: {song.startTime.toFixed(1)}s
-                        </Text>
-                    </TouchableOpacity>
-                ))}
-            </ScrollView>
+            {currentSong ? (
+                <View style={styles.songDisplay}>
+                    <View style={styles.songInfo}>
+                        <Text style={styles.label}>{isSoundPlaying ? 'NOW PLAYING' : 'SELECTED TRACK'}</Text>
+                        <Text style={styles.songTitle}>{currentSong.title}</Text>
+                        <Text style={styles.songMeta}>{currentSong.bpm} BPM</Text>
+                    </View>
+                    {isLoading && (
+                        <ActivityIndicator size="large" color={COLORS.accent} />
+                    )}
+                </View>
+            ) : (
+                <View style={styles.noSongContainer}>
+                    <Text style={styles.noSongText}>No track selected</Text>
+                    <Text style={styles.noSongHint}>Go to Menu to select a track</Text>
+                </View>
+            )}
         </View>
     );
 };
@@ -149,49 +165,49 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#000',
+        justifyContent: 'center',
+        alignItems: 'center',
         padding: 20,
     },
-    headerRow: {
+    songDisplay: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 10,
-        marginBottom: 10,
+        justifyContent: 'space-between',
+        width: '100%',
+        paddingHorizontal: 20,
     },
-    header: {
-        color: '#666',
-        fontFamily: FONTS.main,
-        fontSize: 14,
-    },
-    list: {
+    songInfo: {
         flex: 1,
     },
-    songItem: {
-        padding: 15,
-        borderBottomWidth: 1,
-        borderBottomColor: '#333',
-        marginBottom: 5,
-        borderRadius: 8,
-    },
-    activeSong: {
-        backgroundColor: COLORS.accent + '20', // 20% opacity
-        borderColor: COLORS.accent,
-        borderWidth: 1,
+    label: {
+        color: '#666',
+        fontFamily: FONTS.main,
+        fontSize: 12,
+        marginBottom: 4,
     },
     songTitle: {
         color: '#FFF',
         fontFamily: FONTS.main,
-        fontSize: 16,
+        fontSize: 24,
         marginBottom: 4,
-    },
-    activeSongText: {
-        color: COLORS.accent,
     },
     songMeta: {
         color: '#888',
         fontFamily: FONTS.main,
-        fontSize: 12,
+        fontSize: 14,
     },
-    disabledText: {
-        opacity: 0.5,
+    noSongContainer: {
+        alignItems: 'center',
+    },
+    noSongText: {
+        color: '#666',
+        fontFamily: FONTS.main,
+        fontSize: 18,
+        marginBottom: 8,
+    },
+    noSongHint: {
+        color: '#444',
+        fontFamily: FONTS.main,
+        fontSize: 14,
     },
 });

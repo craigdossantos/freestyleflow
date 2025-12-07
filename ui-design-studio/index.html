@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreestyleFlow UI Design Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Bebas+Neue&family=Bangers&family=Press+Start+2P&family=Russo+One&family=Orbitron:wght@400;700&family=Righteous&family=Audiowide&family=Bungee&family=Fredoka:wght@400;600&family=Londrina+Solid&family=Titan+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/themes.css">
+    <link rel="stylesheet" href="styles/editor.css">
+</head>
+<body>
+    <div class="studio-container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>FREESTYLEFLOW</h1>
+                <span class="subtitle">UI Design Studio</span>
+            </div>
+
+            <!-- Screen Selector -->
+            <section class="sidebar-section">
+                <h3>SCREENS</h3>
+                <div class="screen-selector">
+                    <button class="screen-btn active" data-screen="menu">Menu</button>
+                    <button class="screen-btn" data-screen="gameboard-yt">Game (YT)</button>
+                    <button class="screen-btn" data-screen="gameboard-local">Game (Songs)</button>
+                    <button class="screen-btn" data-screen="mastery">Mastery</button>
+                    <button class="screen-btn" data-screen="record">Record Mode</button>
+                </div>
+            </section>
+
+            <!-- Theme Selector -->
+            <section class="sidebar-section">
+                <h3>THEMES <span class="theme-count">(15)</span></h3>
+                <div class="theme-grid">
+                    <button class="theme-swatch active" data-theme="sketch" title="Current (Sketch)">
+                        <span class="swatch-color" style="background: linear-gradient(135deg, #fffdf0 50%, #2c3e50 50%)"></span>
+                        <span class="swatch-label">Sketch</span>
+                    </button>
+                    <button class="theme-swatch" data-theme="neon" title="Neon Arcade">
+                        <span class="swatch-color" style="background: linear-gradient(135deg, #0a0a0a 50%, #00ff88 50%)"></span>
+                        <span class="swatch-label">Neon</span>
+                    </button>
+                    <button class="theme-swatch" data-theme="hiphop" title="Hip-Hop Graffiti">
+                        <span class="swatch-color" style="background: linear-gradient(135deg, #1a1a2e 50%, #ff2e63 50%)"></span>
+                        <span class="swatch-label">Hip-Hop</span>
+                    </button>
+                    <button class="theme-swatch" data-theme="spotify" title="Spotify Dark">
+                        <span class="swatch-color" style="background: linear-gradient(135deg, #121212 50%, #1DB954 50%)"></span>
+                        <span class="swatch-label">Spotify</span>
+                    </button>
+                    <button class="theme-swatch" data-theme="tiktok" title="TikTok Vibe">
+                        <span class="swatch-color" style="background: linear-gradient(135deg, #000 50%, #fe2c55 50%)"></span>
+                        <span class="swatch-label">TikTok</span>
+                    </button>
+                    <button class="theme-swatch" data-theme="soundcloud" title="SoundCloud Orange">
+                        <span class="swatch-color" style="background: linear-gradient(135deg, #f2f2f2 50%, #ff5500 50%)"></span>
+                        <span class="swatch-label">SoundCloud</span>
+                    </button>
+                    <button class="theme-swatch" data-theme="streetwear" title="Streetwear">
+                        <span class="swatch-color" style="background: linear-gradient(135deg, #000 50%, #fff 50%)"></span>
+                        <span class="swatch-label">Street</span>
+                    </button>
+                    <button class="theme-swatch" data-theme="retro" title="Retro 80s">
+                        <span class="swatch-color" style="background: linear-gradient(135deg, #2b1055 50%, #ff00ff 50%)"></span>
+                        <span class="swatch-label">Retro</span>
+                    </button>
+                    <button class="theme-swatch" data-theme="cyber" title="Cyberpunk">
+                        <span class="swatch-color" style="background: linear-gradient(135deg, #0d0d0d 50%, #00f0ff 50%)"></span>
+                        <span class="swatch-label">Cyber</span>
+                    </button>
+                    <button class="theme-swatch" data-theme="gold" title="Bling & Gold">
+                        <span class="swatch-color" style="background: linear-gradient(135deg, #1a1a1a 50%, #ffd700 50%)"></span>
+                        <span class="swatch-label">Gold</span>
+                    </button>
+                    <button class="theme-swatch" data-theme="pastel" title="Pastel Soft">
+                        <span class="swatch-color" style="background: linear-gradient(135deg, #ffeef8 50%, #a855f7 50%)"></span>
+                        <span class="swatch-label">Pastel</span>
+                    </button>
+                    <button class="theme-swatch" data-theme="fire" title="Fire & Flame">
+                        <span class="swatch-color" style="background: linear-gradient(135deg, #1a0a00 50%, #ff4500 50%)"></span>
+                        <span class="swatch-label">Fire</span>
+                    </button>
+                    <button class="theme-swatch" data-theme="ocean" title="Ocean Wave">
+                        <span class="swatch-color" style="background: linear-gradient(135deg, #0a192f 50%, #00d9ff 50%)"></span>
+                        <span class="swatch-label">Ocean</span>
+                    </button>
+                    <button class="theme-swatch" data-theme="minimal" title="Minimal Clean">
+                        <span class="swatch-color" style="background: linear-gradient(135deg, #fff 50%, #333 50%)"></span>
+                        <span class="swatch-label">Minimal</span>
+                    </button>
+                    <button class="theme-swatch" data-theme="arcade" title="Arcade Game">
+                        <span class="swatch-color" style="background: linear-gradient(135deg, #000033 50%, #ffff00 50%)"></span>
+                        <span class="swatch-label">Arcade</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Tools -->
+            <section class="sidebar-section">
+                <h3>TOOLS</h3>
+                <div class="tools-row">
+                    <button class="tool-btn active" data-tool="select" title="Select">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg>
+                    </button>
+                    <button class="tool-btn" data-tool="move" title="Move">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"/></svg>
+                    </button>
+                    <button class="tool-btn" data-tool="note" title="Add Note">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                    </button>
+                    <button class="tool-btn" data-tool="compare" title="Compare View">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M10 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h5v2h2V1h-2v2zm0 15H5l5-6v6zm9-15h-5v2h5v13l-5-6v9h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Notes List -->
+            <section class="sidebar-section notes-section">
+                <h3>NOTES <button class="clear-notes-btn" title="Clear All">Clear</button></h3>
+                <div class="notes-list" id="notesList">
+                    <p class="no-notes">Click "Add Note" then click on the screen to add feedback</p>
+                </div>
+            </section>
+
+            <!-- Export -->
+            <section class="sidebar-section">
+                <h3>ACTIONS</h3>
+                <div class="action-buttons">
+                    <button class="action-btn" id="exportBtn">Export Config</button>
+                    <button class="action-btn" id="resetBtn">Reset Layout</button>
+                </div>
+            </section>
+        </aside>
+
+        <!-- Main Canvas Area -->
+        <main class="canvas-area">
+            <div class="canvas-header">
+                <div class="header-left">
+                    <span class="current-screen">Menu</span>
+                    <span class="current-theme">Sketch Theme</span>
+                </div>
+                <div class="header-right">
+                    <button class="nav-btn" id="prevTheme">← Prev Theme</button>
+                    <button class="nav-btn" id="nextTheme">Next Theme →</button>
+                </div>
+            </div>
+
+            <div class="phone-container">
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen" id="phoneScreen">
+                        <!-- Screen content will be injected here -->
+                    </div>
+                    <div class="phone-home-indicator"></div>
+                </div>
+            </div>
+
+            <!-- Comparison View (hidden by default) -->
+            <div class="comparison-view" id="comparisonView" style="display: none;">
+                <div class="comparison-phone">
+                    <h4>Theme A</h4>
+                    <div class="phone-frame small">
+                        <div class="phone-screen" id="compareScreenA"></div>
+                    </div>
+                    <select id="compareThemeA" class="theme-select"></select>
+                </div>
+                <div class="comparison-phone">
+                    <h4>Theme B</h4>
+                    <div class="phone-frame small">
+                        <div class="phone-screen" id="compareScreenB"></div>
+                    </div>
+                    <select id="compareThemeB" class="theme-select"></select>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Panel (Theme Details) -->
+        <aside class="right-panel">
+            <h3>THEME DETAILS</h3>
+            <div class="theme-info" id="themeInfo">
+                <div class="info-row">
+                    <span class="info-label">Name:</span>
+                    <span class="info-value" id="themeName">Sketch (Current)</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Font:</span>
+                    <span class="info-value" id="themeFont">Permanent Marker</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Vibe:</span>
+                    <span class="info-value" id="themeVibe">Hand-drawn, playful</span>
+                </div>
+            </div>
+
+            <h3>COLOR PALETTE</h3>
+            <div class="color-palette" id="colorPalette">
+                <div class="color-chip" style="background: #fffdf0" title="Background"></div>
+                <div class="color-chip" style="background: #2c3e50" title="Text"></div>
+                <div class="color-chip" style="background: #e74c3c" title="Accent"></div>
+                <div class="color-chip" style="background: rgba(44,62,80,0.5)" title="Dimmed"></div>
+            </div>
+
+            <h3>INSPIRATIONS</h3>
+            <div class="inspirations" id="inspirations">
+                <p>Based on current app design with Permanent Marker font and hand-drawn aesthetic.</p>
+            </div>
+
+            <h3>KEYBOARD SHORTCUTS</h3>
+            <div class="shortcuts">
+                <div class="shortcut"><kbd>1-5</kbd> Switch screens</div>
+                <div class="shortcut"><kbd>←/→</kbd> Cycle themes</div>
+                <div class="shortcut"><kbd>N</kbd> Add note</div>
+                <div class="shortcut"><kbd>C</kbd> Compare view</div>
+                <div class="shortcut"><kbd>R</kbd> Reset layout</div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Note Input Modal -->
+    <div class="modal" id="noteModal" style="display: none;">
+        <div class="modal-content">
+            <h3>Add Note</h3>
+            <textarea id="noteText" placeholder="Enter your feedback..."></textarea>
+            <div class="note-categories">
+                <button class="cat-btn like" data-cat="like">Like</button>
+                <button class="cat-btn dislike" data-cat="dislike">Dislike</button>
+                <button class="cat-btn idea" data-cat="idea">Idea</button>
+                <button class="cat-btn question" data-cat="question">Question</button>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn cancel" id="cancelNote">Cancel</button>
+                <button class="modal-btn save" id="saveNote">Save Note</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/screens.js"></script>
+    <script src="scripts/themes.js"></script>
+    <script src="scripts/app.js"></script>
+</body>
+</html>

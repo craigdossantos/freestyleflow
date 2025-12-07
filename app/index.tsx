@@ -5,6 +5,7 @@ import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Alert, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { startInAppRecording, stopInAppRecording } from 'react-native-nitro-screen-recorder';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CameraLayer } from '../components/CameraLayer';
 import { GameArea } from '../components/GameArea';
 import { LocalMusicLayer } from '../components/LocalMusicLayer';
@@ -20,6 +21,7 @@ export default function GameScreen() {
     const loadNewRhymes = useGameStore((state) => state.loadNewRhymes);
     const router = useRouter();
     const isFocused = useIsFocused();
+    const insets = useSafeAreaInsets();
 
     const isPlaying = useGameStore((state) => state.isPlaying);
     const togglePlay = useGameStore((state) => state.togglePlay);
@@ -107,96 +109,141 @@ export default function GameScreen() {
         }
     };
 
+    // Camera mode: full screen camera with game board at bottom
+    if (cameraMode) {
+        return (
+            <View style={styles.container}>
+                <StatusBar barStyle="light-content" />
+
+                {/* Full screen camera */}
+                <CameraLayer />
+
+                {/* Header overlay */}
+                <View style={[styles.headerOverlay, { paddingTop: insets.top + 10, paddingHorizontal: Math.max(insets.left, 16) + 4 }]}>
+                    <View style={styles.headerLeft}>
+                        <TouchableOpacity onPress={() => router.push('/menu')} style={styles.menuButtonCamera}>
+                            <Text style={styles.menuTextCamera}>☰ MENU</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => setCameraMode(!cameraMode)}
+                            style={styles.cameraModeActiveButton}
+                        >
+                            <Text style={styles.cameraModeActiveText}>📷 CAMERA</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={styles.headerRight}>
+                        <TouchableOpacity
+                            onPress={handleTogglePlay}
+                            style={[
+                                styles.controlButton,
+                                isPlaying && !isRecording ? styles.stopButtonActive : styles.playButtonStyle
+                            ]}
+                        >
+                            {isPlaying && !isRecording ? (
+                                <View style={styles.stopIcon} />
+                            ) : (
+                                <View style={styles.playIcon} />
+                            )}
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            onPress={isRecording ? handleStopRecording : handleStartRecording}
+                            style={[
+                                styles.controlButton,
+                                styles.recordButtonStyle,
+                                isRecording && styles.recordingActiveStyle
+                            ]}
+                        >
+                            {isRecording ? (
+                                <View style={styles.stopIcon} />
+                            ) : (
+                                <View style={styles.recordIcon} />
+                            )}
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
+                {/* Game board at bottom 45% of screen */}
+                <View style={[styles.gameAreaBottom, { paddingBottom: insets.bottom + 20 }]}>
+                    <GameArea isFocused={isFocused} />
+                </View>
+
+                {/* Hidden music layer to keep audio playing */}
+                {musicMode === 'local' && (
+                    <View style={styles.hiddenMusicLayer}>
+                        <LocalMusicLayer />
+                    </View>
+                )}
+
+                {/* Tap Button */}
+                <View style={[styles.tapButtonContainer, { bottom: insets.bottom + 20, right: Math.max(insets.right, 16) + 4 }]}>
+                    <TapButton />
+                </View>
+            </View>
+        );
+    }
+
+    // Normal mode: standard layout
     return (
         <View style={styles.container}>
             <StatusBar barStyle="light-content" />
 
             {/* Top Half */}
-            <View style={styles.topHalf}>
+            <View style={[styles.topHalf, { paddingTop: insets.top + 10 }]}>
                 {/* Header */}
-                <View style={styles.header}>
+                <View style={[styles.header, { paddingHorizontal: Math.max(insets.left, 16) + 4 }]}>
                     <View style={styles.headerLeft}>
                         <TouchableOpacity onPress={() => router.push('/menu')} style={styles.menuButton}>
                             <Text style={styles.menuText}>☰ MENU</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             onPress={() => setCameraMode(!cameraMode)}
-                            style={[styles.modeButton, cameraMode && styles.cameraModeActive]}
+                            style={styles.modeButton}
                         >
-                            <Text style={[styles.modeText, cameraMode && { color: 'white' }]}>
-                                {cameraMode ? '📷 CAMERA' : '○ CAMERA'}
-                            </Text>
+                            <Text style={styles.modeText}>○ CAMERA</Text>
                         </TouchableOpacity>
                     </View>
 
                     {/* Control Buttons */}
                     <View style={styles.headerRight}>
-                        {/* Play/Stop Button */}
                         <TouchableOpacity
                             onPress={handleTogglePlay}
                             style={[
-                                styles.playButton,
-                                isPlaying && !isRecording ? styles.stopButton : styles.startButton
+                                styles.controlButton,
+                                isPlaying ? styles.stopButtonActive : styles.playButtonStyle
                             ]}
                         >
-                            <Text style={styles.playButtonText}>
-                                {isPlaying && !isRecording ? 'STOP' : 'PLAY'}
-                            </Text>
+                            {isPlaying ? (
+                                <View style={styles.stopIcon} />
+                            ) : (
+                                <View style={styles.playIcon} />
+                            )}
                         </TouchableOpacity>
-
-                        {/* Record Button (only visible in camera mode) */}
-                        {cameraMode && (
-                            <TouchableOpacity
-                                onPress={isRecording ? handleStopRecording : handleStartRecording}
-                                style={[
-                                    styles.recordButton,
-                                    isRecording && styles.recordingActive
-                                ]}
-                            >
-                                <Text style={styles.recordButtonText}>
-                                    {isRecording ? '■ STOP' : '● REC'}
-                                </Text>
-                            </TouchableOpacity>
-                        )}
                     </View>
                 </View>
 
-                {/* Top Content: Camera (if Camera Mode) or GameArea (Normal) */}
+                {/* Game Area */}
                 <View style={styles.contentArea}>
-                    {cameraMode ? (
-                        <CameraLayer />
-                    ) : (
-                        <GameArea isFocused={isFocused} />
-                    )}
+                    <GameArea isFocused={isFocused} />
                 </View>
             </View>
 
             {/* Bottom Half */}
-            <View style={styles.bottomHalf}>
-                {/* Bottom Content */}
+            <View style={[styles.bottomHalf, { paddingBottom: insets.bottom }]}>
                 <View style={styles.videoWrapper}>
-                    {/* Game area for camera mode */}
-                    {cameraMode && (
-                        <GameArea isFocused={isFocused} compact={true} />
-                    )}
-
-                    {/* YouTube layer - only when not in camera mode and using YouTube */}
-                    {!cameraMode && musicMode === 'youtube' && (
+                    {musicMode === 'youtube' && (
                         <YouTubeLayer videoId={videoId} />
                     )}
-
-                    {/* Local music layer - always mounted when using local music to preserve audio state */}
                     {musicMode === 'local' && (
-                        <View style={cameraMode ? styles.hiddenMusicLayer : styles.visibleMusicLayer}>
-                            <LocalMusicLayer />
-                        </View>
+                        <LocalMusicLayer />
                     )}
                 </View>
+            </View>
 
-                {/* Controls Overlay */}
-                <View style={styles.controls}>
-                    <TapButton />
-                </View>
+            {/* Tap Button */}
+            <View style={[styles.tapButtonContainer, { bottom: 280 + insets.bottom + 20, right: Math.max(insets.right, 16) + 4 }]}>
+                <TapButton />
             </View>
         </View>
     );
@@ -211,13 +258,11 @@ const styles = StyleSheet.create({
         flex: 1,
         zIndex: 10,
         backgroundColor: COLORS.background,
-        paddingTop: 70,
     },
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingHorizontal: 20,
         marginBottom: 10,
     },
     headerLeft: {
@@ -249,56 +294,113 @@ const styles = StyleSheet.create({
         color: COLORS.accent,
         fontFamily: FONTS.main,
     },
+    // Camera mode header styles
+    headerOverlay: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        zIndex: 100,
+    },
+    menuButtonCamera: {
+        padding: 10,
+        borderWidth: 2,
+        borderColor: 'rgba(255, 255, 255, 0.8)',
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+        ...SHAPES.rect,
+    },
+    menuTextCamera: {
+        color: '#FFF',
+        fontFamily: FONTS.main,
+    },
+    cameraModeActiveButton: {
+        padding: 10,
+        borderWidth: 2,
+        backgroundColor: '#4488FF',
+        borderColor: '#4488FF',
+        ...SHAPES.rect,
+    },
+    cameraModeActiveText: {
+        color: '#FFF',
+        fontFamily: FONTS.main,
+    },
+    gameAreaBottom: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: '45%',
+        justifyContent: 'flex-end',
+    },
     headerRight: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 10,
+        gap: 12,
     },
-    playButton: {
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderWidth: 2,
-        ...SHAPES.rect,
-        minWidth: 70,
+    controlButton: {
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        borderWidth: 3,
+        justifyContent: 'center',
         alignItems: 'center',
     },
-    startButton: {
-        borderColor: '#00FF00',
-        backgroundColor: 'rgba(0, 255, 0, 0.1)',
+    playButtonStyle: {
+        borderColor: '#00CC00',
+        backgroundColor: 'rgba(0, 204, 0, 0.15)',
     },
-    stopButton: {
+    stopButtonActive: {
         borderColor: '#FFAA00',
-        backgroundColor: 'rgba(255, 170, 0, 0.1)',
+        backgroundColor: 'rgba(255, 170, 0, 0.2)',
     },
-    recordButton: {
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderWidth: 2,
+    playIcon: {
+        width: 0,
+        height: 0,
+        marginLeft: 4,
+        borderTopWidth: 10,
+        borderBottomWidth: 10,
+        borderLeftWidth: 16,
+        borderStyle: 'solid',
+        borderTopColor: 'transparent',
+        borderBottomColor: 'transparent',
+        borderLeftColor: '#00CC00',
+    },
+    stopIcon: {
+        width: 16,
+        height: 16,
+        backgroundColor: '#FFAA00',
+    },
+    recordButtonStyle: {
+        borderColor: '#FF3333',
+        backgroundColor: 'rgba(255, 51, 51, 0.15)',
+    },
+    recordingActiveStyle: {
         borderColor: '#FF0000',
-        backgroundColor: 'rgba(255, 0, 0, 0.1)',
-        ...SHAPES.rect,
-        minWidth: 70,
-        alignItems: 'center',
+        backgroundColor: 'rgba(255, 0, 0, 0.3)',
     },
-    recordingActive: {
-        backgroundColor: '#FF0000',
-        borderColor: '#FF0000',
-    },
-    recordButtonText: {
-        color: COLORS.text,
-        fontFamily: FONTS.main,
-        fontSize: 16,
-    },
-    playButtonText: {
-        color: COLORS.text,
-        fontFamily: FONTS.main,
-        fontSize: 16,
+    recordIcon: {
+        width: 20,
+        height: 20,
+        borderRadius: 10,
+        backgroundColor: '#FF3333',
     },
     contentArea: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         paddingBottom: 20,
+    },
+    gameOverlay: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     bottomHalf: {
         height: 280,
@@ -323,10 +425,8 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
     },
-    controls: {
+    tapButtonContainer: {
         position: 'absolute',
-        bottom: 20,
-        right: 20,
         zIndex: 100,
     },
 });

@@ -1,6 +1,7 @@
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { SONGS } from '../constants/songList';
 import { COLORS, FONTS, SHAPES } from '../constants/theme';
 import { useGameStore } from '../store';
 
@@ -29,6 +30,8 @@ export default function MenuScreen() {
     const setRhymeScheme = useGameStore((state) => state.setRhymeScheme);
     const musicMode = useGameStore((state) => state.musicMode);
     const setMusicMode = useGameStore((state) => state.setMusicMode);
+    const currentSong = useGameStore((state) => state.currentSong);
+    const setCurrentSong = useGameStore((state) => state.setCurrentSong);
     const [inputUrl, setInputUrl] = useState('');
 
     const handleLoadVideo = () => {
@@ -78,6 +81,30 @@ export default function MenuScreen() {
                         <TouchableOpacity style={styles.button} onPress={handleLoadVideo}>
                             <Text style={styles.buttonText}>LOAD VIDEO</Text>
                         </TouchableOpacity>
+                    </>
+                )}
+
+                {musicMode === 'local' && (
+                    <>
+                        <Text style={styles.label}>SELECT TRACK</Text>
+                        <ScrollView style={styles.songList} showsVerticalScrollIndicator={false}>
+                            {SONGS.map((song) => (
+                                <TouchableOpacity
+                                    key={song.id}
+                                    style={[
+                                        styles.songItem,
+                                        currentSong?.id === song.id && styles.songItemActive
+                                    ]}
+                                    onPress={() => setCurrentSong(song)}
+                                >
+                                    <Text style={[
+                                        styles.songTitle,
+                                        currentSong?.id === song.id && styles.songTitleActive
+                                    ]}>{song.title}</Text>
+                                    <Text style={styles.songMeta}>{song.bpm} BPM</Text>
+                                </TouchableOpacity>
+                            ))}
+                        </ScrollView>
                     </>
                 )}
             </View>
@@ -208,5 +235,34 @@ const styles = StyleSheet.create({
     },
     schemeButtonTextActive: {
         color: '#FFF',
+    },
+    songList: {
+        maxHeight: 180,
+    },
+    songItem: {
+        paddingVertical: 12,
+        paddingHorizontal: 15,
+        borderWidth: 2,
+        borderColor: COLORS.cardBorder,
+        marginBottom: 8,
+        ...SHAPES.rect,
+    },
+    songItemActive: {
+        backgroundColor: COLORS.accent,
+        borderColor: COLORS.accent,
+    },
+    songTitle: {
+        color: COLORS.text,
+        fontFamily: FONTS.main,
+        fontSize: 16,
+    },
+    songTitleActive: {
+        color: '#FFF',
+    },
+    songMeta: {
+        color: COLORS.dimmed,
+        fontFamily: FONTS.main,
+        fontSize: 12,
+        marginTop: 2,
     },
 });

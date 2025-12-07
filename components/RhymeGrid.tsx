@@ -1,11 +1,10 @@
 import React, { useEffect, useRef } from 'react';
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, { LinearTransition, runOnJS, SlideInUp } from 'react-native-reanimated';
 import { COLORS, FONTS, SHAPES } from '../constants/theme';
 import { useGameStore } from '../store';
 
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const GAP = 10;
 const PADDING = 20;
 
@@ -20,6 +19,7 @@ interface RhymeGridProps {
 }
 
 export const RhymeGrid: React.FC<RhymeGridProps> = ({ compact = false }) => {
+    const { width: screenWidth } = useWindowDimensions();
     const brokenBricks = useGameStore((state) => state.brokenBricks);
     const rhymeRows = useGameStore((state) => state.rhymeRows);
     const loadNewRhymes = useGameStore((state) => state.loadNewRhymes);
@@ -44,7 +44,7 @@ export const RhymeGrid: React.FC<RhymeGridProps> = ({ compact = false }) => {
     };
 
     const updateColumnFromGesture = (x: number) => {
-        const colWidth = SCREEN_WIDTH / 4;
+        const colWidth = screenWidth / 4;
         const colIndex = Math.floor(x / colWidth);
         const clampedIndex = Math.max(0, Math.min(3, colIndex));
         if (clampedIndex !== rhymeColumnIndex) {
@@ -66,7 +66,7 @@ export const RhymeGrid: React.FC<RhymeGridProps> = ({ compact = false }) => {
 
         // Dynamic Sizing
         const totalGap = GAP * 3;
-        const availableWidth = SCREEN_WIDTH - (PADDING * 2) - totalGap;
+        const availableWidth = screenWidth - (PADDING * 2) - totalGap;
         const activeWidth = availableWidth * 0.4; // 40% for active word
         const inactiveWidth = (availableWidth * 0.6) / 3; // 20% for others
 
@@ -82,7 +82,8 @@ export const RhymeGrid: React.FC<RhymeGridProps> = ({ compact = false }) => {
                     const isBroken = brokenBricks[brickIndex];
                     const isWordBrick = colIndex === rhymeColumnIndex;
                     const width = isWordBrick ? activeWidth : inactiveWidth;
-                    const backgroundColor = 'transparent';
+                    // Use row's color for border (Gold for A, SkyBlue for B, Gray for X)
+                    const borderColor = row.color || COLORS.cardBorder;
 
                     return (
                         <TouchableOpacity
@@ -93,7 +94,13 @@ export const RhymeGrid: React.FC<RhymeGridProps> = ({ compact = false }) => {
                             <View
                                 style={[
                                     styles.brick,
-                                    { backgroundColor, width, height: brickHeight },
+                                    {
+                                        width,
+                                        height: brickHeight,
+                                        borderColor: borderColor,
+                                        // Solid background - cream color matching the theme
+                                        backgroundColor: COLORS.background,
+                                    },
                                     isBroken && styles.hiddenBrick
                                 ]}
                             >
@@ -138,9 +145,8 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
     },
     brick: {
-        // height is set dynamically
-        borderWidth: 2,
-        borderColor: COLORS.cardBorder,
+        // height, borderColor, and backgroundColor are set dynamically
+        borderWidth: 3,
         justifyContent: 'center',
         alignItems: 'center',
         paddingHorizontal: 5,

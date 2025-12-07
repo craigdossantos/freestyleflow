@@ -1,0 +1,645 @@
+/* FreestyleFlow UI Design Studio - Theme Definitions */
+
+/* ===== THEME: SKETCH (Current) ===== */
+.theme-sketch {
+    --bg: #fffdf0;
+    --text: #2c3e50;
+    --accent: #e74c3c;
+    --card-border: #2c3e50;
+    --card-bg: transparent;
+    --dimmed: rgba(44, 62, 80, 0.5);
+    --font: 'Permanent Marker', cursive;
+    --btn-radius: 4px;
+    --card-radius: 4px;
+}
+
+/* ===== THEME: NEON ARCADE ===== */
+.theme-neon {
+    --bg: #0a0a0a;
+    --text: #00ff88;
+    --accent: #ff00ff;
+    --card-border: #00ff88;
+    --card-bg: rgba(0, 255, 136, 0.05);
+    --dimmed: rgba(0, 255, 136, 0.4);
+    --secondary: #00ffff;
+    --font: 'Orbitron', sans-serif;
+    --btn-radius: 0;
+    --card-radius: 0;
+    --glow: 0 0 20px currentColor;
+}
+
+/* ===== THEME: HIP-HOP GRAFFITI ===== */
+.theme-hiphop {
+    --bg: #1a1a2e;
+    --text: #ffffff;
+    --accent: #ff2e63;
+    --card-border: #ff2e63;
+    --card-bg: rgba(255, 46, 99, 0.1);
+    --dimmed: rgba(255, 255, 255, 0.5);
+    --secondary: #08d9d6;
+    --tertiary: #eeff00;
+    --font: 'Bangers', cursive;
+    --btn-radius: 8px;
+    --card-radius: 12px;
+}
+
+/* ===== THEME: SPOTIFY DARK ===== */
+.theme-spotify {
+    --bg: #121212;
+    --text: #ffffff;
+    --accent: #1DB954;
+    --card-border: #282828;
+    --card-bg: #181818;
+    --dimmed: #b3b3b3;
+    --secondary: #535353;
+    --font: 'Circular', -apple-system, BlinkMacSystemFont, sans-serif;
+    --btn-radius: 500px;
+    --card-radius: 8px;
+}
+
+/* ===== THEME: TIKTOK VIBE ===== */
+.theme-tiktok {
+    --bg: #000000;
+    --text: #ffffff;
+    --accent: #fe2c55;
+    --card-border: #2f2f2f;
+    --card-bg: #121212;
+    --dimmed: #8a8a8a;
+    --secondary: #25f4ee;
+    --font: 'Fredoka', sans-serif;
+    --btn-radius: 4px;
+    --card-radius: 12px;
+}
+
+/* ===== THEME: SOUNDCLOUD ORANGE ===== */
+.theme-soundcloud {
+    --bg: #f2f2f2;
+    --text: #333333;
+    --accent: #ff5500;
+    --card-border: #e5e5e5;
+    --card-bg: #ffffff;
+    --dimmed: #999999;
+    --secondary: #ff7700;
+    --font: 'Interstate', -apple-system, BlinkMacSystemFont, sans-serif;
+    --btn-radius: 3px;
+    --card-radius: 3px;
+}
+
+/* ===== THEME: STREETWEAR ===== */
+.theme-streetwear {
+    --bg: #000000;
+    --text: #ffffff;
+    --accent: #ffffff;
+    --card-border: #ffffff;
+    --card-bg: transparent;
+    --dimmed: #666666;
+    --secondary: #ff0000;
+    --font: 'Bebas Neue', sans-serif;
+    --btn-radius: 0;
+    --card-radius: 0;
+    --border-width: 3px;
+}
+
+/* ===== THEME: RETRO 80s ===== */
+.theme-retro {
+    --bg: linear-gradient(180deg, #2b1055 0%, #7597de 100%);
+    --text: #ffffff;
+    --accent: #ff00ff;
+    --card-border: #ff00ff;
+    --card-bg: rgba(0, 0, 0, 0.3);
+    --dimmed: rgba(255, 255, 255, 0.6);
+    --secondary: #00ffff;
+    --tertiary: #ffff00;
+    --font: 'Press Start 2P', cursive;
+    --btn-radius: 0;
+    --card-radius: 0;
+    --glow: 0 0 30px #ff00ff;
+}
+
+/* ===== THEME: CYBERPUNK ===== */
+.theme-cyber {
+    --bg: #0d0d0d;
+    --text: #00f0ff;
+    --accent: #ff003c;
+    --card-border: #00f0ff;
+    --card-bg: rgba(0, 240, 255, 0.05);
+    --dimmed: rgba(0, 240, 255, 0.5);
+    --secondary: #f0f000;
+    --font: 'Audiowide', sans-serif;
+    --btn-radius: 2px;
+    --card-radius: 2px;
+    --glow: 0 0 15px #00f0ff;
+}
+
+/* ===== THEME: BLING & GOLD ===== */
+.theme-gold {
+    --bg: #1a1a1a;
+    --text: #ffffff;
+    --accent: #ffd700;
+    --card-border: #ffd700;
+    --card-bg: linear-gradient(135deg, rgba(255, 215, 0, 0.1), transparent);
+    --dimmed: #8b8000;
+    --secondary: #c0c0c0;
+    --font: 'Righteous', cursive;
+    --btn-radius: 8px;
+    --card-radius: 12px;
+    --glow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+/* ===== THEME: PASTEL SOFT ===== */
+.theme-pastel {
+    --bg: #ffeef8;
+    --text: #4a4a6a;
+    --accent: #a855f7;
+    --card-border: #e9d5ff;
+    --card-bg: #ffffff;
+    --dimmed: #9ca3af;
+    --secondary: #34d399;
+    --tertiary: #fbbf24;
+    --font: 'Fredoka', sans-serif;
+    --btn-radius: 20px;
+    --card-radius: 20px;
+}
+
+/* ===== THEME: FIRE & FLAME ===== */
+.theme-fire {
+    --bg: #1a0a00;
+    --text: #ffffff;
+    --accent: #ff4500;
+    --card-border: #ff4500;
+    --card-bg: linear-gradient(180deg, rgba(255, 69, 0, 0.2), transparent);
+    --dimmed: #ff8c00;
+    --secondary: #ffd700;
+    --font: 'Bungee', cursive;
+    --btn-radius: 4px;
+    --card-radius: 8px;
+    --glow: 0 0 30px rgba(255, 69, 0, 0.5);
+}
+
+/* ===== THEME: OCEAN WAVE ===== */
+.theme-ocean {
+    --bg: #0a192f;
+    --text: #ccd6f6;
+    --accent: #00d9ff;
+    --card-border: #233554;
+    --card-bg: #112240;
+    --dimmed: #8892b0;
+    --secondary: #64ffda;
+    --font: 'Russo One', sans-serif;
+    --btn-radius: 8px;
+    --card-radius: 12px;
+}
+
+/* ===== THEME: MINIMAL CLEAN ===== */
+.theme-minimal {
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --accent: #000000;
+    --card-border: #e0e0e0;
+    --card-bg: #f5f5f5;
+    --dimmed: #757575;
+    --font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    --btn-radius: 8px;
+    --card-radius: 12px;
+}
+
+/* ===== THEME: ARCADE GAME ===== */
+.theme-arcade {
+    --bg: #000033;
+    --text: #ffffff;
+    --accent: #ffff00;
+    --card-border: #ffff00;
+    --card-bg: rgba(255, 255, 0, 0.05);
+    --dimmed: #9999ff;
+    --secondary: #ff0000;
+    --tertiary: #00ff00;
+    --font: 'Press Start 2P', cursive;
+    --btn-radius: 0;
+    --card-radius: 0;
+}
+
+
+/* ===================================================================
+   MOCKUP SCREEN BASE STYLES
+   =================================================================== */
+
+.mockup-screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+/* Status Bar */
+.status-bar {
+    height: 54px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 24px 8px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: -apple-system, sans-serif;
+}
+
+/* Common Elements */
+.mockup-title {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+
+.mockup-section {
+    margin-bottom: 24px;
+}
+
+.mockup-label {
+    font-size: 12px;
+    margin-bottom: 8px;
+    opacity: 0.6;
+    letter-spacing: 1px;
+}
+
+.mockup-button {
+    padding: 14px 20px;
+    border-width: 2px;
+    border-style: solid;
+    text-align: center;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mockup-button:hover {
+    transform: scale(1.02);
+}
+
+.mockup-button-row {
+    display: flex;
+    gap: 10px;
+}
+
+.mockup-input {
+    width: 100%;
+    padding: 14px;
+    border-width: 2px;
+    border-style: solid;
+    font-family: inherit;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.mockup-card {
+    padding: 16px;
+    border-width: 2px;
+    border-style: solid;
+    margin-bottom: 10px;
+}
+
+/* Rhyme Grid */
+.rhyme-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 16px;
+}
+
+.rhyme-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.rhyme-brick {
+    height: 45px;
+    border-width: 2px;
+    border-style: solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.rhyme-brick.active {
+    flex: 2;
+}
+
+.rhyme-brick.inactive {
+    flex: 1;
+}
+
+/* Metronome Ball */
+.metronome-ball {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    margin: 8px auto;
+}
+
+/* Header Bar */
+.header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+}
+
+.header-left,
+.header-right {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.header-btn {
+    padding: 8px 12px;
+    border-width: 2px;
+    border-style: solid;
+    font-family: inherit;
+    font-size: 12px;
+}
+
+/* Control Buttons */
+.play-btn {
+    padding: 8px 16px;
+    border-width: 2px;
+    border-style: solid;
+    font-family: inherit;
+}
+
+.record-btn {
+    padding: 8px 16px;
+    border-width: 2px;
+    border-style: solid;
+    font-family: inherit;
+}
+
+/* Bottom Panel */
+.bottom-panel {
+    flex: 1;
+    border-top-width: 2px;
+    border-top-style: solid;
+    display: flex;
+    flex-direction: column;
+}
+
+/* YouTube Mock */
+.youtube-mock {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    opacity: 0.6;
+}
+
+/* Song List */
+.song-list {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+}
+
+.song-item {
+    padding: 12px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    margin-bottom: 8px;
+}
+
+.song-title {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.song-meta {
+    font-size: 11px;
+    opacity: 0.6;
+}
+
+/* Camera View */
+.camera-view {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.camera-icon {
+    font-size: 64px;
+    opacity: 0.3;
+}
+
+.camera-overlay {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 6px 10px;
+    font-size: 10px;
+    border-radius: 4px;
+}
+
+/* Tap Button */
+.tap-button {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border-width: 2px;
+    border-style: solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tap-bpm {
+    font-size: 24px;
+    line-height: 1;
+}
+
+.tap-label {
+    font-size: 10px;
+    opacity: 0.6;
+}
+
+/* Stats */
+.stats-row {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 24px;
+}
+
+.stat-box {
+    text-align: center;
+    padding: 12px 20px;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.stat-value {
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 10px;
+    opacity: 0.6;
+}
+
+/* Action Buttons */
+.action-card {
+    padding: 16px;
+    border-width: 2px;
+    border-style: solid;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.action-title {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.action-subtitle {
+    font-size: 11px;
+    opacity: 0.6;
+}
+
+/* Slider */
+.slider-section {
+    padding: 0 16px;
+    margin-bottom: 20px;
+}
+
+.slider-track {
+    height: 6px;
+    border-radius: 3px;
+    position: relative;
+    margin: 12px 0;
+}
+
+.slider-fill {
+    height: 100%;
+    border-radius: 3px;
+    width: 60%;
+}
+
+.slider-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+}
+
+/* Family List */
+.family-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 16px 80px;
+}
+
+.family-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-width: 2px;
+    border-style: solid;
+    margin-bottom: 8px;
+}
+
+.family-item.seen {
+    border-style: dashed;
+}
+
+.family-label {
+    font-size: 14px;
+}
+
+.family-examples {
+    font-size: 10px;
+    opacity: 0.6;
+}
+
+.family-badge {
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 10px;
+    opacity: 0.7;
+}
+
+/* Fixed Bottom Button */
+.fixed-bottom {
+    position: absolute;
+    bottom: 40px;
+    left: 16px;
+    right: 16px;
+}
+
+.start-button {
+    width: 100%;
+    padding: 16px;
+    text-align: center;
+    font-size: 16px;
+    border: none;
+}
+
+/* Toggle Button */
+.toggle-btn {
+    padding: 12px 16px;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.toggle-btn.active {
+    /* Handled by theme */
+}
+
+/* Scheme Selector */
+.scheme-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.scheme-btn {
+    padding: 8px 12px;
+    border-width: 2px;
+    border-style: solid;
+    font-size: 12px;
+}
+
+/* Back Button */
+.back-btn {
+    padding: 8px;
+    font-size: 12px;
+}
+
+/* Scrollable Content */
+.scroll-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+}
+
+/* Content Area */
+.content-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

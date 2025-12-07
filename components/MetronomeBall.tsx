@@ -37,18 +37,34 @@ export const MetronomeBall: React.FC<MetronomeBallProps> = ({ compact = false })
 
     const currentBeat = useGameStore((state) => state.currentBeat);
     const shiftBoard = useGameStore((state) => state.shiftBoard);
+    const rhymeColumnIndex = useGameStore((state) => state.rhymeColumnIndex);
 
     const translateX = useSharedValue(0);
     const translateY = useSharedValue(0);
 
-    const availableWidth = width - (GRID_PADDING * 2);
+    // Match RhymeGrid's width calculation exactly
+    const totalGap = GAP * 3; // 3 gaps between 4 columns
+    const availableWidth = width - (GRID_PADDING * 2) - totalGap;
+    const activeWidth = availableWidth * 0.4; // 40% for active word column
+    const inactiveWidth = (availableWidth * 0.6) / 3; // 20% for other columns
     const beatDuration = 60000 / bpm;
 
     const getTargetX = (col: number) => {
         'worklet';
-        const colWidth = availableWidth / 4;
-        // Center of the column
-        return (col * colWidth) + (colWidth / 2) - (ballSize / 2);
+        // Calculate X position based on variable column widths
+        // rhymeColumnIndex determines which column is the wide one
+        let x = 0;
+        for (let i = 0; i < col; i++) {
+            const colIsActive = i === rhymeColumnIndex;
+            x += colIsActive ? activeWidth : inactiveWidth;
+            x += GAP; // Add gap after each column except last
+        }
+        // Now add half of the current column's width to get center
+        const currentColIsActive = col === rhymeColumnIndex;
+        const currentColWidth = currentColIsActive ? activeWidth : inactiveWidth;
+        x += currentColWidth / 2;
+        // Subtract half ball size to center the ball
+        return x - (ballSize / 2);
     };
 
     const onBeatHit = (beatIndex: number) => {
@@ -60,19 +76,22 @@ export const MetronomeBall: React.FC<MetronomeBallProps> = ({ compact = false })
     useEffect(() => {
         console.log(`[MetronomeBall] Effect triggered. Sync: ${syncTrigger}, BPM: ${bpm}, Beat: ${currentBeat}, Playing: ${isPlaying}`);
 
-        // Initialize position based on currentBeat (0-3)
+        if (!isPlaying) {
+            // When not playing, position ball on top of first brick (column 0)
+            translateX.value = getTargetX(0);
+            translateY.value = 0;
+            console.log(`[MetronomeBall] Not playing - ball positioned on first brick`);
+            return;
+        }
+
+        // Initialize position based on currentBeat (0-3) when playing
         const startBeat = currentBeat % 4;
         const startCol = startBeat;
 
-        console.log(`[MetronomeBall] Resetting to Beat ${startBeat} (Row: 0, Col: ${startCol})`);
+        console.log(`[MetronomeBall] Playing - starting at Beat ${startBeat} (Col: ${startCol})`);
 
         translateX.value = getTargetX(startCol);
         translateY.value = 0; // Always top row
-
-        if (!isPlaying) {
-            // If not playing, just hold the position
-            return;
-        }
 
         function runLoop(beatIndex: number) {
             'worklet';
@@ -125,7 +144,7 @@ export const MetronomeBall: React.FC<MetronomeBallProps> = ({ compact = false })
             cancelAnimation(translateX);
             cancelAnimation(translateY);
         };
-    }, [bpm, syncTrigger, width, isPlaying]); // Restart if width, bpm, syncTrigger, or isPlaying changes
+    }, [bpm, syncTrigger, width, isPlaying, rhymeColumnIndex]); // Restart if width, bpm, syncTrigger, isPlaying, or column changes
 
     const animatedStyle = useAnimatedStyle(() => {
         return {
@@ -137,19 +156,37 @@ export const MetronomeBall: React.FC<MetronomeBallProps> = ({ compact = false })
     });
 
     // Dynamic styles based on compact mode
+    // Row layout analysis:
+    // - Row height: 80px (normal) / 55px (compact)
+    // - Row has paddingVertical: 5px and alignItems: 'center'
+    // - Brick height: 50px (normal) / 40px (compact)
+    // - Content area: rowHeight - 10px (padding)
+    // - Brick is centered in content: paddingTop + (contentHeight - brickHeight) / 2
+    // Normal: 5 + (70 - 50) / 2 = 5 + 10 = 15px from row top
+    // Compact: 5 + (45 - 40) / 2 = 5 + 2.5 = 7.5px from row top
+    const brickHeight = compact ? 40 : 50;
+    const contentHeight = rowHeight - 10; // subtract paddingVertical * 2
+    const brickTop = 5 + (contentHeight - brickHeight) / 2;
+
+    // Ball should land with its bottom touching the brick top
+    // marginTop positions the ball's top edge
+    // We want: ballTop + ballSize = brickTop (ball bottom = brick top)
+    // So: ballTop = brickTop - ballSize
+    // Normal: 15 - 20 = -5
+    // Compact: 7.5 - 16 = -8.5
     const ballStyle = {
         width: ballSize,
         height: ballSize,
         borderRadius: ballSize / 2,
         backgroundColor: COLORS.accent,
-        // Position ball so it visually touches the brick
-        // For normal: row height 80, paddingVertical 5, brick starts around y=5
-        // For compact: row height 55, paddingVertical 5, brick starts around y=5
-        marginTop: 5 - (ballSize / 2), // Center ball on brick top edge
+        marginTop: brickTop - ballSize,
     };
 
+    // Total width includes the brick widths plus gaps
+    const totalWidth = availableWidth + totalGap;
+
     return (
-        <View style={[styles.container, { width: availableWidth, height: rowHeight * 4 }]} pointerEvents="none">
+        <View style={[styles.container, { width: totalWidth, height: rowHeight * 4 }]} pointerEvents="none">
             <Animated.View style={[ballStyle, animatedStyle]} />
         </View>
     );
