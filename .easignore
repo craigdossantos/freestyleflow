@@ -1,0 +1,35 @@
+# Dependencies (rebuilt on EAS)
+node_modules/
+
+# iOS build artifacts
+ios/Pods/
+ios/build/
+ios/DerivedData/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+
+# Android build artifacts
+android/.gradle/
+android/build/
+android/app/build/
+
+# Development files
+.git/
+.expo/
+*.log
+*.tsbuildinfo
+
+# Test files
+__tests__/
+*.test.js
+*.test.ts
+*.spec.js
+*.spec.ts
+
+# Documentation
+*.md
+!README.md
+
+# IDE
+.vscode/
+.idea/
