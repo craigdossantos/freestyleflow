@@ -4,7 +4,8 @@ import { RhymeFamily } from "../data/rhymes";
 
 const PACKS_DIR = (FileSystem.documentDirectory ?? "") + "rhyme-packs/";
 const LOCAL_MANIFEST = PACKS_DIR + "local-manifest.json";
-const MANIFEST_URL = "https://cdn.freestyleflow.app/manifest.json"; // Placeholder
+const MANIFEST_URL =
+  "https://pub-ee1a7f1954cb4df882c70a58d146d6b1.r2.dev/manifest.json";
 const MANIFEST_TIMEOUT_MS = 5000;
 
 export interface PackInfo {

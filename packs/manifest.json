@@ -9,7 +9,7 @@
       "version": "1.0.0",
       "size": 23745,
       "sha256": "8bc3dabf5776ca8eb6c283958e31cd514f9b37b5a24e13d7baf582c30d70432b",
-      "url": "https://cdn.freestyleflow.app/packs/core-v1.0.0.json",
+      "url": "https://pub-ee1a7f1954cb4df882c70a58d146d6b1.r2.dev/packs/core-v1.0.0.json",
       "bundled": true
     },
     {
@@ -19,7 +19,7 @@
       "version": "1.0.0",
       "size": 15914,
       "sha256": "7599f1a6cc77951d7dfb0b976e93ff67212e981d5e634e88a9017584ec08e947",
-      "url": "https://cdn.freestyleflow.app/packs/slant-1-v1.0.0.json",
+      "url": "https://pub-ee1a7f1954cb4df882c70a58d146d6b1.r2.dev/packs/slant-1-v1.0.0.json",
       "bundled": false
     }
   ]
