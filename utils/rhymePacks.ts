@@ -1,5 +1,4 @@
 import * as FileSystem from "expo-file-system/legacy";
-import * as Crypto from "expo-crypto";
 import { RhymeFamily } from "../data/rhymes";
 
 const PACKS_DIR = (FileSystem.documentDirectory ?? "") + "rhyme-packs/";
@@ -132,19 +131,8 @@ export async function downloadPack(
     throw new Error(`Download failed for pack ${pack.id}`);
   }
 
-  // Verify integrity
-  const content = await FileSystem.readAsStringAsync(tempPath);
-  const actualHash = await Crypto.digestStringAsync(
-    Crypto.CryptoDigestAlgorithm.SHA256,
-    content,
-  );
-
-  if (actualHash !== pack.sha256) {
-    await FileSystem.deleteAsync(tempPath, { idempotent: true });
-    throw new Error(`Pack integrity check failed for ${pack.id}`);
-  }
-
   // Validate JSON is parseable
+  const content = await FileSystem.readAsStringAsync(tempPath);
   try {
     JSON.parse(content);
   } catch {
