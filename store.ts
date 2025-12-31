@@ -1,13 +1,9 @@
 import { create } from "zustand";
 import rhymeDataRaw from "./app/data/rhyme_levels_filtered.json";
-import { RhymeData, RhymeFamily } from "./data/rhymes";
-import { loadPack } from "./utils/rhymePacks";
+import { RhymeData } from "./data/rhymes";
 
 const rhymeData = rhymeDataRaw as RhymeData;
 const BUNDLED_FAMILIES = rhymeData.syllable_1_families;
-
-// Track load operations to prevent race conditions
-let packLoadId = 0;
 
 export interface RhymeRow {
   id: string;
@@ -26,8 +22,6 @@ interface GameState {
   resetTaps: () => void;
   syncTrigger: number;
   triggerSync: () => void;
-  videoId: string;
-  setVideoId: (videoId: string) => void;
   currentBeat: number;
   setCurrentBeat: (beat: number) => void;
   brokenBricks: Record<number, boolean>;
@@ -55,8 +49,8 @@ interface GameState {
   patternIndex: number;
   activeGroups: { A: string[]; B: string[] };
 
-  musicMode: "youtube" | "local";
-  setMusicMode: (mode: "youtube" | "local") => void;
+  musicMode: "local" | "external";
+  setMusicMode: (mode: "local" | "external") => void;
   currentSong: any; // Using any for now to avoid circular dependency with Song interface
   setCurrentSong: (song: any) => void;
 
@@ -70,12 +64,9 @@ interface GameState {
   musicVolume: number; // 0.0 to 1.0
   setMusicVolume: (volume: number) => void;
 
-  // Rhyme Packs
-  loadedFamilies: RhymeFamily[];
-  activePacks: string[];
-  isLoadingPacks: boolean;
-  packsReady: boolean;
-  loadFamiliesFromPacks: (packIds: string[]) => Promise<void>;
+  // Playback position tracking
+  playbackPosition: number; // Current position in seconds
+  setPlaybackPosition: (position: number) => void;
 }
 
 export const useGameStore = create<GameState>((set) => ({
@@ -100,8 +91,6 @@ export const useGameStore = create<GameState>((set) => ({
       console.log("[Store] triggerSync called");
       return { syncTrigger: state.syncTrigger + 1 };
     }),
-  videoId: "AYaEa3ujqCE", // Default video
-  setVideoId: (videoId: string) => set({ videoId }),
   currentBeat: 0,
   setCurrentBeat: (beat: number) => set({ currentBeat: beat }),
   brokenBricks: {}, // Map of index -> boolean
@@ -154,14 +143,7 @@ export const useGameStore = create<GameState>((set) => ({
 
   loadNewRhymes: (rowIndex?: number) => {
     const state = useGameStore.getState();
-
-    // Guard: don't try to load rhymes if packs aren't ready yet
-    if (!state.packsReady || state.loadedFamilies.length === 0) {
-      console.warn("[Store] loadNewRhymes called before packs loaded");
-      return;
-    }
-
-    const families = state.loadedFamilies;
+    const families = BUNDLED_FAMILIES;
 
     // Helper to get a new group
     const getNewGroup = () => {
@@ -283,8 +265,8 @@ export const useGameStore = create<GameState>((set) => ({
       const currentPattern = patterns[state.rhymeScheme] || patterns["AABB"];
       const type = currentPattern[nextIndex];
 
-      // Use loaded families (from packs or bundled)
-      const families = state.loadedFamilies;
+      // Use bundled families
+      const families = BUNDLED_FAMILIES;
 
       // Helper to get new group
       const getNewGroup = () => {
@@ -385,8 +367,8 @@ export const useGameStore = create<GameState>((set) => ({
   setRhymeColumnIndex: (index: number) => set({ rhymeColumnIndex: index }),
 
   // Music Mode State
-  musicMode: "youtube", // 'youtube' | 'local'
-  setMusicMode: (mode: "youtube" | "local") => set({ musicMode: mode }),
+  musicMode: "local", // 'local' | 'external'
+  setMusicMode: (mode: "local" | "external") => set({ musicMode: mode }),
   currentSong: null,
   setCurrentSong: (song: any) => set({ currentSong: song }),
 
@@ -399,48 +381,7 @@ export const useGameStore = create<GameState>((set) => ({
   setMusicVolume: (volume) =>
     set({ musicVolume: Math.max(0, Math.min(1, volume)) }),
 
-  // Rhyme Packs State
-  loadedFamilies: BUNDLED_FAMILIES, // Start with bundled families
-  activePacks: ["core"],
-  isLoadingPacks: false,
-  packsReady: true, // True because bundled families are available
-
-  // Load families from selected packs (parallel loading)
-  loadFamiliesFromPacks: async (packIds: string[]) => {
-    const thisLoadId = ++packLoadId;
-    set({ isLoadingPacks: true, packsReady: false });
-
-    try {
-      // Load all packs in parallel
-      const familyArrays = await Promise.all(packIds.map(loadPack));
-
-      // Check if another load was started while we were waiting
-      if (thisLoadId !== packLoadId) return;
-
-      const allFamilies = familyArrays.flat();
-
-      // If no families loaded, fall back to bundled
-      const finalFamilies =
-        allFamilies.length > 0 ? allFamilies : BUNDLED_FAMILIES;
-
-      set({
-        loadedFamilies: finalFamilies,
-        activePacks: packIds,
-        isLoadingPacks: false,
-        packsReady: true,
-      });
-
-      // Reload rhymes with new families
-      useGameStore.getState().loadNewRhymes();
-    } catch (error) {
-      console.error("[Store] Failed to load packs:", error);
-      // Fall back to bundled families
-      set({
-        loadedFamilies: BUNDLED_FAMILIES,
-        activePacks: ["core"],
-        isLoadingPacks: false,
-        packsReady: true,
-      });
-    }
-  },
+  // Playback position tracking
+  playbackPosition: 0,
+  setPlaybackPosition: (position) => set({ playbackPosition: position }),
 }));

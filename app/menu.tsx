@@ -1,12 +1,11 @@
 import Slider from "@react-native-community/slider";
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import React from "react";
 import {
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -14,25 +13,8 @@ import { SONGS } from "../constants/songList";
 import { COLORS, FONTS, SHAPES } from "../constants/theme";
 import { useGameStore } from "../store";
 
-// Function to extract video ID from YouTube URL
-function extractVideoId(url: string): string | null {
-  const patterns = [
-    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
-    /^([a-zA-Z0-9_-]{11})$/, // Direct video ID
-  ];
-
-  for (const pattern of patterns) {
-    const match = url.match(pattern);
-    if (match && match[1]) {
-      return match[1];
-    }
-  }
-  return null;
-}
-
 export default function MenuScreen() {
   const router = useRouter();
-  const setVideoId = useGameStore((state) => state.setVideoId);
   const includeImperfect = useGameStore((state) => state.includeImperfect);
   const setIncludeImperfect = useGameStore(
     (state) => state.setIncludeImperfect,
@@ -47,7 +29,6 @@ export default function MenuScreen() {
   const setCameraFilter = useGameStore((state) => state.setCameraFilter);
   const musicVolume = useGameStore((state) => state.musicVolume);
   const setMusicVolume = useGameStore((state) => state.setMusicVolume);
-  const [inputUrl, setInputUrl] = useState("");
 
   const CAMERA_FILTERS = [
     { id: "none", label: "NORMAL" },
@@ -57,17 +38,6 @@ export default function MenuScreen() {
     { id: "comic", label: "COMIC" },
     { id: "pastel", label: "PASTEL" },
   ] as const;
-
-  const handleLoadVideo = () => {
-    const extractedId = extractVideoId(inputUrl);
-    if (extractedId) {
-      setVideoId(extractedId);
-      setInputUrl("");
-      router.back(); // Go back to game
-    } else {
-      alert("Invalid YouTube URL or Video ID");
-    }
-  };
 
   return (
     <View style={styles.container}>
@@ -96,22 +66,6 @@ export default function MenuScreen() {
             <TouchableOpacity
               style={[
                 styles.schemeButton,
-                musicMode === "youtube" && styles.schemeButtonActive,
-              ]}
-              onPress={() => setMusicMode("youtube")}
-            >
-              <Text
-                style={[
-                  styles.schemeButtonText,
-                  musicMode === "youtube" && styles.schemeButtonTextActive,
-                ]}
-              >
-                YOUTUBE
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.schemeButton,
                 musicMode === "local" && styles.schemeButtonActive,
               ]}
               onPress={() => setMusicMode("local")}
@@ -125,23 +79,31 @@ export default function MenuScreen() {
                 BUILT-IN SONGS
               </Text>
             </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.schemeButton,
+                musicMode === "external" && styles.schemeButtonActive,
+              ]}
+              onPress={() => setMusicMode("external")}
+            >
+              <Text
+                style={[
+                  styles.schemeButtonText,
+                  musicMode === "external" && styles.schemeButtonTextActive,
+                ]}
+              >
+                EXTERNAL SOURCE
+              </Text>
+            </TouchableOpacity>
           </View>
 
-          {musicMode === "youtube" && (
-            <>
-              <Text style={styles.label}>Select Background Video</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Paste YouTube URL or Video ID"
-                placeholderTextColor="#666"
-                value={inputUrl}
-                onChangeText={setInputUrl}
-                onSubmitEditing={handleLoadVideo}
-              />
-              <TouchableOpacity style={styles.button} onPress={handleLoadVideo}>
-                <Text style={styles.buttonText}>LOAD VIDEO</Text>
-              </TouchableOpacity>
-            </>
+          {musicMode === "external" && (
+            <View style={styles.externalSourceInfo}>
+              <Text style={styles.externalSourceText}>
+                Play music from Spotify, Apple Music, YouTube, or any other app.
+                This app will provide the visual metronome only.
+              </Text>
+            </View>
           )}
 
           {musicMode === "local" && (
@@ -234,14 +196,6 @@ export default function MenuScreen() {
             onPress={() => router.push("/progress")}
           >
             <Text style={styles.buttonText}>RHYME MASTERY</Text>
-          </TouchableOpacity>
-
-          {/* Rhyme Packs Button */}
-          <TouchableOpacity
-            style={[styles.button, { marginTop: 10 }]}
-            onPress={() => router.push("/packs")}
-          >
-            <Text style={styles.buttonText}>RHYME PACKS</Text>
           </TouchableOpacity>
         </View>
 
@@ -341,16 +295,19 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontFamily: FONTS.main,
   },
-  input: {
+  externalSourceInfo: {
     backgroundColor: COLORS.cardBg,
-    color: COLORS.text,
     borderWidth: 2,
     borderColor: COLORS.cardBorder,
     padding: 15,
-    fontSize: 16,
-    marginBottom: 10,
-    fontFamily: FONTS.main,
+    marginBottom: 20,
     ...SHAPES.rect,
+  },
+  externalSourceText: {
+    color: COLORS.dimmed,
+    fontFamily: FONTS.main,
+    fontSize: 14,
+    lineHeight: 20,
   },
   button: {
     backgroundColor: COLORS.cardBg,
