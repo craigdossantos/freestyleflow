@@ -10,6 +10,10 @@
 import * as fs from "fs";
 import * as path from "path";
 import * as crypto from "crypto";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const DATAMUSE_URL = "https://api.datamuse.com/words";
 const OUTPUT_DIR = path.join(__dirname, "..", "packs");

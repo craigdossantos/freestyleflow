@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "lastUpdated": "2025-12-31",
+  "packs": [
+    {
+      "id": "core",
+      "name": "Core Rhymes",
+      "description": "Essential 1-syllable rhymes for everyday freestyling",
+      "version": "1.0.0",
+      "size": 23745,
+      "sha256": "8bc3dabf5776ca8eb6c283958e31cd514f9b37b5a24e13d7baf582c30d70432b",
+      "url": "https://cdn.freestyleflow.app/packs/core-v1.0.0.json",
+      "bundled": true
+    },
+    {
+      "id": "slant-1",
+      "name": "Slant Rhymes",
+      "description": "Near-rhymes and imperfect matches for creative flows",
+      "version": "1.0.0",
+      "size": 15914,
+      "sha256": "7599f1a6cc77951d7dfb0b976e93ff67212e981d5e634e88a9017584ec08e947",
+      "url": "https://cdn.freestyleflow.app/packs/slant-1-v1.0.0.json",
+      "bundled": false
+    }
+  ]
+}
